@@ -23,9 +23,6 @@ public class CadastrarProdutos {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet products = workbook.getSheet(2);
 
-        Cell c0 = products.getCell(10,0);
-        String disp = c0.getContents();
-        int disponivel = Integer.parseInt(disp);
         Cell c = products.getCell(9,0);
         String quant = c.getContents();
         int quantidade = Integer.parseInt(quant);
@@ -35,39 +32,34 @@ public class CadastrarProdutos {
         WritableSheet productscopy = copy.getSheet(2);
 
 
-        Label label = new Label(0, disponivel, "SHAMPOO");
+        Label label = new Label(0, quantidade +1, "SHAMPOO");
         productscopy.addCell(label);
 
-        Number number = new Number(1, disponivel, 3);
+        Number number = new Number(1, quantidade + 1, 3);
         productscopy.addCell(number);
 
-        Label label2 = new Label(2, disponivel, "BANHO");
+        Label label2 = new Label(2, quantidade +1, "BANHO");
         productscopy.addCell(label2);
 
-        Number number2 = new Number(3, disponivel, 0);
+        Number number2 = new Number(3, quantidade +1, 0);
         productscopy.addCell(number2);
 
-        Number number3 = new Number(4, disponivel, 0);
+        Number number3 = new Number(4, quantidade +1, 0);
         productscopy.addCell(number3);
 
-        Number number4 = new Number(5, disponivel, 65);
+        Number number4 = new Number(5,quantidade +1, 65);
         productscopy.addCell(number4);
 
-        Number number5 = new Number(6, disponivel, 80);
+        Number number5 = new Number(6, quantidade +1, 80);
         productscopy.addCell(number5);
 
-        Number number6 = new Number(7, disponivel, 1);
+        Number number6 = new Number(7, quantidade +1, 1);
         productscopy.addCell(number6);
 
-        WritableCell c1 = productscopy.getWritableCell(10, 0);
-        disponivel++;
-        String novodisponivel = Integer.toString(disponivel);
-        modifyData(c1, novodisponivel);
-
+        WritableCell c1 = productscopy.getWritableCell(9, 0);
         quantidade++;
-        WritableCell c2 = productscopy.getWritableCell(9, 0);
-        String novaquantidade = Integer.toString(quantidade);
-        modifyData(c2, novaquantidade);
+        String novodisponivel = Integer.toString(quantidade);
+        modifyData(c1, novodisponivel);
 
         copy.write();
         copy.close();
