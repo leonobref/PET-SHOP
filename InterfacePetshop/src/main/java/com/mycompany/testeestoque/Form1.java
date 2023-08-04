@@ -46,7 +46,7 @@ public class Form1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque Pet Shop");
         setBackground(new java.awt.Color(0, 51, 255));
-        setPreferredSize(new java.awt.Dimension(736, 500));
+        setPreferredSize(new java.awt.Dimension(736, 450));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);

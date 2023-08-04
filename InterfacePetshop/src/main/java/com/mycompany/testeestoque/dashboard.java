@@ -105,7 +105,6 @@ public class dashboard extends javax.swing.JFrame {
         btnVender.setAlignmentY(0.0F);
         btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVender.setDoubleBuffered(true);
-        btnVender.setIconTextGap(8);
         btnVender.setInheritsPopupMenu(false);
         btnVender.setOpaque(true);
         btnVender.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -120,7 +119,7 @@ public class dashboard extends javax.swing.JFrame {
                 btnVenderMouseExited(evt);
             }
         });
-        jPanel1.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 180, 40));
+        jPanel1.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 180, 40));
 
         btnRelatorio.setBackground(new java.awt.Color(23, 27, 36));
         btnRelatorio.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 16)); // NOI18N
@@ -128,7 +127,7 @@ public class dashboard extends javax.swing.JFrame {
         btnRelatorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/statistics.png"))); // NOI18N
         btnRelatorio.setText("Relatório");
-        btnRelatorio.setIconTextGap(8);
+        btnRelatorio.setFocusable(false);
         btnRelatorio.setOpaque(true);
         btnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -141,13 +140,15 @@ public class dashboard extends javax.swing.JFrame {
                 btnRelatorioMouseExited(evt);
             }
         });
-        jPanel1.add(btnRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 40));
+        jPanel1.add(btnRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 180, 40));
 
         jLabel7.setBackground(new java.awt.Color(23, 27, 36));
-        jLabel7.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 16)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-product (1).png"))); // NOI18N
         jLabel7.setText("Adicionar Produtos");
+        jLabel7.setIconTextGap(2);
         jLabel7.setOpaque(true);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -160,7 +161,7 @@ public class dashboard extends javax.swing.JFrame {
                 jLabel7MouseExited(evt);
             }
         });
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 180, 50));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 410));
 
