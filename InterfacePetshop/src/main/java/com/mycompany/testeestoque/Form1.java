@@ -124,11 +124,10 @@ public class Form1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
+        this.dispose();
         dashboard dash1 = new dashboard();
         dash1.setVisible(true);
-        
-        this.dispose();
-        
         
     }//GEN-LAST:event_btnLoginActionPerformed
 
