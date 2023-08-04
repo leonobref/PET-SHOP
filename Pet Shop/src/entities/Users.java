@@ -1,11 +1,17 @@
-package entities;
+package usuarioteste1;
 
 import java.io.File;
 import java.io.IOException;
+
+import jxl.Cell;
+import jxl.CellType;
 import jxl.Workbook;
+import jxl.read.biff.BiffException;
 import jxl.write.Label;
+import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 public class Users {
     private String name;
@@ -22,7 +28,7 @@ public class Users {
     }
 
     public Users(String name, String namecomplement, String email, String date, String password, String number,
-                 Boolean admin, Boolean active, String job) {
+            Boolean admin, Boolean active, String job) {
         this.name = name;
         this.namecomplement = namecomplement;
         this.email = email;
@@ -107,9 +113,14 @@ public class Users {
     }
 
     public void escreverDadosEmExcel(String nomeDoArquivo) {
-        try {
+    	try {
+    		File file = new File(nomeDoArquivo);
+    		if (file.exists()) {
+                System.out.println("O arquivo " + nomeDoArquivo + " já existe.");
+                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
+            }
             // Criar um arquivo Excel e uma planilha
-            WritableWorkbook workbook = Workbook.createWorkbook(new File(nomeDoArquivo));
+            WritableWorkbook workbook = Workbook.createWorkbook(file);
             WritableSheet sheet = workbook.createSheet("Planilha1", 0);
 
             // Escrever dados na planilha
@@ -177,6 +188,108 @@ public class Users {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void cadastrarUsuario() {
+        try {
+            File file = new File("C:/eclipse-workspace/usuarioteste1/arquivo1_excel.xls");
+            Workbook workbook = Workbook.getWorkbook(file);
+            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
+            WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
+
+            int quantidadeUsuarios = usuarioSheet.getRows(); // Obter o número de linhas (usuários) já cadastrados
+
+            Label nomeLabel = new Label(0, quantidadeUsuarios, getName());
+            usuarioSheet.addCell(nomeLabel);
+
+            Label complementoLabel = new Label(1, quantidadeUsuarios, getNamecomplement());
+            usuarioSheet.addCell(complementoLabel);
+
+            Label emailLabel = new Label(2, quantidadeUsuarios, getEmail());
+            usuarioSheet.addCell(emailLabel);
+
+            Label dataLabel = new Label(3, quantidadeUsuarios, getDate());
+            usuarioSheet.addCell(dataLabel);
+
+            Label senhaLabel = new Label(4, quantidadeUsuarios, getPassword());
+            usuarioSheet.addCell(senhaLabel);
+
+            Label numeroLabel = new Label(5, quantidadeUsuarios, getNumber());
+            usuarioSheet.addCell(numeroLabel);
+
+            Label adminLabel = new Label(6, quantidadeUsuarios, getAdmin().toString());
+            usuarioSheet.addCell(adminLabel);
+
+            Label ativoLabel = new Label(7, quantidadeUsuarios, getActive().toString());
+            usuarioSheet.addCell(ativoLabel);
+
+            Label cargoLabel = new Label(8, quantidadeUsuarios, getJob());
+            usuarioSheet.addCell(cargoLabel);
+
+            // Atualizar a célula que guarda a quantidade de usuários cadastrados
+            WritableCell c1 = usuarioSheet.getWritableCell(0, 0);
+            c1 = new Label(0, 0, Integer.toString(quantidadeUsuarios));
+            modifyData(c1, Integer.toString(quantidadeUsuarios));
+
+            copy.write();
+            copy.close();
+
+            System.out.println("Usuário cadastrado com sucesso!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void modifyData(WritableCell cell, String novastring) throws Exception {
+        if (cell.getType() == CellType.LABEL) {
+            Label l = (Label) cell;
+            l.setString(novastring);
+        } else if (cell.getType() == CellType.NUMBER) {
+            Label n = (Label) cell;
+            n.setString(novastring);
+        } else {
+            System.out.println("Other data... ");
+        }
+    }
+    public void excluirUsuario(String nomeDoArquivo) {
+        try {
+            File file = new File(nomeDoArquivo);
+            Workbook workbook = Workbook.getWorkbook(file);
+            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
+            WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
+
+            int totalLinhas = usuarioSheet.getRows();
+            int linhaExclusao = -1;
+
+            String emailUsuario = getEmail(); // Usando o getter para obter o email do próprio objeto Users
+
+            // Procurar o usuário na planilha pelo email
+            for (int i = 1; i < totalLinhas; i++) {
+                Cell cell = usuarioSheet.getCell(2, i); // Coluna 2 contém os emails
+                String email = cell.getContents();
+                if (email.equals(emailUsuario)) {
+                    linhaExclusao = i;
+                    break;
+                }
+            }
+
+            if (linhaExclusao != -1) {
+                // Encontrou o usuário pelo email e agora vamos remover a linha
+                usuarioSheet.removeRow(linhaExclusao);
+                copy.write();
+                copy.close();
+                System.out.println("Usuário excluído com sucesso!");
+            } else {
+                System.out.println("Usuário não encontrado na planilha.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        } catch (WriteException e) {
             e.printStackTrace();
         }
     }
