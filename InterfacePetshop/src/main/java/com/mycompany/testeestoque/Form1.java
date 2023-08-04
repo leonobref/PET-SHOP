@@ -124,10 +124,14 @@ public class Form1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-
-        this.dispose();
+        String usuario;
+        usuario = txtusuario.getText();
+        String senha = jPasswordField1.getText();
+        if("admin".equals(usuario) && "admin".equals(senha)){
+            this.dispose();
         dashboard dash1 = new dashboard();
-        dash1.setVisible(true);
+        dash1.setVisible(true); 
+        }
         
     }//GEN-LAST:event_btnLoginActionPerformed
 
