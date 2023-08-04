@@ -77,7 +77,7 @@ public class dashboard extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
         btnSair.setBackground(new java.awt.Color(255, 255, 255));
-        btnSair.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
+        btnSair.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         btnSair.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnSair.setText("Logout");
         btnSair.setOpaque(true);
@@ -92,7 +92,7 @@ public class dashboard extends javax.swing.JFrame {
                 btnSairMouseExited(evt);
             }
         });
-        jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 90, -1));
+        jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 110, 30));
 
         btnVender.setBackground(new java.awt.Color(23, 27, 36));
         btnVender.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 16)); // NOI18N
