@@ -98,7 +98,8 @@ public class dashboard extends javax.swing.JFrame {
         btnVender.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 16)); // NOI18N
         btnVender.setForeground(new java.awt.Color(255, 255, 255));
         btnVender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnVender.setText("Vender");
+        btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/shopping-cart (4).png"))); // NOI18N
+        btnVender.setText("Fazer Venda");
         btnVender.setToolTipText("");
         btnVender.setAlignmentX(232.0F);
         btnVender.setAlignmentY(0.0F);
@@ -119,12 +120,13 @@ public class dashboard extends javax.swing.JFrame {
                 btnVenderMouseExited(evt);
             }
         });
-        jPanel1.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 180, 40));
+        jPanel1.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 180, 40));
 
         btnRelatorio.setBackground(new java.awt.Color(23, 27, 36));
         btnRelatorio.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 16)); // NOI18N
         btnRelatorio.setForeground(new java.awt.Color(255, 255, 255));
         btnRelatorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/statistics.png"))); // NOI18N
         btnRelatorio.setText("Relatório");
         btnRelatorio.setIconTextGap(8);
         btnRelatorio.setOpaque(true);
@@ -139,7 +141,7 @@ public class dashboard extends javax.swing.JFrame {
                 btnRelatorioMouseExited(evt);
             }
         });
-        jPanel1.add(btnRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 180, 40));
+        jPanel1.add(btnRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 40));
 
         jLabel7.setBackground(new java.awt.Color(23, 27, 36));
         jLabel7.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 16)); // NOI18N
@@ -158,7 +160,7 @@ public class dashboard extends javax.swing.JFrame {
                 jLabel7MouseExited(evt);
             }
         });
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 50));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 180, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 410));
 
