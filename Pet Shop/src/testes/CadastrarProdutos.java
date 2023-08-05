@@ -19,7 +19,7 @@ import jxl.write.Number;
 
 public class CadastrarProdutos {
     public static void main(String[] args) throws Exception {
-        File file = new File("C:/Users/leono/OneDrive/Desktop/UEA/2023.1/Projeto de Programas/Arquivos/Dados Pet Shop.xls");
+        File file = new File("Dados Pet Shop.xls");
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet products = workbook.getSheet(2);
 
@@ -28,7 +28,7 @@ public class CadastrarProdutos {
         int quantidade = Integer.parseInt(quant);
 
 
-        WritableWorkbook copy = Workbook.createWorkbook(new File("C:/Users/leono/OneDrive/Desktop/UEA/2023.1/Projeto de Programas/Arquivos/Dados Pet Shop.xls"), workbook);
+        WritableWorkbook copy = Workbook.createWorkbook(new File("Dados Pet Shop.xls"), workbook);
         WritableSheet productscopy = copy.getSheet(2);
 
 
@@ -55,6 +55,9 @@ public class CadastrarProdutos {
 
         Number number6 = new Number(7, quantidade +1, 1);
         productscopy.addCell(number6);
+
+        number = new Number(0, 1000, 567);
+        productscopy.addCell(number);
 
         WritableCell c1 = productscopy.getWritableCell(9, 0);
         quantidade++;

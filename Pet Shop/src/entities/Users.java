@@ -8,6 +8,7 @@ import jxl.CellType;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import jxl.write.Label;
+import jxl.write.Number;
 import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -16,21 +17,25 @@ import jxl.write.WriteException;
 public class Users {
     private String name;
     private String namecomplement;
+    private int employmentcode;
     private String email;
     private String date;
     private String password;
     private String number;
-    private Boolean admin;
-    private Boolean active;
+    private int admin;
+    private int active;
     private String job;
+    private String CPF;
+
 
     public Users() {
     }
 
-    public Users(String name, String namecomplement, String email, String date, String password, String number,
-            Boolean admin, Boolean active, String job) {
+    public Users(String name, String namecomplement, int employmentcode, String email, String date, String password, String number,
+            int admin, int active, String job, String CPF) {
         this.name = name;
         this.namecomplement = namecomplement;
+        this.employmentcode = employmentcode;
         this.email = email;
         this.date = date;
         this.password = password;
@@ -38,6 +43,7 @@ public class Users {
         this.admin = admin;
         this.active = active;
         this.job = job;
+        this.CPF = CPF;
     }
 
     public String getName() {
@@ -88,19 +94,19 @@ public class Users {
         this.number = number;
     }
 
-    public Boolean getAdmin() {
+    public int getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setAdmin(int admin) {
         this.admin = admin;
     }
 
-    public Boolean getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
@@ -112,8 +118,17 @@ public class Users {
         this.job = job;
     }
 
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
     public void escreverDadosEmExcel(String nomeDoArquivo) {
     	try {
+            this.employmentcode = 1; //O código do usuario nao terá funçao getter e setter, mas por via de teste definindo ele como 1 aqui.
     		File file = new File(nomeDoArquivo);
     		if (file.exists()) {
                 System.out.println("O arquivo " + nomeDoArquivo + " já existe.");
@@ -121,35 +136,47 @@ public class Users {
             }
             // Criar um arquivo Excel e uma planilha
             WritableWorkbook workbook = Workbook.createWorkbook(file);
-            WritableSheet sheet = workbook.createSheet("Planilha1", 0);
+            WritableSheet sheet = workbook.createSheet("Users", 0);
 
             // Escrever dados na planilha
-            Label label = new Label(0, 0, "Nome");
+            Label label = new Label(0, 0, "NAME");
             sheet.addCell(label);
 
-            label = new Label(1, 0, "Nome Complemento");
+            label = new Label(1, 0, "NAME COMPLEMENT");
             sheet.addCell(label);
 
-            label = new Label(2, 0, "E-mail");
+            label = new Label(2, 0, "EMPLOYMENT CODE");
             sheet.addCell(label);
 
-            label = new Label(3, 0, "Data");
+            label = new Label(3, 0, "EMAIL");
             sheet.addCell(label);
 
-            label = new Label(4, 0, "Senha");
+            label = new Label(4, 0, "BIRTHDAY");
             sheet.addCell(label);
 
-            label = new Label(5, 0, "Número");
+            label = new Label(5, 0, "PASSWORD");
             sheet.addCell(label);
 
-            label = new Label(6, 0, "Admin");
+            label = new Label(6, 0, "NUMBER");
             sheet.addCell(label);
 
-            label = new Label(7, 0, "Ativo");
+            label = new Label(7, 0, "ADMIN");
             sheet.addCell(label);
 
-            label = new Label(8, 0, "Cargo");
+            label = new Label(8, 0, "ACTIVE");
             sheet.addCell(label);
+
+            label = new Label(9, 0, "JOB");
+            sheet.addCell(label);
+
+            label = new Label(10, 0, "CPF");
+            sheet.addCell(label);
+
+            label = new Label(10, 0, "CPF");
+            sheet.addCell(label);
+
+            Number number = new Number(11, 0, 0);
+            sheet.addCell(number);
 
             // Escrever os dados do usuário na planilha
             int row = 1;
@@ -159,25 +186,31 @@ public class Users {
             dataLabel = new Label(1, row, getNamecomplement());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(2, row, getEmail());
+            Number datanumber = new Number(2, row, this.employmentcode);
+            sheet.addCell(datanumber);
+
+            dataLabel = new Label(3, row, getEmail());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(3, row, getDate());
+            dataLabel = new Label(4, row, getDate());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(4, row, getPassword());
+            dataLabel = new Label(5, row, getPassword());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(5, row, getNumber());
+            dataLabel = new Label(6, row, getNumber());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(6, row, getAdmin().toString());
+            datanumber = new Number(7, row, getAdmin());
+            sheet.addCell(datanumber);
+
+            datanumber = new Number(8, row, getActive());
+            sheet.addCell(datanumber);
+
+            dataLabel = new Label(9, row, getJob());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(7, row, getActive().toString());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(8, row, getJob());
+            dataLabel = new Label(10, row, getCPF());
             sheet.addCell(dataLabel);
 
             // Salvar o arquivo Excel
@@ -218,10 +251,10 @@ public class Users {
             Label numeroLabel = new Label(5, quantidadeUsuarios, getNumber());
             usuarioSheet.addCell(numeroLabel);
 
-            Label adminLabel = new Label(6, quantidadeUsuarios, getAdmin().toString());
+            Number adminLabel = new Number(6, quantidadeUsuarios, getAdmin());
             usuarioSheet.addCell(adminLabel);
 
-            Label ativoLabel = new Label(7, quantidadeUsuarios, getActive().toString());
+            Number ativoLabel = new Number(7, quantidadeUsuarios, getActive());
             usuarioSheet.addCell(ativoLabel);
 
             Label cargoLabel = new Label(8, quantidadeUsuarios, getJob());
