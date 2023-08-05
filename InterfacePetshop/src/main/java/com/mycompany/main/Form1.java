@@ -8,6 +8,8 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,7 +18,9 @@ import java.awt.Color;
 public class Form1 extends javax.swing.JFrame {
     
     Color green = new Color(7,157,152);
-    Color lightgray = new Color(242,242,242);
+    Color lightgray = new Color(209,209,209);
+    String usuario;
+    String senha;
     /**
      * Creates new form Form1
      */
@@ -51,8 +55,8 @@ public class Form1 extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         txtusuario = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnlogin = new javax.swing.JLabel();
 
         jLabel6.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -117,6 +121,11 @@ public class Form1 extends javax.swing.JFrame {
 
         txtsenha.setForeground(new java.awt.Color(105, 102, 135));
         txtsenha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(149, 147, 170)));
+        txtsenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtsenhaKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -140,6 +149,11 @@ public class Form1 extends javax.swing.JFrame {
         txtusuario.setForeground(new java.awt.Color(105, 102, 135));
         txtusuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(149, 147, 170)));
         txtusuario.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtusuarioKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -166,35 +180,35 @@ public class Form1 extends javax.swing.JFrame {
         panelRound1.add(jLabel10);
         jLabel10.setBounds(0, 80, 320, 20);
 
-        jLabel5.setBackground(new java.awt.Color(209, 209, 209));
-        jLabel5.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Login");
-        jLabel5.setToolTipText("");
-        jLabel5.setFocusable(false);
-        jLabel5.setInheritsPopupMenu(false);
-        jLabel5.setOpaque(true);
-        jLabel5.setRequestFocusEnabled(false);
-        jLabel5.setVerifyInputWhenFocusTarget(false);
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel5MouseExited(evt);
-            }
-        });
-        panelRound1.add(jLabel5);
-        jLabel5.setBounds(40, 260, 170, 40);
-
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/supplies (1).png"))); // NOI18N
         panelRound1.add(jLabel7);
         jLabel7.setBounds(0, 30, 320, 40);
+
+        btnlogin.setBackground(new java.awt.Color(209, 209, 209));
+        btnlogin.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
+        btnlogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnlogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnlogin.setText("Login");
+        btnlogin.setToolTipText("");
+        btnlogin.setFocusable(false);
+        btnlogin.setInheritsPopupMenu(false);
+        btnlogin.setOpaque(true);
+        btnlogin.setRequestFocusEnabled(false);
+        btnlogin.setVerifyInputWhenFocusTarget(false);
+        btnlogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnloginMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnloginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnloginMouseExited(evt);
+            }
+        });
+        panelRound1.add(btnlogin);
+        btnlogin.setBounds(40, 260, 170, 40);
 
         jPanel1.add(panelRound1);
         panelRound1.setBounds(200, 30, 310, 340);
@@ -206,24 +220,52 @@ public class Form1 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
-        // TODO add your handling code here:
+    private void txtusuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusuarioKeyPressed
       
-      jLabel5.setBackground(green);
-      
-    }//GEN-LAST:event_jLabel5MouseEntered
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            txtsenha.requestFocus();
+        }
+    }//GEN-LAST:event_txtusuarioKeyPressed
 
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-       jLabel5.setBackground(lightgray);
-       
-    }//GEN-LAST:event_jLabel5MouseExited
+    private void txtsenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsenhaKeyPressed
+      if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+          usuario = txtusuario.getText();
+          senha = txtsenha.getText();
+          if("admin".equals(usuario) && "admin".equals(senha)){
+              this.dispose();
+              dashboard dash1 = new dashboard(); 
+              dash1.setVisible(true);
+          }
+          else{
+              JOptionPane.showMessageDialog(rootPane, "Credenciais Incorretas", "Erro", HEIGHT);
+          }
+          
+      }
+    }//GEN-LAST:event_txtsenhaKeyPressed
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void btnloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnloginMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        dashboard dash1 =  new dashboard();
-        dash1.setVisible(true);
-    }//GEN-LAST:event_jLabel5MouseClicked
+        usuario = txtusuario.getText();
+          senha = txtsenha.getText();
+          if("admin".equals(usuario) && "admin".equals(senha)){
+              this.dispose();
+              dashboard dash1 = new dashboard(); 
+              dash1.setVisible(true);
+          }
+          else{
+              JOptionPane.showMessageDialog(rootPane, "Credenciais Incorretas", "Erro", HEIGHT);
+          }
+    }//GEN-LAST:event_btnloginMouseClicked
+
+    private void btnloginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnloginMouseEntered
+        // TODO add your handling code here:
+        btnlogin.setBackground(green);
+    }//GEN-LAST:event_btnloginMouseEntered
+
+    private void btnloginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnloginMouseExited
+        // TODO add your handling code here:
+        btnlogin.setBackground(lightgray);
+    }//GEN-LAST:event_btnloginMouseExited
 
     /**
      * @param args the command line arguments
@@ -261,12 +303,12 @@ public class Form1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnlogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
