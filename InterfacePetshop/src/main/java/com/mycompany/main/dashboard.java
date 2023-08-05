@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.testeestoque;
+package com.mycompany.main;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,10 +50,10 @@ public class dashboard extends javax.swing.JFrame {
         ImgBoxeslbl = new javax.swing.JLabel();
         btnRelatorio1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -193,6 +194,11 @@ public class dashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 410));
 
+        jLabel5.setText("Adicionar Produtos");
+        jPanel4.add(jLabel5);
+
+        jTabbedPane1.addTab("tab3", jPanel4);
+
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setText("Area de Relatório");
@@ -200,19 +206,14 @@ public class dashboard extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab2", jPanel3);
 
-        jLabel5.setText("Adicionar Produtos");
-        jPanel4.add(jLabel5);
-
-        jTabbedPane1.addTab("tab3", jPanel4);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, -40, 550, 450));
-
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Area de Venda");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 550, 419));
+        jTabbedPane1.addTab("tab1", jPanel2);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, -40, 550, 450));
 
         pack();
         setLocationRelativeTo(null);
