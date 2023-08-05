@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import jxl.CellType;
@@ -15,7 +14,6 @@ import jxl.Workbook;
 import jxl.Sheet;
 import jxl.read.biff.BiffException;
 import jxl.write.Number;
-
 
 public class CadastrarProdutos {
     public static void main(String[] args) throws Exception {

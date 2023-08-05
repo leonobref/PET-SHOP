@@ -175,7 +175,7 @@ public class Users {
             label = new Label(10, 0, "CPF");
             sheet.addCell(label);
 
-            Number number = new Number(11, 0, 0);
+            Number number = new Number(11, 0, 1);
             sheet.addCell(number);
 
             // Escrever os dados do usuário na planilha
@@ -218,8 +218,6 @@ public class Users {
             workbook.close();
 
             System.out.println("Dados escritos no arquivo Excel com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,20 +267,19 @@ public class Users {
             copy.close();
 
             System.out.println("Usuário cadastrado com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void modifyData(WritableCell cell, String novastring) throws Exception {
+        double numero = Double.parseDouble(novastring);
         if (cell.getType() == CellType.LABEL) {
             Label l = (Label) cell;
             l.setString(novastring);
         } else if (cell.getType() == CellType.NUMBER) {
-            Label n = (Label) cell;
-            n.setString(novastring);
+            Number n = (Number) cell;
+            n.setValue(numero);
         } else {
             System.out.println("Other data... ");
         }
@@ -318,11 +315,7 @@ public class Users {
             } else {
                 System.out.println("Usuário não encontrado na planilha.");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        } catch (WriteException e) {
+        } catch (IOException | WriteException | BiffException e) {
             e.printStackTrace();
         }
     }
