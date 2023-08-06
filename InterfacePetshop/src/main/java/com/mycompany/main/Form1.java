@@ -231,7 +231,7 @@ public class Form1 extends javax.swing.JFrame {
           senha = txtsenha.getText();
           if("admin".equals(usuario) && "admin".equals(senha)){
               this.dispose();
-              dashboard dash1 = new dashboard(); 
+              dashboard2 dash1 = new dashboard2(); 
               dash1.setVisible(true);
           }
           else{
@@ -247,7 +247,7 @@ public class Form1 extends javax.swing.JFrame {
         senha = txtsenha.getText();
           if("admin".equals(usuario) && "admin".equals(senha)){
               this.dispose();
-              dashboard dash1 = new dashboard(); 
+              dashboard2 dash1 = new dashboard2(); 
               dash1.setVisible(true);
           }
           else{
