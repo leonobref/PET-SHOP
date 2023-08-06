@@ -49,13 +49,15 @@ public class dashboard extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         ImgBoxeslbl = new javax.swing.JLabel();
         btnRelatorio1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        homepanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -72,16 +74,18 @@ public class dashboard extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Controle ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("de Estoque");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        btnSair.setBackground(new java.awt.Color(255, 255, 255));
+        btnSair.setBackground(new java.awt.Color(23, 27, 36));
         btnSair.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(255, 255, 255));
         btnSair.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/power-off.png"))); // NOI18N
         btnSair.setText("Logout");
         btnSair.setOpaque(true);
         btnSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,14 +99,14 @@ public class dashboard extends javax.swing.JFrame {
                 btnSairMouseExited(evt);
             }
         });
-        jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 80, 20));
+        jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 540, 180, 50));
 
         btnVender.setBackground(new java.awt.Color(23, 27, 36));
         btnVender.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 12)); // NOI18N
         btnVender.setForeground(new java.awt.Color(255, 255, 255));
         btnVender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/shopping-cart (4).png"))); // NOI18N
-        btnVender.setText("Vendas");
+        btnVender.setText("  Vendas");
         btnVender.setToolTipText("");
         btnVender.setAlignmentX(232.0F);
         btnVender.setAlignmentY(0.0F);
@@ -110,6 +114,7 @@ public class dashboard extends javax.swing.JFrame {
         btnVender.setDoubleBuffered(true);
         btnVender.setFocusable(false);
         btnVender.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnVender.setIconTextGap(6);
         btnVender.setInheritsPopupMenu(false);
         btnVender.setOpaque(true);
         btnVender.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -124,7 +129,7 @@ public class dashboard extends javax.swing.JFrame {
                 btnVenderMouseExited(evt);
             }
         });
-        jPanel1.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 150, 280, 40));
+        jPanel1.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 200, 270, 50));
 
         btnRelatorio.setBackground(new java.awt.Color(23, 27, 36));
         btnRelatorio.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 12)); // NOI18N
@@ -133,6 +138,7 @@ public class dashboard extends javax.swing.JFrame {
         btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/person.png"))); // NOI18N
         btnRelatorio.setText("Pessoas");
         btnRelatorio.setFocusable(false);
+        btnRelatorio.setIconTextGap(6);
         btnRelatorio.setOpaque(true);
         btnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -145,7 +151,7 @@ public class dashboard extends javax.swing.JFrame {
                 btnRelatorioMouseExited(evt);
             }
         });
-        jPanel1.add(btnRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 230, 240, 30));
+        jPanel1.add(btnRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 300, 230, 50));
 
         jLabel7.setBackground(new java.awt.Color(23, 27, 36));
         jLabel7.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 12)); // NOI18N
@@ -153,7 +159,7 @@ public class dashboard extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-product (1).png"))); // NOI18N
         jLabel7.setText("Produtos");
-        jLabel7.setIconTextGap(2);
+        jLabel7.setIconTextGap(6);
         jLabel7.setOpaque(true);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -166,18 +172,19 @@ public class dashboard extends javax.swing.JFrame {
                 jLabel7MouseExited(evt);
             }
         });
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 110, 250, 40));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 150, 240, 50));
 
         ImgBoxeslbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/box.png"))); // NOI18N
-        jPanel1.add(ImgBoxeslbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 60, 30));
+        jPanel1.add(ImgBoxeslbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 60, 30));
 
         btnRelatorio1.setBackground(new java.awt.Color(23, 27, 36));
         btnRelatorio1.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 12)); // NOI18N
         btnRelatorio1.setForeground(new java.awt.Color(255, 255, 255));
         btnRelatorio1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRelatorio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/statistics.png"))); // NOI18N
-        btnRelatorio1.setText("Relatório");
+        btnRelatorio1.setText("  Relatório");
         btnRelatorio1.setFocusable(false);
+        btnRelatorio1.setIconTextGap(6);
         btnRelatorio1.setOpaque(true);
         btnRelatorio1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -190,14 +197,32 @@ public class dashboard extends javax.swing.JFrame {
                 btnRelatorio1MouseExited(evt);
             }
         });
-        jPanel1.add(btnRelatorio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 190, 230, 30));
+        jPanel1.add(btnRelatorio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 250, 220, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 410));
+        jLabel8.setBackground(new java.awt.Color(23, 27, 36));
+        jLabel8.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/botao-de-inicio (1).png"))); // NOI18N
+        jLabel8.setText(" Home");
+        jLabel8.setIconTextGap(6);
+        jLabel8.setOpaque(true);
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel8MouseExited(evt);
+            }
+        });
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-80, 100, 250, 50));
 
-        jLabel5.setText("Adicionar Produtos");
-        jPanel4.add(jLabel5);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 620));
 
-        jTabbedPane1.addTab("tab3", jPanel4);
+        jTabbedPane1.addTab("tab4", homepanel);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -213,7 +238,12 @@ public class dashboard extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab1", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, -40, 550, 450));
+        jLabel5.setText("Adicionar Produtos");
+        jPanel4.add(jLabel5);
+
+        jTabbedPane1.addTab("tab3", jPanel4);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -40, 1040, 660));
 
         pack();
         setLocationRelativeTo(null);
@@ -252,14 +282,14 @@ public class dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioMouseClicked
 
     private void btnSairMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSairMouseExited
-        btnSair.setBackground(Color.white);
-        btnSair.setForeground(Color.black);
+        btnSair.setBackground(ColorDefault);
+        btnSair.setForeground(Color.white);
     }//GEN-LAST:event_btnSairMouseExited
 
     private void btnSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSairMouseEntered
         // TODO add your handling code here:
         btnSair.setBackground(Color.red);
-        btnSair.setForeground(Color.white);
+        
     }//GEN-LAST:event_btnSairMouseEntered
 
     private void btnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSairMouseClicked
@@ -296,6 +326,18 @@ public class dashboard extends javax.swing.JFrame {
     private void btnRelatorio1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRelatorio1MouseExited
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+       jLabel8.setBackground(ChangeColor);
+    }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
+        jLabel8.setBackground(ColorDefault);
+    }//GEN-LAST:event_jLabel8MouseExited
 
     /**
      * @param args the command line arguments
@@ -339,12 +381,14 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel btnRelatorio1;
     private javax.swing.JLabel btnSair;
     private javax.swing.JLabel btnVender;
+    private javax.swing.JPanel homepanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -4,9 +4,7 @@
  */
 package com.mycompany.main;
 
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -44,7 +42,7 @@ public class Form1 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        panelRound1 = new com.mycompany.main.PanelRound();
+        panelRound1 = new com.mycompany.model.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -69,7 +67,7 @@ public class Form1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque Pet Shop");
         setBackground(new java.awt.Color(0, 51, 255));
-        setPreferredSize(new java.awt.Dimension(736, 430));
+        setPreferredSize(new java.awt.Dimension(736, 425));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
@@ -246,7 +244,7 @@ public class Form1 extends javax.swing.JFrame {
     private void btnloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnloginMouseClicked
         // TODO add your handling code here:
         usuario = txtusuario.getText();
-          senha = txtsenha.getText();
+        senha = txtsenha.getText();
           if("admin".equals(usuario) && "admin".equals(senha)){
               this.dispose();
               dashboard dash1 = new dashboard(); 
@@ -316,7 +314,7 @@ public class Form1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private com.mycompany.main.PanelRound panelRound1;
+    private com.mycompany.model.PanelRound panelRound1;
     private javax.swing.JPasswordField txtsenha;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
