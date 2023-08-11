@@ -52,23 +52,14 @@ public class Sales
     // Setters
 
     public void setCustomer_code(int customer_code) {this.customer_code = customer_code;}
-
     public void setCustomer_last_name(String customer_last_name) {this.customer_last_name = customer_last_name;}
-
     public void setCustomer_name(String customer_name) {this.customer_name = customer_name;}
-
     public void setDate(String date) {this.date = date;}
-
     public void setProduct(String product) {this.product = product;}
-
     public void setProduct_code(int product_code) {this.product_code = product_code;}
-
     public void setSale(float sale) {this.sale = sale;}
-
     public void setQuantity(int quantity) {this.quantity = quantity;}
-
     public void setValue(float value) {this.value = value;}
-
     public static void criarNovoArquivoXLS(String nomeArquivo)
     {
         // Verificar se o arquivo já existe
