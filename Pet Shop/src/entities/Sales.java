@@ -60,6 +60,7 @@ public class Sales
     public void setSale(float sale) {this.sale = sale;}
     public void setQuantity(int quantity) {this.quantity = quantity;}
     public void setValue(float value) {this.value = value;}
+    
     public static void criarNovoArquivoXLS(String nomeArquivo)
     {
         // Verificar se o arquivo já existe
