@@ -6,6 +6,7 @@ import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import java.util.List;
 
 public class Sales
 {
@@ -58,7 +59,7 @@ public class Sales
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void setValue(float value) { this.value = value; }
 
-    public static void createNewFile(String fileName, Sales salesData) {
+    public static void createNewFile(String fileName, List<Sales> salesList) {
         WritableWorkbook workbook = null;
 
         try {
@@ -77,25 +78,30 @@ public class Sales
                 sheet.addCell(label);
             }
 
-            Label productLabel = new Label(0, 1, salesData.getProduct());
-            Label productCodeLabel = new Label(1, 1, String.valueOf(salesData.getProduct_code()));
-            Label valueLabel = new Label(2, 1, String.valueOf(salesData.getValue()));
-            Label quantityLabel = new Label(3, 1, String.valueOf(salesData.getQuantity()));
-            Label dateLabel = new Label(4, 1, salesData.getDate());
-            Label saleLabel = new Label(5, 1, String.valueOf(salesData.getSale()));
-            Label customerNameLabel = new Label(6, 1, salesData.getCustomer_name());
-            Label customerLastNameLabel = new Label(7, 1, salesData.getCustomer_last_name());
-            Label customerCodeLabel = new Label(8, 1, String.valueOf(salesData.getCustomer_code()));
+            int row = 1; // Start from the second row
+            for (Sales salesData : salesList) {
+                Label productLabel = new Label(0, row, salesData.getProduct());
+                Label productCodeLabel = new Label(1, row, String.valueOf(salesData.getProduct_code()));
+                Label valueLabel = new Label(2, row, String.valueOf(salesData.getValue()));
+                Label quantityLabel = new Label(3, row, String.valueOf(salesData.getQuantity()));
+                Label dateLabel = new Label(4, row, salesData.getDate());
+                Label saleLabel = new Label(5, row, String.valueOf(salesData.getSale()));
+                Label customerNameLabel = new Label(6, row, salesData.getCustomer_name());
+                Label customerLastNameLabel = new Label(7, row, salesData.getCustomer_last_name());
+                Label customerCodeLabel = new Label(8, row, String.valueOf(salesData.getCustomer_code()));
 
-            sheet.addCell(productLabel);
-            sheet.addCell(productCodeLabel);
-            sheet.addCell(valueLabel);
-            sheet.addCell(quantityLabel);
-            sheet.addCell(dateLabel);
-            sheet.addCell(saleLabel);
-            sheet.addCell(customerNameLabel);
-            sheet.addCell(customerLastNameLabel);
-            sheet.addCell(customerCodeLabel);
+                sheet.addCell(productLabel);
+                sheet.addCell(productCodeLabel);
+                sheet.addCell(valueLabel);
+                sheet.addCell(quantityLabel);
+                sheet.addCell(dateLabel);
+                sheet.addCell(saleLabel);
+                sheet.addCell(customerNameLabel);
+                sheet.addCell(customerLastNameLabel);
+                sheet.addCell(customerCodeLabel);
+
+                row++;
+            }
 
             workbook.write();
             System.out.println("File created: " + fileName);
@@ -111,4 +117,5 @@ public class Sales
             }
         }
     }
+
 }
