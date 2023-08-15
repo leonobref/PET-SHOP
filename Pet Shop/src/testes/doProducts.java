@@ -4,10 +4,8 @@ import entities.sProducts;
 import java.util.ArrayList;
 import java.util.List;
 
-public class doProducts
-{
-    public static void main(String[] args)
-    {
+public class doProducts{
+    public static void main(String[] args){
         String nomeArquivo = "product_data.xls";
         List<sProducts> productList = new ArrayList<>();
 

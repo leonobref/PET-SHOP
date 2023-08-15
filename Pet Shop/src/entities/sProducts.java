@@ -32,13 +32,13 @@ public class sProducts
         this.active = active;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
-    public String getCode() {
+    public String getCode(){
         return code;
     }
     public void setCode(String code) {this.code = code;}
@@ -60,7 +60,7 @@ public class sProducts
     {
         WritableWorkbook workbook = null;
 
-        try {
+        try{
             File file = new File(fileName);
             workbook = Workbook.createWorkbook(file);
             WritableSheet sheet = workbook.createSheet("Sales", 0);
@@ -71,13 +71,13 @@ public class sProducts
                     "INSERTION DATE", "0"
             };
 
-            for (int i = 0; i < headers.length; i++) {
+            for (int i = 0; i < headers.length; i++){
                 Label label = new Label(i, 0, headers[i]);
                 sheet.addCell(label);
             }
 
             int row = 1;
-            for (sProducts productsData : salesList) {
+            for (sProducts productsData : salesList){
                 Label productLabel = new Label(0, row, productsData.getName());
                 Label productCodeLabel = new Label(1, row, String.valueOf(productsData.getProduct_code()));
                 Label categoryLabel = new Label(2, row, String.valueOf(productsData.getCategory()));
@@ -101,13 +101,13 @@ public class sProducts
 
             workbook.write();
             System.out.println("File created: " + fileName);
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         } finally {
-            if (workbook != null) {
+            if (workbook != null){
                 try {
                     workbook.close();
-                } catch (Exception e) {
+                } catch (Exception e){
                     e.printStackTrace();
                 }
             }
