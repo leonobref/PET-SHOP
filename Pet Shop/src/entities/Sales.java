@@ -40,7 +40,7 @@ public class Sales
 
     public float getSale() { return sale; }
     public float getValue() { return value; }
-    public int getCustomer_code(z) { return customer_code; }
+    public int getCustomer_code() { return customer_code; }
     public int getProduct_code() { return product_code; }
     public int getQuantity() { return quantity; }
     public String getCustomer_last_name() { return customer_last_name; }
@@ -58,72 +58,54 @@ public class Sales
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void setValue(float value) { this.value = value; }
 
-    public static void criarNovoArquivo(String nomeArquivo, Sales salesData)
-    {
+    public static void createNewFile(String fileName, Sales salesData) {
         WritableWorkbook workbook = null;
 
         try {
-            // Verificar se o arquivo já existe
-            File arquivo = new File(nomeArquivo);
+            File file = new File(fileName);
+            workbook = Workbook.createWorkbook(file);
+            WritableSheet sheet = workbook.createSheet("Sales", 0);
 
-            if (!arquivo.exists())
-            {
-                // Criando o novo arquivo
-                workbook = Workbook.createWorkbook(arquivo);
-                WritableSheet sheet = workbook.createSheet("Sales", 0);
+            String[] headers = {
+                    "PRODUCT", "PRODUCT CODE", "VALUE", "QUANTITY",
+                    "DATE", "SALE", "CUSTOMER NAME", "CUSTOMER LAST NAME",
+                    "CUSTOMER CODE", "0"
+            };
 
-                String[] headers = {
-                        "PRODUCT", "PRODUCT CODE", "VALUE", "QUANTITY",
-                        "DATE", "SALE", "CUSTOMER NAME", "CUSTOMER LAST NAME",
-                        "CUSTOMER CODE", "0", "0"
-                };
-
-                for (int i = 0; i < headers.length; i++) {
-                    Label label = new Label(i, 0, headers[i]);
-                    sheet.addCell(label);
-                }
-
-                Label productLabel = new Label(0, 1, salesData.getProduct());
-                Label productCodeLabel = new Label(1, 1, String.valueOf(salesData.getProduct_code()));
-                Label valueLabel = new Label(2, 1, String.valueOf(salesData.getValue()));
-                Label quantityLabel = new Label(3, 1, String.valueOf(salesData.getQuantity()));
-                Label dateLabel = new Label(4, 1, salesData.getDate());
-                Label saleLabel = new Label(5, 1, String.valueOf(salesData.getSale()));
-                Label customerNameLabel = new Label(6, 1, salesData.getCustomer_name());
-                Label customerLastNameLabel = new Label(7, 1, salesData.getCustomer_last_name());
-                Label customerCodeLabel = new Label(8, 1, String.valueOf(salesData.getCustomer_code()));
-
-                sheet.addCell(productLabel);
-                sheet.addCell(productCodeLabel);
-                sheet.addCell(valueLabel);
-                sheet.addCell(quantityLabel);
-                sheet.addCell(dateLabel);
-                sheet.addCell(saleLabel);
-                sheet.addCell(customerNameLabel);
-                sheet.addCell(customerLastNameLabel);
-                sheet.addCell(customerCodeLabel);
-                sheet.addCell(n1);
-                sheet.addCell(n2);
-
-                workbook.write();
-                System.out.println("Arquivo criado: " + nomeArquivo);
-            } else
-            {
-                System.out.println("Arquivo já existe: " + nomeArquivo);
+            for (int i = 0; i < headers.length; i++) {
+                Label label = new Label(i, 0, headers[i]);
+                sheet.addCell(label);
             }
 
-            System.out.println("Dados escritos no arquivo Excel com sucesso!");
+            Label productLabel = new Label(0, 1, salesData.getProduct());
+            Label productCodeLabel = new Label(1, 1, String.valueOf(salesData.getProduct_code()));
+            Label valueLabel = new Label(2, 1, String.valueOf(salesData.getValue()));
+            Label quantityLabel = new Label(3, 1, String.valueOf(salesData.getQuantity()));
+            Label dateLabel = new Label(4, 1, salesData.getDate());
+            Label saleLabel = new Label(5, 1, String.valueOf(salesData.getSale()));
+            Label customerNameLabel = new Label(6, 1, salesData.getCustomer_name());
+            Label customerLastNameLabel = new Label(7, 1, salesData.getCustomer_last_name());
+            Label customerCodeLabel = new Label(8, 1, String.valueOf(salesData.getCustomer_code()));
 
-        } catch (Exception e)
-        {
+            sheet.addCell(productLabel);
+            sheet.addCell(productCodeLabel);
+            sheet.addCell(valueLabel);
+            sheet.addCell(quantityLabel);
+            sheet.addCell(dateLabel);
+            sheet.addCell(saleLabel);
+            sheet.addCell(customerNameLabel);
+            sheet.addCell(customerLastNameLabel);
+            sheet.addCell(customerCodeLabel);
+
+            workbook.write();
+            System.out.println("File created: " + fileName);
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally
-        {
-            if (workbook != null)
-            {
+        } finally {
+            if (workbook != null) {
                 try {
                     workbook.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
