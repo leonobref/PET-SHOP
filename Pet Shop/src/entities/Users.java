@@ -20,24 +20,47 @@ public class Users {
     private String date;
     private String password;
     private String number;
-    private Boolean admin;
-    private Boolean active;
+    private String admin;
+    private String active;
     private String job;
-
+    private String Employment;
+    private String CPF;
+    private String prox;
     public Users() {
     }
 
-    public Users(String name, String namecomplement, String email, String date, String password, String number,
-            Boolean admin, Boolean active, String job) {
+    public Users(String name, String namecomplement,String Employment,String email, String date, String password, String number,
+            String admin, String active, String job,String CPF ,String prox) {
         this.name = name;
         this.namecomplement = namecomplement;
+        this.Employment = Employment;
         this.email = email;
         this.date = date;
         this.password = password;
         this.number = number;
         this.admin = admin;
+        this.CPF = CPF;
+        this.prox=prox;
         this.active = active;
         this.job = job;
+    }
+    public String getprox() {
+    	return prox;
+    }
+    public void setprox(String prox) {
+    	this.prox=prox;
+    }
+    public String getCPF() {
+    	return CPF;
+    }
+    public void setCPF(String CPF) {
+    	this.CPF=CPF;
+    }
+    public String getEmployment() {
+    	return Employment;
+    }
+    public void setEmployment(String Employment) {
+    	this.Employment= Employment;
     }
 
     public String getName() {
@@ -88,19 +111,19 @@ public class Users {
         this.number = number;
     }
 
-    public Boolean getAdmin() {
+    public String getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setAdmin(String admin) {
         this.admin = admin;
     }
 
-    public Boolean getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(String active) {
         this.active = active;
     }
 
@@ -114,6 +137,7 @@ public class Users {
 
     public void escreverDadosEmExcel(String nomeDoArquivo) {
     	try {
+    		
     		File file = new File(nomeDoArquivo);
     		if (file.exists()) {
                 System.out.println("O arquivo " + nomeDoArquivo + " já existe.");
@@ -124,31 +148,40 @@ public class Users {
             WritableSheet sheet = workbook.createSheet("Planilha1", 0);
 
             // Escrever dados na planilha
-            Label label = new Label(0, 0, "Nome");
+            Label label = new Label(0, 0, "NAME");
             sheet.addCell(label);
 
-            label = new Label(1, 0, "Nome Complemento");
+            label = new Label(1, 0, "NAME COMPLEMENT");
+            sheet.addCell(label);
+            
+            label = new Label(2, 0, "EMPLOYMENT CODE");
+            sheet.addCell(label);
+            
+            label = new Label(3, 0, "E-mail");
             sheet.addCell(label);
 
-            label = new Label(2, 0, "E-mail");
+            label = new Label(4, 0, "Data");
             sheet.addCell(label);
 
-            label = new Label(3, 0, "Data");
+            label = new Label(5, 0, "Senha");
             sheet.addCell(label);
 
-            label = new Label(4, 0, "Senha");
+            label = new Label(6, 0, "Número");
             sheet.addCell(label);
 
-            label = new Label(5, 0, "Número");
+            label = new Label(7, 0, "Admin");
             sheet.addCell(label);
 
-            label = new Label(6, 0, "Admin");
+            label = new Label(8, 0, "Ativo");
             sheet.addCell(label);
 
-            label = new Label(7, 0, "Ativo");
+            label = new Label(9, 0, "Cargo");
             sheet.addCell(label);
-
-            label = new Label(8, 0, "Cargo");
+            
+            label = new Label(10, 0, "CPF");
+            sheet.addCell(label);
+            
+            label = new Label(11, 0, "PROX");
             sheet.addCell(label);
 
             // Escrever os dados do usuário na planilha
@@ -158,26 +191,35 @@ public class Users {
 
             dataLabel = new Label(1, row, getNamecomplement());
             sheet.addCell(dataLabel);
-
-            dataLabel = new Label(2, row, getEmail());
+            
+            dataLabel = new Label(2, row, getEmployment());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(3, row, getDate());
+            dataLabel = new Label(3, row, getEmail());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(4, row, getPassword());
+            dataLabel = new Label(4, row, getDate());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(5, row, getNumber());
+            dataLabel = new Label(5, row, getPassword());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(6, row, getAdmin().toString());
+            dataLabel = new Label(6, row, getNumber());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(7, row, getActive().toString());
+            dataLabel = new Label(7, row, getAdmin());
             sheet.addCell(dataLabel);
 
-            dataLabel = new Label(8, row, getJob());
+            dataLabel = new Label(8, row, getActive());
+            sheet.addCell(dataLabel);
+
+            dataLabel = new Label(9, row, getJob());
+            sheet.addCell(dataLabel);
+            
+            dataLabel = new Label(10, row, getCPF());
+            sheet.addCell(dataLabel);
+            
+            dataLabel = new Label(11, row, getprox());
             sheet.addCell(dataLabel);
 
             // Salvar o arquivo Excel
@@ -193,7 +235,7 @@ public class Users {
     }
     public void cadastrarUsuario() {
         try {
-            File file = new File("C:/eclipse-workspace/usuarioteste1/DadosPetShop.xls");
+            File file = new File("C:\\eclipse-workspace\\PETSHOUPE\\DADOSPETSHOP.xls");
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
             WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
@@ -205,27 +247,36 @@ public class Users {
 
             Label complementoLabel = new Label(1, quantidadeUsuarios, getNamecomplement());
             usuarioSheet.addCell(complementoLabel);
+            
+            Label EmploymentLabel = new Label(2, quantidadeUsuarios, getEmployment());
+            usuarioSheet.addCell(EmploymentLabel);
 
-            Label emailLabel = new Label(2, quantidadeUsuarios, getEmail());
+            Label emailLabel = new Label(3, quantidadeUsuarios, getEmail());
             usuarioSheet.addCell(emailLabel);
 
-            Label dataLabel = new Label(3, quantidadeUsuarios, getDate());
+            Label dataLabel = new Label(4, quantidadeUsuarios, getDate());
             usuarioSheet.addCell(dataLabel);
 
-            Label senhaLabel = new Label(4, quantidadeUsuarios, getPassword());
+            Label senhaLabel = new Label(5, quantidadeUsuarios, getPassword());
             usuarioSheet.addCell(senhaLabel);
 
-            Label numeroLabel = new Label(5, quantidadeUsuarios, getNumber());
+            Label numeroLabel = new Label(6, quantidadeUsuarios, getNumber());
             usuarioSheet.addCell(numeroLabel);
 
-            Label adminLabel = new Label(6, quantidadeUsuarios, getAdmin().toString());
+            Label adminLabel = new Label(7, quantidadeUsuarios, getAdmin());
             usuarioSheet.addCell(adminLabel);
 
-            Label ativoLabel = new Label(7, quantidadeUsuarios, getActive().toString());
+            Label ativoLabel = new Label(8, quantidadeUsuarios, getActive());
             usuarioSheet.addCell(ativoLabel);
 
-            Label cargoLabel = new Label(8, quantidadeUsuarios, getJob());
+            Label cargoLabel = new Label(9, quantidadeUsuarios, getJob());
             usuarioSheet.addCell(cargoLabel);
+            
+            Label CPFLabel = new Label(10, quantidadeUsuarios, getCPF());
+            usuarioSheet.addCell(CPFLabel);
+            
+            Label proxLabel = new Label(11, quantidadeUsuarios, getprox());
+            usuarioSheet.addCell(proxLabel);
 
             // Atualizar a célula que guarda a quantidade de usuários cadastrados
             WritableCell c1 = usuarioSheet.getWritableCell(0, 0);
@@ -257,6 +308,10 @@ public class Users {
     public void excluirUsuario(String nomeDoArquivo) {
         try {
             File file = new File(nomeDoArquivo);
+    		if (!file.exists()) {
+                System.out.println("O arquivo " + nomeDoArquivo + " não existe.");
+                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
+            }
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
             WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
@@ -268,7 +323,7 @@ public class Users {
 
             // Procurar o usuário na planilha pelo email
             for (int i = 1; i < totalLinhas; i++) {
-                Cell cell = usuarioSheet.getCell(2, i); // Coluna 2 contém os emails
+                Cell cell = usuarioSheet.getCell(3, i); // Coluna 2 contém os emails
                 String email = cell.getContents();
                 if (email.equals(emailUsuario)) {
                     linhaExclusao = i;
@@ -311,4 +366,3 @@ public class Users {
         }
     }
 }
-
