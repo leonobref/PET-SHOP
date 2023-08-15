@@ -4,9 +4,29 @@
  */
 package com.mycompany.main;
 
+import java.io.File;
+import java.io.IOException;
 import com.mycompany.model.Model_Card;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import com.mycompany.model.Model_Card;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import jxl.Cell;
+import jxl.CellType;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableCell;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 /**
  *
@@ -16,9 +36,24 @@ public class dashboard2 extends javax.swing.JFrame {
 
     Color green = new Color(7,157,152);
     Color corfundo = new Color(23,27,36);
-    public dashboard2() {
+    public dashboard2() throws IOException, BiffException {
         initComponents();
-         card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$ 87.090"));
+        atualizarCards();
+    }
+    
+    public String LerDados(int numPlanilha, int x,int y) throws IOException, BiffException{
+        File file = new File("C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\PET-SHOP\\InterfacePetshop\\Dados Pet Shop.xls");
+        Workbook workbook = Workbook.getWorkbook(file);
+        Sheet sheet = workbook.getSheet(numPlanilha);
+        Cell cell = sheet.getCell(x,y);
+        return cell.getContents();
+    }
+    
+    private void atualizarCards() throws IOException, BiffException{
+        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(1,0,0)));
+        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(2,0,0)));
+        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(3,0,0)));
+
     }
 
     /**
@@ -45,6 +80,10 @@ public class dashboard2 extends javax.swing.JFrame {
         card1 = new com.mycompany.components.Card();
         card2 = new com.mycompany.components.Card();
         card3 = new com.mycompany.components.Card();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque Pet Shop");
@@ -84,6 +123,9 @@ public class dashboard2 extends javax.swing.JFrame {
         jLabel2.setText("Home");
         jLabel2.setOpaque(true);
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel2MouseEntered(evt);
             }
@@ -101,6 +143,9 @@ public class dashboard2 extends javax.swing.JFrame {
         jLabel3.setText("Produtos");
         jLabel3.setOpaque(true);
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel3MouseEntered(evt);
             }
@@ -213,6 +258,68 @@ public class dashboard2 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab2", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setBackground(new java.awt.Color(7, 157, 152));
+        jLabel10.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plus (1).png"))); // NOI18N
+        jLabel10.setText("Adicionar Usuário");
+        jLabel10.setOpaque(true);
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel10MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel10MouseExited(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
+        jLabel11.setText("Todos os Produtos");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 493, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 14, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(567, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel2);
+
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, -30, 940, 670));
 
         pack();
@@ -273,6 +380,30 @@ public class dashboard2 extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+       jTabbedPane1.setSelectedIndex(1);
+        try {
+            atualizarCards();
+        } catch (IOException ex) {
+            Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+         jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
+       jLabel10.setBackground(new Color(0,168,181));
+    }//GEN-LAST:event_jLabel10MouseEntered
+
+    private void jLabel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseExited
+        jLabel10.setBackground(green);
+    }//GEN-LAST:event_jLabel10MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -306,7 +437,13 @@ public class dashboard2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dashboard2().setVisible(true);
+                try {
+                    new dashboard2().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (BiffException ex) {
+                    Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -316,6 +453,8 @@ public class dashboard2 extends javax.swing.JFrame {
     private com.mycompany.components.Card card2;
     private com.mycompany.components.Card card3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -325,6 +464,8 @@ public class dashboard2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private com.mycompany.model.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables

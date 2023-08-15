@@ -7,7 +7,11 @@ package com.mycompany.main;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import jxl.read.biff.BiffException;
 
 /**
  *
@@ -67,12 +71,14 @@ public class Form1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque Pet Shop");
         setBackground(new java.awt.Color(0, 51, 255));
-        setPreferredSize(new java.awt.Dimension(736, 425));
+        setPreferredSize(new java.awt.Dimension(1400, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(736, 405));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1400, 800));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1400, 800));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1400, 800));
         jPanel1.setLayout(null);
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
@@ -90,14 +96,14 @@ public class Form1 extends javax.swing.JFrame {
         jLabel3.setAlignmentY(0.9F);
         jLabel3.setIconTextGap(10);
         panelRound1.add(jLabel3);
-        jLabel3.setBounds(0, 100, 320, 19);
+        jLabel3.setBounds(-10, 110, 320, 19);
 
         jLabel2.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(149, 147, 170));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Usuário");
         panelRound1.add(jLabel2);
-        jLabel2.setBounds(60, 130, 50, 20);
+        jLabel2.setBounds(60, 130, 60, 20);
 
         jLabel4.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(149, 147, 170));
@@ -105,7 +111,7 @@ public class Form1 extends javax.swing.JFrame {
         jLabel4.setText("Senha");
         jLabel4.setIconTextGap(6);
         panelRound1.add(jLabel4);
-        jLabel4.setBounds(60, 190, 40, 18);
+        jLabel4.setBounds(60, 190, 50, 18);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock.png"))); // NOI18N
         panelRound1.add(jLabel9);
@@ -181,7 +187,7 @@ public class Form1 extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/supplies (1).png"))); // NOI18N
         panelRound1.add(jLabel7);
-        jLabel7.setBounds(0, 30, 320, 40);
+        jLabel7.setBounds(0, 30, 310, 40);
 
         btnlogin.setBackground(new java.awt.Color(209, 209, 209));
         btnlogin.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
@@ -209,10 +215,10 @@ public class Form1 extends javax.swing.JFrame {
         btnlogin.setBounds(40, 260, 170, 40);
 
         jPanel1.add(panelRound1);
-        panelRound1.setBounds(200, 30, 310, 340);
+        panelRound1.setBounds(180, 0, 320, 410);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 740, 410);
+        jPanel1.setBounds(270, 130, 720, 410);
 
         pack();
         setLocationRelativeTo(null);
@@ -231,7 +237,14 @@ public class Form1 extends javax.swing.JFrame {
           senha = txtsenha.getText();
           if("admin".equals(usuario) && "admin".equals(senha)){
               this.dispose();
-              dashboard2 dash1 = new dashboard2(); 
+              dashboard2 dash1 = null; 
+              try {
+                  dash1 = new dashboard2();
+              } catch (IOException ex) {
+                  Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (BiffException ex) {
+                  Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+              }
               dash1.setVisible(true);
           }
           else{
@@ -247,7 +260,14 @@ public class Form1 extends javax.swing.JFrame {
         senha = txtsenha.getText();
           if("admin".equals(usuario) && "admin".equals(senha)){
               this.dispose();
-              dashboard2 dash1 = new dashboard2(); 
+              dashboard2 dash1 = null; 
+            try {
+                dash1 = new dashboard2();
+            } catch (IOException ex) {
+                Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (BiffException ex) {
+                Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+            }
               dash1.setVisible(true);
           }
           else{
