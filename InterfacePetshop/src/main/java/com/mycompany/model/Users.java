@@ -1,4 +1,4 @@
-package com.mycompany.components;
+package com.mycompany.model;
 
 import java.io.File;
 import java.io.IOException;
@@ -135,13 +135,13 @@ public class Users {
         this.job = job;
     }
 
-    public void escreverDadosEmExcel(String nomeDoArquivo) {
+    public String escreverDadosEmExcel(String nomeDoArquivo) {
     	try {
     		
     		File file = new File(nomeDoArquivo);
     		if (file.exists()) {
                 System.out.println("O arquivo " + nomeDoArquivo + " já existe.");
-                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
+                return nomeDoArquivo; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
             }
             // Criar um arquivo Excel e uma planilha
             WritableWorkbook workbook = Workbook.createWorkbook(file);
@@ -232,10 +232,13 @@ public class Users {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        return nomeDoArquivo;
     }
-    public void cadastrarUsuario() {
+    //Função recebe um path personalizado
+    public void cadastrarUsuario(File file) {
         try {
-            File file = new File("C:\\eclipse-workspace\\PETSHOUPE\\DADOSPETSHOP.xls");
+            
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
             WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)

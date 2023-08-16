@@ -1,4 +1,4 @@
-package com.mycompany.components;
+package com.mycompany.model;
 
 import java.awt.Color;
 import java.awt.Component;

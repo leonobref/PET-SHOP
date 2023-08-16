@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.main;
+package com.mycompany.components;
 
-import com.mycompany.components.Users;
+import com.mycompany.components.Form1;
+import com.mycompany.model.Users;
 import java.io.File;
 import java.io.IOException;
 import com.mycompany.model.Model_Card;
@@ -20,11 +21,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import jxl.Cell;
 import jxl.CellType;
 import jxl.Sheet;
 import jxl.Workbook;
-import com.mycompany.main.FrameDadosUsuario;
+import javax.swing.table.DefaultTableModel;
 import jxl.read.biff.BiffException;
 import jxl.write.Label;
 import jxl.write.WritableCell;
@@ -39,7 +42,8 @@ import jxl.write.WriteException;
 public class dashboard2 extends javax.swing.JFrame {
 
     
-    File file = new File("C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\PET-SHOP\\InterfacePetshop\\Dados Pet Shop.xls");
+    File file = new File("C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\PET-SHOP\\InterfacePetshop\\Pet Shop Dados.xls");
+
     Color green = new Color(7,157,152);
     Color corfundo = new Color(23,27,36);
     private int linha;
@@ -47,9 +51,13 @@ public class dashboard2 extends javax.swing.JFrame {
     
     public dashboard2() throws IOException, BiffException {
         initComponents();
-        atualizarCards();
+        
         atualizarTabela();
+        atualizarCards();
+        
+        
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
+        
     }
     
     public String LerDados(int numPlanilha, int x,int y) throws IOException, BiffException{
@@ -60,24 +68,30 @@ public class dashboard2 extends javax.swing.JFrame {
     }
     
     private void atualizarCards() throws IOException, BiffException{
-        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(1,0,0)));
-        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(2,0,0)));
-        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(3,0,0)));
-
+        if (file.exists()){
+        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(0,0,0)));
+        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(0,0,0)));
+        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(0,0,0)));
+        }
     }
     
     private void atualizarTabela() throws IOException, BiffException{
-        
+        ((DefaultTableModel) table1.getModel()).setRowCount(0);
+        if (file.exists()) {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(0);
         
-        for(int i = 1 ; i < sheet.getRows(); i++){
+        for(int i = 1; i != sheet.getRows(); i++){
             if( ! "".equals(sheet.getCell(0,i).getContents())){
                
-        table1.addRow(new Object[]{sheet.getCell(0,i).getContents(), sheet.getCell(3,i).getContents(), sheet.getCell(7,i).getContents(), sheet.getCell(8,i).getContents()} );
+        table1.addRow(new Object[]{sheet.getCell(0,i).getContents()+ " " + sheet.getCell(1,i).getContents(), sheet.getCell(3,i).getContents(), sheet.getCell(7,i).getContents(), sheet.getCell(8,i).getContents()} );
             }
         }
-            
+        } 
+    }
+    
+    public void selecttable(int i){
+        jTabbedPane1.setSelectedIndex(i);
     }
     
     private Users LerUsuario(int linha) throws IOException, BiffException{
@@ -111,21 +125,21 @@ public class dashboard2 extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        card1 = new com.mycompany.components.Card();
-        card2 = new com.mycompany.components.Card();
-        card3 = new com.mycompany.components.Card();
+        card1 = new com.mycompany.model.Card();
+        card2 = new com.mycompany.model.Card();
+        card3 = new com.mycompany.model.Card();
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new com.mycompany.components.Table();
+        table1 = new com.mycompany.model.Table();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque Pet Shop");
         setMaximumSize(new java.awt.Dimension(1125, 630));
-        setPreferredSize(new java.awt.Dimension(1118, 626));
+        setPreferredSize(new java.awt.Dimension(1118, 620));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -318,6 +332,9 @@ public class dashboard2 extends javax.swing.JFrame {
         jLabel10.setText("Adicionar Usuário");
         jLabel10.setOpaque(true);
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel10MouseEntered(evt);
             }
@@ -327,27 +344,8 @@ public class dashboard2 extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
-        jLabel11.setText("Usuários");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 539, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
+        jLabel11.setForeground(new java.awt.Color(23, 27, 36));
+        jLabel11.setText("Todos os Usuários");
 
         jScrollPane1.setVerifyInputWhenFocusTarget(false);
 
@@ -368,6 +366,8 @@ public class dashboard2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table1.setGridColor(new java.awt.Color(255, 255, 255));
+        table1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         table1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 table1MouseClicked(evt);
@@ -375,25 +375,46 @@ public class dashboard2 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table1);
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(112, 112, 112))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
@@ -477,13 +498,15 @@ public class dashboard2 extends javax.swing.JFrame {
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
        if(evt.getClickCount() == 2){
-           
-          linha = table1.getSelectedRow() + 1 ;
+           if (file.exists()) {
+           linha = table1.getSelectedRow()+2;
           
            try {
                Users usertxt = LerUsuario(linha);
+               
                FrameDadosUsuario framedata = new FrameDadosUsuario(usertxt);
                framedata.setVisible(true);
+               this.dispose();
                
            } catch (IOException | BiffException ex) {
                Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
@@ -492,6 +515,7 @@ public class dashboard2 extends javax.swing.JFrame {
            
           
        }
+       }
        
        
         
@@ -499,16 +523,15 @@ public class dashboard2 extends javax.swing.JFrame {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         jTabbedPane1.setSelectedIndex(1);
-        try {
-            atualizarCards();
-        } catch (IOException ex) {
-            Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BiffException ex) {
-            Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          
     
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+      CadastroUsuario cadastro = new CadastroUsuario();
+      cadastro.setVisible(true);
+      this.dispose();
+      
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
      * @param args the command line arguments
@@ -543,8 +566,10 @@ public class dashboard2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 try {
                     new dashboard2().setVisible(true);
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (BiffException ex) {
@@ -555,9 +580,9 @@ public class dashboard2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.components.Card card1;
-    private com.mycompany.components.Card card2;
-    private com.mycompany.components.Card card3;
+    private com.mycompany.model.Card card1;
+    private com.mycompany.model.Card card2;
+    private com.mycompany.model.Card card3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -576,6 +601,6 @@ public class dashboard2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private com.mycompany.model.PanelRound panelRound1;
-    private com.mycompany.components.Table table1;
+    private com.mycompany.model.Table table1;
     // End of variables declaration//GEN-END:variables
 }
