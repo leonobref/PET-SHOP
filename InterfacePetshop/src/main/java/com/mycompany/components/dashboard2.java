@@ -42,7 +42,7 @@ import jxl.write.WriteException;
 public class dashboard2 extends javax.swing.JFrame {
 
     
-    File file = new File("C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\PET-SHOP\\InterfacePetshop\\Pet Shop Dados.xls");
+    File file = new File("Pet Shop Dados.xls");
 
     Color green = new Color(7,157,152);
     Color corfundo = new Color(23,27,36);

@@ -14,7 +14,7 @@ import com.mycompany.model.AplicarNimbus;
  *
  * @author geova
  */
-public class InterfacePetshop {
+public class Main_InterfacePetShop {
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
        AplicarNimbus.pegaNimbus();

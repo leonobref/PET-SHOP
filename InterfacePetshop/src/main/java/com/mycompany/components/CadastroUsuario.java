@@ -23,7 +23,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
    
     
-    File file = new File("C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\PET-SHOP\\InterfacePetshop\\Pet Shop Dados.xls");
+    File file = new File("Pet Shop Dados.xls");
 
     public CadastroUsuario() {
         
@@ -285,7 +285,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
        
        
        Users novouser = new Users();
-       novouser.escreverDadosEmExcel("Pet Shop Dados.xls");
+       novouser.escreverDadosEmExcel();
         
         try {
             Workbook workbook = Workbook.getWorkbook(file);

@@ -8,7 +8,6 @@ com\mycompany\components\CadastroUsuario$5.class
 com\mycompany\components\CadastroUsuario$2.class
 com\mycompany\components\Form1$4.class
 com\mycompany\components\Form1$1.class
-com\mycompany\main\InterfacePetshop.class
 com\mycompany\components\FrameDadosUsuario$1.class
 com\mycompany\components\dashboard2.class
 com\mycompany\components\dashboard2$1.class
@@ -39,6 +38,7 @@ com\mycompany\model\ScrollBar.class
 com\mycompany\components\FrameDadosUsuario$6.class
 com\mycompany\model\StatusType.class
 com\mycompany\components\Form1$3.class
+com\mycompany\main\Main_InterfacePetShop.class
 com\mycompany\components\dashboard2$9.class
 com\mycompany\components\FrameDadosUsuario$3.class
 com\mycompany\components\Form1.class

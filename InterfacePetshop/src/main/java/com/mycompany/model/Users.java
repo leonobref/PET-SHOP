@@ -135,18 +135,18 @@ public class Users {
         this.job = job;
     }
 
-    public String escreverDadosEmExcel(String nomeDoArquivo) {
+    public void  escreverDadosEmExcel() {
     	try {
     		
-    		File file = new File(nomeDoArquivo);
+    	File file = new File("Pet Shop Dados.xls");
     		if (file.exists()) {
-                System.out.println("O arquivo " + nomeDoArquivo + " já existe.");
-                return nomeDoArquivo; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
+                System.out.println("O arquivo " + file + " já existe.");
+                return ; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
             }
             // Criar um arquivo Excel e uma planilha
             WritableWorkbook workbook = Workbook.createWorkbook(file);
-            WritableSheet sheet = workbook.createSheet("Planilha1", 0);
-
+            WritableSheet sheet = workbook.createSheet("Users", 0);
+            
             // Escrever dados na planilha
             Label label = new Label(0, 0, "NAME");
             sheet.addCell(label);
@@ -233,7 +233,7 @@ public class Users {
             e.printStackTrace();
         }
         
-        return nomeDoArquivo;
+        return ;
     }
     //Função recebe um path personalizado
     public void cadastrarUsuario(File file) {
