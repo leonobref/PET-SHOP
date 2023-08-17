@@ -33,6 +33,11 @@ public class Form1 extends javax.swing.JFrame {
   
     }
     
+    int validar(){
+        
+        return 1;
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
