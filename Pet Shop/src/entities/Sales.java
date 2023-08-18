@@ -141,7 +141,7 @@ public class Sales
         }
     }
 
-    public void excluirUsuario(String nomeDoArquivo)
+    public void excluirProduto(String nomeDoArquivo)
     {
         try {
             File file = new File(nomeDoArquivo);
@@ -169,11 +169,11 @@ public class Sales
             }
 
             if (linhaExclusao != -1) {
-                // Encontrou o usuário pelo email e agora vamos remover a linha
+                // Encontrou a venda pelo codigo do produto e agora vamos remover a linha
                 usuarioSheet.removeRow(linhaExclusao);
                 copy.write();
                 copy.close();
-                System.out.println("Usuário excluído com sucesso!");
+                System.out.println("Venda excluída com sucesso!");
             } else {
                 System.out.println("Usuário não encontrado na planilha.");
             }
@@ -181,5 +181,4 @@ public class Sales
             e.printStackTrace();
         }
     }
-
 }
