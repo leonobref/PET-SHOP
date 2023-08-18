@@ -46,11 +46,14 @@ public class Supplies
     public void setDate(String date) { this.date = date; }
     public void setCost(float cost) { this.cost = cost; }
 
-    public static void createNewFile(String fileName, List<Supplies> salesList) {
+    public static void createNewFile(String fileName, List<Supplies> suppliesList)
+    {
         WritableWorkbook workbook = null;
 
         try {
             File file = new File(fileName);
+
+            // Criando arquivo e planilha
             workbook = Workbook.createWorkbook(file);
             WritableSheet sheet = workbook.createSheet("Supplies", 0);
 
@@ -65,7 +68,7 @@ public class Supplies
             }
 
             int row = 1;
-            for (Supplies suppliesData : salesList) {
+            for (Supplies suppliesData : suppliesList) {
                 Label productLabel = new Label(0, row, suppliesData.getProduct());
                 Label productCodeLabel = new Label(1, row, String.valueOf(suppliesData.getProduct_code()));
                 Label supplyLabel = new Label(2, row, String.valueOf(suppliesData.getSupply()));
@@ -97,5 +100,4 @@ public class Supplies
             }
         }
     }
-
 }

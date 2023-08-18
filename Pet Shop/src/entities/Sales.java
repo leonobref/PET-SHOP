@@ -2,16 +2,22 @@ package entities;
 
 import java.io.File;
 import java.io.IOException;
+
+import jxl.Cell;
+import jxl.CellType;
+import jxl.Sheet;
 import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
+import jxl.read.biff.BiffException;
+import jxl.write.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Iterator;
 import java.util.List;
 
 public class Sales
 {
     private String product;
-    private int product_code;
+    private String product_code;
     private float value;
     private int quantity;
     private String date;
@@ -27,7 +33,7 @@ public class Sales
                  String customer_last_name, int customer_code)
     {
         this.product = product;
-        this.product_code = product_code;
+        this.product_code = String.valueOf(product_code);
         this.value = value;
         this.quantity = quantity;
         this.date = date;
@@ -42,7 +48,7 @@ public class Sales
     public float getSale() { return sale; }
     public float getValue() { return value; }
     public int getCustomer_code() { return customer_code; }
-    public int getProduct_code() { return product_code; }
+    public String getProduct_code() { return product_code; }
     public int getQuantity() { return quantity; }
     public String getCustomer_last_name() { return customer_last_name; }
     public String getCustomer_name() { return customer_name; }
@@ -54,12 +60,13 @@ public class Sales
     public void setCustomer_name(String customer_name) { this.customer_name = customer_name; }
     public void setDate(String date) { this.date = date; }
     public void setProduct(String product) { this.product = product; }
-    public void setProduct_code(int product_code) { this.product_code = product_code; }
+    public void setProduct_code(String product_code) { this.product_code = product_code; }
     public void setSale(float sale) { this.sale = sale; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void setValue(float value) { this.value = value; }
 
-    public static void createNewFile(String fileName, List<Sales> salesList) {
+    public static void createNewFile(String fileName, List<Sales> salesList)
+    {
         WritableWorkbook workbook = null;
 
         try {
@@ -78,7 +85,7 @@ public class Sales
                 sheet.addCell(label);
             }
 
-            int row = 1; // Start from the second row
+            int row = 1;
             for (Sales salesData : salesList) {
                 Label productLabel = new Label(0, row, salesData.getProduct());
                 Label productCodeLabel = new Label(1, row, String.valueOf(salesData.getProduct_code()));
@@ -115,6 +122,63 @@ public class Sales
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public static void modifyData(WritableCell cell, String novastring) throws Exception
+    {
+        if (cell.getType() == CellType.LABEL)
+        {
+            Label l = (Label) cell;
+            l.setString(novastring);
+        } else if (cell.getType() == CellType.NUMBER)
+        {
+            Label n = (Label) cell;
+            n.setString(novastring);
+        } else
+        {
+            System.out.println("Other data... ");
+        }
+    }
+
+    public void excluirUsuario(String nomeDoArquivo)
+    {
+        try {
+            File file = new File(nomeDoArquivo);
+            if (!file.exists()) {
+                System.out.println("O arquivo " + nomeDoArquivo + " não existe.");
+                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
+            }
+            Workbook workbook = Workbook.getWorkbook(file);
+            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
+            WritableSheet usuarioSheet = copy.getSheet(4); // Assumindo que a planilha que queremos usar é a quinta (i = 4)
+
+            int totalLinhas = usuarioSheet.getRows();
+            int linhaExclusao = -1;
+
+            String productCode = getProduct_code();
+
+            // Procurar o usuário na planilha pelo email
+            for (int i = 1; i < totalLinhas; i++) {
+                Cell cell = usuarioSheet.getCell(1, i); // Coluna 1 contém os códigos
+                String code = cell.getContents();
+                if (code.equals(productCode)) {
+                    linhaExclusao = i;
+                    break;
+                }
+            }
+
+            if (linhaExclusao != -1) {
+                // Encontrou o usuário pelo email e agora vamos remover a linha
+                usuarioSheet.removeRow(linhaExclusao);
+                copy.write();
+                copy.close();
+                System.out.println("Usuário excluído com sucesso!");
+            } else {
+                System.out.println("Usuário não encontrado na planilha.");
+            }
+        } catch (IOException | BiffException | WriteException e) {
+            e.printStackTrace();
         }
     }
 
