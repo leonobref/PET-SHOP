@@ -120,8 +120,8 @@ public class Products {
                 '}';
     }
 
-    public void escrever_produtos() throws Exception {
-        File file = new File("Dados Pet Shop.xls");
+    public void escrever_produtos(String filename) throws Exception {
+        File file = new File(filename);
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet products = workbook.getSheet(2);
 
@@ -129,7 +129,7 @@ public class Products {
         String quant = c.getContents();
         int quantidade = Integer.parseInt(quant);
 
-        WritableWorkbook copy = Workbook.createWorkbook(new File("Dados Pet Shop.xls"), workbook);
+        WritableWorkbook copy = Workbook.createWorkbook(new File(filename), workbook);
         WritableSheet productscopy = copy.getSheet(2);
 
         Label label = new Label(0, quantidade, this.name);
