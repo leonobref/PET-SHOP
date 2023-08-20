@@ -176,11 +176,11 @@ public class Users {
         copy.close();
     }
     private void modifyData(WritableCell cell, String novastring) throws Exception {
-        double numero = Double.parseDouble(novastring);
         if (cell.getType() == CellType.LABEL) {
             Label l = (Label) cell;
             l.setString(novastring);
         } else if (cell.getType() == CellType.NUMBER) {
+            double numero = Double.parseDouble(novastring);
             Number n = (Number) cell;
             n.setValue(numero);
         } else {
@@ -234,7 +234,7 @@ public class Users {
         }
     }
     
-    //???????????????????????????????
+    /*???????????????????????????????
     public void mudarNomeArquivo(String nomeAntigo, String nomeNovo) {
         File arquivoAntigo = new File(nomeAntigo);
         
@@ -249,5 +249,5 @@ public class Users {
         } else {
             System.out.println("O arquivo " + nomeAntigo + " não existe.");
         }
-    }
+    }*/
 }
