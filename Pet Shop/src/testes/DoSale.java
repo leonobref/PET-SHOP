@@ -2,11 +2,10 @@ package testes;
 
 import java.util.ArrayList;
 import java.util.List;
-import entities.Sales;
 
-public class DoSale {
-    public static void main(String[] args)
-    {
+public class DoSale
+{
+    public static void main(String[] args) {
         String nomeArquivo = "sales_data.xls";
         List<Sales> salesList = new ArrayList<>();
 
@@ -18,6 +17,9 @@ public class DoSale {
                 "Maria", "Joaquina", 1);
         salesList.add(salesData2);
 
-        Sales.createNewFile("sales_data.xls", salesList);
+        Sales.createNewFile(nomeArquivo, salesList);
+
+        String productDelete = "123";
+        Sales.excluirProduto(nomeArquivo, productDelete);
     }
 }

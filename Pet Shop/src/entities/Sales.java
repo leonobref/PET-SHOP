@@ -1,17 +1,13 @@
 package entities;
 
-import java.io.File;
-import java.io.IOException;
-
 import jxl.Cell;
 import jxl.CellType;
-import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import jxl.write.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.Iterator;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class Sales
@@ -65,8 +61,7 @@ public class Sales
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void setValue(float value) { this.value = value; }
 
-    public static void createNewFile(String fileName, List<Sales> salesList)
-    {
+    public static void createNewFile(String fileName, List<Sales> salesList) {
         WritableWorkbook workbook = null;
 
         try {
@@ -74,41 +69,8 @@ public class Sales
             workbook = Workbook.createWorkbook(file);
             WritableSheet sheet = workbook.createSheet("Sales", 0);
 
-            String[] headers = {
-                    "PRODUCT", "PRODUCT CODE", "VALUE", "QUANTITY",
-                    "DATE", "SALE", "CUSTOMER NAME", "CUSTOMER LAST NAME",
-                    "CUSTOMER CODE", "0"
-            };
-
-            for (int i = 0; i < headers.length; i++) {
-                Label label = new Label(i, 0, headers[i]);
-                sheet.addCell(label);
-            }
-
-            int row = 1;
-            for (Sales salesData : salesList) {
-                Label productLabel = new Label(0, row, salesData.getProduct());
-                Label productCodeLabel = new Label(1, row, String.valueOf(salesData.getProduct_code()));
-                Label valueLabel = new Label(2, row, String.valueOf(salesData.getValue()));
-                Label quantityLabel = new Label(3, row, String.valueOf(salesData.getQuantity()));
-                Label dateLabel = new Label(4, row, salesData.getDate());
-                Label saleLabel = new Label(5, row, String.valueOf(salesData.getSale()));
-                Label customerNameLabel = new Label(6, row, salesData.getCustomer_name());
-                Label customerLastNameLabel = new Label(7, row, salesData.getCustomer_last_name());
-                Label customerCodeLabel = new Label(8, row, String.valueOf(salesData.getCustomer_code()));
-
-                sheet.addCell(productLabel);
-                sheet.addCell(productCodeLabel);
-                sheet.addCell(valueLabel);
-                sheet.addCell(quantityLabel);
-                sheet.addCell(dateLabel);
-                sheet.addCell(saleLabel);
-                sheet.addCell(customerNameLabel);
-                sheet.addCell(customerLastNameLabel);
-                sheet.addCell(customerCodeLabel);
-
-                row++;
-            }
+            escreverHeaders(sheet);
+            escreverSales(sheet, salesList);
 
             workbook.write();
             System.out.println("File created: " + fileName);
@@ -122,6 +84,46 @@ public class Sales
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private static void escreverHeaders(WritableSheet sheet) throws WriteException {
+        String[] headers = {
+                "PRODUCT", "PRODUCT CODE", "VALUE", "QUANTITY",
+                "DATE", "SALE", "CUSTOMER NAME", "CUSTOMER LAST NAME",
+                "CUSTOMER CODE", "0"
+        };
+
+        for (int i = 0; i < headers.length; i++) {
+            Label label = new Label(i, 0, headers[i]);
+            sheet.addCell(label);
+        }
+    }
+
+    private static void escreverSales(WritableSheet sheet, List<Sales> salesList) throws WriteException {
+        int row = 1;
+        for (Sales salesData : salesList) {
+            Label productLabel = new Label(0, row, salesData.getProduct());
+            Label productCodeLabel = new Label(1, row, String.valueOf(salesData.getProduct_code()));
+            Label valueLabel = new Label(2, row, String.valueOf(salesData.getValue()));
+            Label quantityLabel = new Label(3, row, String.valueOf(salesData.getQuantity()));
+            Label dateLabel = new Label(4, row, salesData.getDate());
+            Label saleLabel = new Label(5, row, String.valueOf(salesData.getSale()));
+            Label customerNameLabel = new Label(6, row, salesData.getCustomer_name());
+            Label customerLastNameLabel = new Label(7, row, salesData.getCustomer_last_name());
+            Label customerCodeLabel = new Label(8, row, String.valueOf(salesData.getCustomer_code()));
+
+            sheet.addCell(productLabel);
+            sheet.addCell(productCodeLabel);
+            sheet.addCell(valueLabel);
+            sheet.addCell(quantityLabel);
+            sheet.addCell(dateLabel);
+            sheet.addCell(saleLabel);
+            sheet.addCell(customerNameLabel);
+            sheet.addCell(customerLastNameLabel);
+            sheet.addCell(customerCodeLabel);
+
+            row++;
         }
     }
 
@@ -141,26 +143,23 @@ public class Sales
         }
     }
 
-    public void excluirProduto(String nomeDoArquivo)
-    {
+    public static void excluirProduto(String fileName, String productCode) {
         try {
-            File file = new File(nomeDoArquivo);
+            File file = new File(fileName);
             if (!file.exists()) {
-                System.out.println("O arquivo " + nomeDoArquivo + " não existe.");
-                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
+                System.out.println("O arquivo " + fileName + " não existe.");
+                return;
             }
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet usuarioSheet = copy.getSheet(4); // Assumindo que a planilha que queremos usar é a quinta (i = 4)
+            WritableSheet sheet = copy.getSheet(4);
 
-            int totalLinhas = usuarioSheet.getRows();
+            int totalLinhas = sheet.getRows();
             int linhaExclusao = -1;
 
-            String productCode = getProduct_code();
-
-            // Procurar o usuário na planilha pelo email
+            // Procurar o produto na planilha pelo código
             for (int i = 1; i < totalLinhas; i++) {
-                Cell cell = usuarioSheet.getCell(1, i); // Coluna 1 contém os códigos
+                Cell cell = sheet.getCell(1, i);
                 String code = cell.getContents();
                 if (code.equals(productCode)) {
                     linhaExclusao = i;
@@ -169,13 +168,12 @@ public class Sales
             }
 
             if (linhaExclusao != -1) {
-                // Encontrou a venda pelo codigo do produto e agora vamos remover a linha
-                usuarioSheet.removeRow(linhaExclusao);
+                sheet.removeRow(linhaExclusao);
                 copy.write();
                 copy.close();
-                System.out.println("Venda excluída com sucesso!");
+                System.out.println("Produto excluído com sucesso!");
             } else {
-                System.out.println("Usuário não encontrado na planilha.");
+                System.out.println("Produto não encontrado na planilha.");
             }
         } catch (IOException | BiffException | WriteException e) {
             e.printStackTrace();
