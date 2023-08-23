@@ -16,8 +16,7 @@ public class Costumers
     private String number;
     private String orders;
     private String code;
-
-
+    
     // Construtores
     public Costumers() {}
 
