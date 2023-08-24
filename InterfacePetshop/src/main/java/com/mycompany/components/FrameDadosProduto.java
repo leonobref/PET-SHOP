@@ -26,13 +26,13 @@ import jxl.write.WriteException;
  *
  * @author geova
  */
-public class FrameDadosUsuario extends javax.swing.JFrame{
+public class FrameDadosProduto extends javax.swing.JFrame{
 
     
    
     public static Users user = null;
     File file = new File("Pet Shop Dados.xls");
-    public FrameDadosUsuario(Users userdatatext) {
+    public FrameDadosProduto(Users userdatatext) {
         
         
         initComponents();
@@ -97,7 +97,6 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Dados do Usuário");
-        setPreferredSize(new java.awt.Dimension(635, 550));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -417,18 +416,13 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
 
             copy.write();
             copy.close();
-            
-            this.dispose();
-            dashboard2 dash2 = new dashboard2();
-            dash2.setVisible(true);
-            dash2.selecttable(1);
 
            } catch (IOException ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } 
              
             
@@ -452,7 +446,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
             dash2.setVisible(true);
             dash2.selecttable(1);
         } catch (IOException | BiffException ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
       
     }//GEN-LAST:event_jLabel9MouseClicked
@@ -465,11 +459,11 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
             dashboard2 dash = new dashboard2();
             dash.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (WriteException ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnexcluirMouseClicked
 
@@ -490,14 +484,20 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameDadosProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameDadosProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameDadosProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameDadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameDadosProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -505,7 +505,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                new FrameDadosUsuario(user).setVisible(true);
+                new FrameDadosProduto(user).setVisible(true);
             }
         });
     }

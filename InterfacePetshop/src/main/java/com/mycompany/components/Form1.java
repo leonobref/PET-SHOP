@@ -5,24 +5,34 @@
 package com.mycompany.components;
 
 
+import com.mycompany.model.Users;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 /**
  *
  * @author geova
  */
+
 public class Form1 extends javax.swing.JFrame {
     
     Color green = new Color(7,157,152);
     Color lightgray = new Color(209,209,209);
     String usuario;
     String senha;
+    File file = new File("Pet Shop Dados.xls");
     /**
      * Creates new form Form1
      */
@@ -32,12 +42,6 @@ public class Form1 extends javax.swing.JFrame {
         
   
     }
-    
-    int validar(){
-        
-        return 1;
-    }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -243,46 +247,111 @@ public class Form1 extends javax.swing.JFrame {
 
     private void txtsenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsenhaKeyPressed
       if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+          
           usuario = txtusuario.getText();
           senha = txtsenha.getText();
-          if("admin".equals(usuario) && "admin".equals(senha)){
-              this.dispose();
-              dashboard2 dash1 = null; 
-              try {
-                  dash1 = new dashboard2();
-              } catch (IOException ex) {
-                  Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
-              } catch (BiffException ex) {
+          
+         
+           
+               try {
+                   if(file.exists()){
+                  int linhaVerificacao = -1;
+                   Workbook workbook = Workbook.getWorkbook(file);
+                    Sheet usuarioSheet = workbook.getSheet(0);
+                  
+                for (int i = 0; i < usuarioSheet.getRows(); i++) {
+                   if(usuario.equals(usuarioSheet.getCell(0,i).getContents())){
+                       linhaVerificacao = i;
+                       
+                   }
+                }
+               if(linhaVerificacao != -1){
+               if(senha.equals(usuarioSheet.getCell(5, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(8, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(7, linhaVerificacao).getContents())){
+                    this.dispose();
+                   dashboard2 dash = new dashboard2();
+                    dash.setVisible(true);
+                   System.out.println("Usuario Logado Com sucesso");
+               }
+                
+                   }
+                   else{
+                       if("admin".equals(usuario) && "admin".equals(senha)){
+                           this.dispose();
+                           dashboard2 dash = new dashboard2();
+                           dash.setVisible(true);
+                           
+                       }
+                   }
+               } 
+                   else{
+                       System.out.println("Usuário Não Encontrado");                 }
+                
+                
+                
+                
+            } catch (IOException | BiffException ex) {
                   Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
               }
-              dash1.setVisible(true);
-          }
-          else{
-              JOptionPane.showMessageDialog(rootPane, "Credenciais Incorretas", "Erro", HEIGHT);
-          }
-          
-      }
+         }
+      
+                  
+                  
+                  
+                  
+              
+      
+           
+         
+              
+            
     }//GEN-LAST:event_txtsenhaKeyPressed
 
     private void btnloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnloginMouseClicked
-        // TODO add your handling code here:
-        usuario = txtusuario.getText();
-        senha = txtsenha.getText();
-          if("admin".equals(usuario) && "admin".equals(senha)){
-              this.dispose();
-              dashboard2 dash1 = null; 
-            try {
-                dash1 = new dashboard2();
-            } catch (IOException ex) {
-                Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BiffException ex) {
-                Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-              dash1.setVisible(true);
-          }
-          else{
-              JOptionPane.showMessageDialog(rootPane, "Credenciais Incorretas", "Erro", HEIGHT);
-          }
+        // Se o arquivo existir, deve validar a senha//
+        
+          
+          usuario = txtusuario.getText();
+          senha = txtsenha.getText();
+          
+         
+           
+               try {
+                   if(file.exists()){
+                  int linhaVerificacao = -1;
+                   Workbook workbook = Workbook.getWorkbook(file);
+                    Sheet usuarioSheet = workbook.getSheet(0);
+                  
+                for (int i = 0; i < usuarioSheet.getRows(); i++) {
+                   if(usuario.equals(usuarioSheet.getCell(0,i).getContents())){
+                       linhaVerificacao = i;
+                       
+                   }
+                }
+                
+               if(senha.equals(usuarioSheet.getCell(5, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(8, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(7, linhaVerificacao).getContents())){
+                    this.dispose();
+                   dashboard2 dash = new dashboard2();
+                    dash.setVisible(true);
+                   System.out.println("Usuario Logado Com sucesso");
+               }
+                
+                   }
+                   else{
+                       if("admin".equals(usuario) && "admin".equals(senha)){
+                           this.dispose();
+                           dashboard2 dash = new dashboard2();
+                           dash.setVisible(true);
+                           
+                       }
+                   }
+                
+                
+                
+                
+            } catch (IOException | BiffException ex) {
+                  Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+              }
+         
     }//GEN-LAST:event_btnloginMouseClicked
 
     private void btnloginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnloginMouseEntered

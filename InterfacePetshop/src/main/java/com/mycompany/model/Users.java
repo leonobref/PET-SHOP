@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import jxl.Cell;
 import jxl.CellType;
+import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import jxl.write.Label;
@@ -137,7 +138,7 @@ public class Users {
 
     public void  escreverDadosEmExcel() {
     	try {
-    		
+    		// Manter Um nome pAdrão
     	File file = new File("Pet Shop Dados.xls");
     		if (file.exists()) {
                 System.out.println("O arquivo " + file + " já existe.");
@@ -184,43 +185,7 @@ public class Users {
             label = new Label(11, 0, "PROX");
             sheet.addCell(label);
 
-            // Escrever os dados do usuário na planilha
-            int row = 1;
-            Label dataLabel = new Label(0, row, getName());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(1, row, getNamecomplement());
-            sheet.addCell(dataLabel);
             
-            dataLabel = new Label(2, row, getEmployment());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(3, row, getEmail());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(4, row, getDate());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(5, row, getPassword());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(6, row, getNumber());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(7, row, getAdmin());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(8, row, getActive());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(9, row, getJob());
-            sheet.addCell(dataLabel);
-            
-            dataLabel = new Label(10, row, getCPF());
-            sheet.addCell(dataLabel);
-            
-            dataLabel = new Label(11, row, getprox());
-            sheet.addCell(dataLabel);
 
             // Salvar o arquivo Excel
             workbook.write();
@@ -236,9 +201,9 @@ public class Users {
         return ;
     }
     //Função recebe um path personalizado
-    public void cadastrarUsuario(File file) {
+    public void cadastrarUsuario() {
         try {
-            
+            File file = new File("Pet Shop Dados.xls");
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
             WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
@@ -282,9 +247,9 @@ public class Users {
             usuarioSheet.addCell(proxLabel);
 
             // Atualizar a célula que guarda a quantidade de usuários cadastrados
-            WritableCell c1 = usuarioSheet.getWritableCell(0, 0);
+            WritableCell c1 = usuarioSheet.getWritableCell(12, 1);
             c1 = new Label(0, 0, Integer.toString(quantidadeUsuarios));
-            modifyData(c1, Integer.toString(quantidadeUsuarios));
+            
 
             copy.write();
             copy.close();
@@ -298,59 +263,47 @@ public class Users {
     }
 
     public static void modifyData(WritableCell cell, String novastring) throws Exception {
-        if (cell.getType() == CellType.LABEL) {
-            Label l = (Label) cell;
-            l.setString(novastring);
-        } else if (cell.getType() == CellType.NUMBER) {
+         
+       
             Label n = (Label) cell;
             n.setString(novastring);
-        } else {
-            System.out.println("Other data... ");
+       
+            System.out.println(" Usuario Alterado ");
         }
-    }
-    public void excluirUsuario(String nomeDoArquivo) {
-        try {
-            File file = new File(nomeDoArquivo);
-    		if (!file.exists()) {
-                System.out.println("O arquivo " + nomeDoArquivo + " não existe.");
-                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
-            }
-            Workbook workbook = Workbook.getWorkbook(file);
-            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
-
-            int totalLinhas = usuarioSheet.getRows();
+    
+        
+        
+    
+    public void excluirUsuario() throws IOException, BiffException, WriteException {
+        
+            File file = new File("Pet Shop Dados.xls");
+            
+            //Criar uma Planilha editável
+            Workbook file1 = Workbook.getWorkbook(file);
+            WritableWorkbook writeBook =Workbook.createWorkbook(file,file1);
+            WritableSheet usersheet = writeBook.getSheet(0);
+            
             int linhaExclusao = -1;
-
-            String emailUsuario = getEmail(); // Usando o getter para obter o email do próprio objeto Users
-
-            // Procurar o usuário na planilha pelo email
-            for (int i = 1; i < totalLinhas; i++) {
-                Cell cell = usuarioSheet.getCell(3, i); // Coluna 2 contém os emails
-                String email = cell.getContents();
-                if (email.equals(emailUsuario)) {
+            
+            //Procurar Por nome e Saber a Linha
+            String nome = getName();
+            for(int i = 0;i < usersheet.getRows();i++){
+                if(nome.equals(usersheet.getCell(0,i).getContents())){
                     linhaExclusao = i;
-                    break;
                 }
             }
-
-            if (linhaExclusao != -1) {
-                // Encontrou o usuário pelo email e agora vamos remover a linha
-                usuarioSheet.removeRow(linhaExclusao);
-                copy.write();
-                copy.close();
-                System.out.println("Usuário excluído com sucesso!");
-            } else {
-                System.out.println("Usuário não encontrado na planilha.");
+            
+            //Excluindo
+            if(linhaExclusao != -1){
+               usersheet.removeRow(linhaExclusao);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        } catch (WriteException e) {
-            e.printStackTrace();
-        }
+            
+            //Escrevendo e fechando//
+            writeBook.write();
+            writeBook.close();
+            
     }
+    
     
     
     public void mudarNomeArquivo(String nomeAntigo, String nomeNovo) {

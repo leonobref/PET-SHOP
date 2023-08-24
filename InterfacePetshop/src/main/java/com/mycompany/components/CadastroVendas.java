@@ -19,13 +19,13 @@ import jxl.read.biff.BiffException;
  *
  * @author geova
  */
-public class CadastroUsuario extends javax.swing.JFrame {
+public class CadastroVendas extends javax.swing.JFrame {
 
    
     
     File file = new File("Pet Shop Dados.xls");
 
-    public CadastroUsuario() {
+    public CadastroVendas() {
         
         initComponents();
         
@@ -262,7 +262,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,9 +292,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
             Sheet sheet = workbook.getSheet(0);
             novouser.setprox(String.valueOf(sheet.getRows()));
         } catch (IOException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
        novouser.setName(txtnome.getText());
@@ -330,16 +330,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
        
        JOptionPane.showMessageDialog(rootPane, "Usuário Cadastrado com Sucesso","Confirmação",HEIGHT);
        
-       
+       this.dispose();
         try {
-            this.dispose();
             dashboard2 dash2 = new dashboard2();
             dash2.setVisible(true);
             dash2.selecttable(1);
         } catch (IOException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
        }
     
@@ -363,9 +362,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
             dash2.setVisible(true);
             dash2.selecttable(1);
         } catch (IOException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
            
     }//GEN-LAST:event_jLabel10MouseClicked
@@ -387,20 +386,21 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroUsuario().setVisible(true);
+                new CadastroVendas().setVisible(true);
                 
             }
         });
