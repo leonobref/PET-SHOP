@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import jxl.Cell;
+import jxl.Sheet;
 import jxl.CellType;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -12,57 +13,43 @@ import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import jxl.write.Number;
 
 public class Users {
     private String name;
     private String namecomplement;
+    private int code;
     private String email;
     private String date;
     private String password;
     private String number;
-    private String admin;
-    private String active;
+    private int admin;
+    private int active;
     private String job;
-    private String Employment;
     private String CPF;
-    private String prox;
     public Users() {
     }
 
-    public Users(String name, String namecomplement,String Employment,String email, String date, String password, String number,
-            String admin, String active, String job,String CPF ,String prox) {
+    public Users(String name, String namecomplement,String email, String date, String password, String number,
+            int admin, String job,String CPF) {
         this.name = name;
         this.namecomplement = namecomplement;
-        this.Employment = Employment;
         this.email = email;
         this.date = date;
         this.password = password;
         this.number = number;
         this.admin = admin;
         this.CPF = CPF;
-        this.prox=prox;
-        this.active = active;
+        this.active = 1;
         this.job = job;
     }
-    public String getprox() {
-    	return prox;
-    }
-    public void setprox(String prox) {
-    	this.prox=prox;
-    }
+
     public String getCPF() {
     	return CPF;
     }
     public void setCPF(String CPF) {
     	this.CPF=CPF;
     }
-    public String getEmployment() {
-    	return Employment;
-    }
-    public void setEmployment(String Employment) {
-    	this.Employment= Employment;
-    }
-
     public String getName() {
         return name;
     }
@@ -111,19 +98,19 @@ public class Users {
         this.number = number;
     }
 
-    public String getAdmin() {
+    public int getAdmin() {
         return admin;
     }
 
-    public void setAdmin(String admin) {
+    public void setAdmin(int admin) {
         this.admin = admin;
     }
 
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
@@ -135,177 +122,72 @@ public class Users {
         this.job = job;
     }
 
-    public void escreverDadosEmExcel(String nomeDoArquivo) {
-    	try {
-    		
-    		File file = new File(nomeDoArquivo);
-    		if (file.exists()) {
-                System.out.println("O arquivo " + nomeDoArquivo + " já existe.");
-                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
-            }
-            // Criar um arquivo Excel e uma planilha
-            WritableWorkbook workbook = Workbook.createWorkbook(file);
-            WritableSheet sheet = workbook.createSheet("Planilha1", 0);
+    public void escrever_usuarios(String filename) throws Exception{
+        File file = new File(filename);
+        Workbook workbook = Workbook.getWorkbook(file);
+        Sheet users = workbook.getSheet(0);
 
-            // Escrever dados na planilha
-            Label label = new Label(0, 0, "NAME");
-            sheet.addCell(label);
+        Cell c = users.getCell(11, 0);
+        String quant = c.getContents();
+        int quantidade = Integer.parseInt(quant);
 
-            label = new Label(1, 0, "NAME COMPLEMENT");
-            sheet.addCell(label);
-            
-            label = new Label(2, 0, "EMPLOYMENT CODE");
-            sheet.addCell(label);
-            
-            label = new Label(3, 0, "E-mail");
-            sheet.addCell(label);
+        WritableWorkbook copy = Workbook.createWorkbook(new File(filename), workbook);
+        WritableSheet userscopy = copy.getSheet(0);
 
-            label = new Label(4, 0, "Data");
-            sheet.addCell(label);
+        Label label = new Label(0, quantidade, this.name);
+        userscopy.addCell(label);
 
-            label = new Label(5, 0, "Senha");
-            sheet.addCell(label);
+        label = new Label(1, quantidade, this.namecomplement);
+        userscopy.addCell(label);
 
-            label = new Label(6, 0, "Número");
-            sheet.addCell(label);
+        Number number = new Number(2, quantidade, quantidade);
+        userscopy.addCell(number);
 
-            label = new Label(7, 0, "Admin");
-            sheet.addCell(label);
+        label = new Label(3, quantidade, this.email);
+        userscopy.addCell(label);
 
-            label = new Label(8, 0, "Ativo");
-            sheet.addCell(label);
+        label = new Label(4, quantidade, this.date);
+        userscopy.addCell(label);
 
-            label = new Label(9, 0, "Cargo");
-            sheet.addCell(label);
-            
-            label = new Label(10, 0, "CPF");
-            sheet.addCell(label);
-            
-            label = new Label(11, 0, "PROX");
-            sheet.addCell(label);
+        label = new Label(5, quantidade, this.password);
+        userscopy.addCell(label);
 
-            // Escrever os dados do usuário na planilha
-            int row = 1;
-            Label dataLabel = new Label(0, row, getName());
-            sheet.addCell(dataLabel);
+        label = new Label(6, quantidade, this.number);
+        userscopy.addCell(label);
 
-            dataLabel = new Label(1, row, getNamecomplement());
-            sheet.addCell(dataLabel);
-            
-            dataLabel = new Label(2, row, getEmployment());
-            sheet.addCell(dataLabel);
+        number = new Number(7, quantidade, this.admin);
+        userscopy.addCell(number);
 
-            dataLabel = new Label(3, row, getEmail());
-            sheet.addCell(dataLabel);
+        number = new Number(8, quantidade, 1);
+        userscopy.addCell(number);
 
-            dataLabel = new Label(4, row, getDate());
-            sheet.addCell(dataLabel);
+        label = new Label(9, quantidade, this.job);
+        userscopy.addCell(label);
 
-            dataLabel = new Label(5, row, getPassword());
-            sheet.addCell(dataLabel);
+        label = new Label(10, quantidade, this.CPF);
+        userscopy.addCell(label);
 
-            dataLabel = new Label(6, row, getNumber());
-            sheet.addCell(dataLabel);
+        WritableCell c1 = userscopy.getWritableCell(11, 0);
+        quantidade++;
+        String novodisponivel = Integer.toString(quantidade);
+        modifyData(c1, novodisponivel);
 
-            dataLabel = new Label(7, row, getAdmin());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(8, row, getActive());
-            sheet.addCell(dataLabel);
-
-            dataLabel = new Label(9, row, getJob());
-            sheet.addCell(dataLabel);
-            
-            dataLabel = new Label(10, row, getCPF());
-            sheet.addCell(dataLabel);
-            
-            dataLabel = new Label(11, row, getprox());
-            sheet.addCell(dataLabel);
-
-            // Salvar o arquivo Excel
-            workbook.write();
-            workbook.close();
-
-            System.out.println("Dados escritos no arquivo Excel com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        copy.write();
+        copy.close();
     }
-    public void cadastrarUsuario() {
-        try {
-            File file = new File("C:\\eclipse-workspace\\PETSHOUPE\\DADOSPETSHOP.xls");
-            Workbook workbook = Workbook.getWorkbook(file);
-            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
-
-            int quantidadeUsuarios = usuarioSheet.getRows(); // Obter o número de linhas (usuários) já cadastrados
-
-            Label nomeLabel = new Label(0, quantidadeUsuarios, getName());
-            usuarioSheet.addCell(nomeLabel);
-
-            Label complementoLabel = new Label(1, quantidadeUsuarios, getNamecomplement());
-            usuarioSheet.addCell(complementoLabel);
-            
-            Label EmploymentLabel = new Label(2, quantidadeUsuarios, getEmployment());
-            usuarioSheet.addCell(EmploymentLabel);
-
-            Label emailLabel = new Label(3, quantidadeUsuarios, getEmail());
-            usuarioSheet.addCell(emailLabel);
-
-            Label dataLabel = new Label(4, quantidadeUsuarios, getDate());
-            usuarioSheet.addCell(dataLabel);
-
-            Label senhaLabel = new Label(5, quantidadeUsuarios, getPassword());
-            usuarioSheet.addCell(senhaLabel);
-
-            Label numeroLabel = new Label(6, quantidadeUsuarios, getNumber());
-            usuarioSheet.addCell(numeroLabel);
-
-            Label adminLabel = new Label(7, quantidadeUsuarios, getAdmin());
-            usuarioSheet.addCell(adminLabel);
-
-            Label ativoLabel = new Label(8, quantidadeUsuarios, getActive());
-            usuarioSheet.addCell(ativoLabel);
-
-            Label cargoLabel = new Label(9, quantidadeUsuarios, getJob());
-            usuarioSheet.addCell(cargoLabel);
-            
-            Label CPFLabel = new Label(10, quantidadeUsuarios, getCPF());
-            usuarioSheet.addCell(CPFLabel);
-            
-            Label proxLabel = new Label(11, quantidadeUsuarios, getprox());
-            usuarioSheet.addCell(proxLabel);
-
-            // Atualizar a célula que guarda a quantidade de usuários cadastrados
-            WritableCell c1 = usuarioSheet.getWritableCell(0, 0);
-            c1 = new Label(0, 0, Integer.toString(quantidadeUsuarios));
-            modifyData(c1, Integer.toString(quantidadeUsuarios));
-
-            copy.write();
-            copy.close();
-
-            System.out.println("Usuário cadastrado com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void modifyData(WritableCell cell, String novastring) throws Exception {
+    private void modifyData(WritableCell cell, String novastring) throws Exception {
         if (cell.getType() == CellType.LABEL) {
             Label l = (Label) cell;
             l.setString(novastring);
         } else if (cell.getType() == CellType.NUMBER) {
-            Label n = (Label) cell;
-            n.setString(novastring);
+            double numero = Double.parseDouble(novastring);
+            Number n = (Number) cell;
+            n.setValue(numero);
         } else {
             System.out.println("Other data... ");
         }
     }
-    public void excluirUsuario(String nomeDoArquivo) {
+    public void desativarUsuario(String nomeDoArquivo) {
         try {
             File file = new File(nomeDoArquivo);
     		if (!file.exists()) {
@@ -333,7 +215,8 @@ public class Users {
 
             if (linhaExclusao != -1) {
                 // Encontrou o usuário pelo email e agora vamos remover a linha
-                usuarioSheet.removeRow(linhaExclusao);
+                WritableCell c1 = usuarioSheet.getWritableCell(8, linhaExclusao);
+                modifyData(c1, "0");
                 copy.write();
                 copy.close();
                 System.out.println("Usuário excluído com sucesso!");
@@ -346,10 +229,12 @@ public class Users {
             e.printStackTrace();
         } catch (WriteException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     
-    
+    /*???????????????????????????????
     public void mudarNomeArquivo(String nomeAntigo, String nomeNovo) {
         File arquivoAntigo = new File(nomeAntigo);
         
@@ -364,5 +249,5 @@ public class Users {
         } else {
             System.out.println("O arquivo " + nomeAntigo + " não existe.");
         }
-    }
+    }*/
 }
