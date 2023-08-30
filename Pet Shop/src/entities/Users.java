@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import jxl.Cell;
-import jxl.Sheet;
 import jxl.CellType;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -13,43 +12,58 @@ import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
-import jxl.write.Number;
+import jxl.write.biff.RowsExceededException;
 
 public class Users {
     private String name;
     private String namecomplement;
-    private int code;
     private String email;
     private String date;
     private String password;
     private String number;
-    private int admin;
-    private int active;
+    private String admin;
+    private String active;
     private String job;
+    private String Employment;
     private String CPF;
+    private String prox;
     public Users() {
     }
 
-    public Users(String name, String namecomplement,String email, String date, String password, String number,
-            int admin, String job,String CPF) {
+    public Users(String name, String namecomplement,String Employment,String email, String date, String password, String number,
+            String admin, String active, String job,String CPF ,String prox) {
         this.name = name;
         this.namecomplement = namecomplement;
+        this.Employment = Employment;
         this.email = email;
         this.date = date;
         this.password = password;
         this.number = number;
         this.admin = admin;
         this.CPF = CPF;
-        this.active = 1;
+        this.prox=prox;
+        this.active = active;
         this.job = job;
     }
-
+    public String getprox() {
+    	return prox;
+    }
+    public void setprox(String prox) {
+    	this.prox=prox;
+    }
     public String getCPF() {
     	return CPF;
     }
     public void setCPF(String CPF) {
     	this.CPF=CPF;
     }
+    public String getEmployment() {
+    	return Employment;
+    }
+    public void setEmployment(String Employment) {
+    	this.Employment= Employment;
+    }
+
     public String getName() {
         return name;
     }
@@ -98,19 +112,19 @@ public class Users {
         this.number = number;
     }
 
-    public int getAdmin() {
+    public String getAdmin() {
         return admin;
     }
 
-    public void setAdmin(int admin) {
+    public void setAdmin(String admin) {
         this.admin = admin;
     }
 
-    public int getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(String active) {
         this.active = active;
     }
 
@@ -122,72 +136,81 @@ public class Users {
         this.job = job;
     }
 
-    public void escrever_usuarios(String filename) throws Exception{
-        File file = new File(filename);
-        Workbook workbook = Workbook.getWorkbook(file);
-        Sheet users = workbook.getSheet(0);
+    
 
-        Cell c = users.getCell(11, 0);
-        String quant = c.getContents();
-        int quantidade = Integer.parseInt(quant);
+    public void cadastrarUsuario() {
+        try {
+            File file = new File("C:\\eclipse-workspace\\PETSHOUPE\\DADOSPETSHOP.xls");
+            Workbook workbook = Workbook.getWorkbook(file);
+            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
+            WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
 
-        WritableWorkbook copy = Workbook.createWorkbook(new File(filename), workbook);
-        WritableSheet userscopy = copy.getSheet(0);
+            int quantidadeUsuarios = usuarioSheet.getRows(); // Obter o número de linhas (usuários) já cadastrados
 
-        Label label = new Label(0, quantidade, this.name);
-        userscopy.addCell(label);
+            Label nomeLabel = new Label(0, quantidadeUsuarios, getName());
+            usuarioSheet.addCell(nomeLabel);
 
-        label = new Label(1, quantidade, this.namecomplement);
-        userscopy.addCell(label);
+            Label complementoLabel = new Label(1, quantidadeUsuarios, getNamecomplement());
+            usuarioSheet.addCell(complementoLabel);
+            
+            Label EmploymentLabel = new Label(2, quantidadeUsuarios, getEmployment());
+            usuarioSheet.addCell(EmploymentLabel);
 
-        Number number = new Number(2, quantidade, quantidade);
-        userscopy.addCell(number);
+            Label emailLabel = new Label(3, quantidadeUsuarios, getEmail());
+            usuarioSheet.addCell(emailLabel);
 
-        label = new Label(3, quantidade, this.email);
-        userscopy.addCell(label);
+            Label dataLabel = new Label(4, quantidadeUsuarios, getDate());
+            usuarioSheet.addCell(dataLabel);
 
-        label = new Label(4, quantidade, this.date);
-        userscopy.addCell(label);
+            Label senhaLabel = new Label(5, quantidadeUsuarios, getPassword());
+            usuarioSheet.addCell(senhaLabel);
 
-        label = new Label(5, quantidade, this.password);
-        userscopy.addCell(label);
+            Label numeroLabel = new Label(6, quantidadeUsuarios, getNumber());
+            usuarioSheet.addCell(numeroLabel);
 
-        label = new Label(6, quantidade, this.number);
-        userscopy.addCell(label);
+            Label adminLabel = new Label(7, quantidadeUsuarios, getAdmin());
+            usuarioSheet.addCell(adminLabel);
 
-        number = new Number(7, quantidade, this.admin);
-        userscopy.addCell(number);
+            Label ativoLabel = new Label(8, quantidadeUsuarios, getActive());
+            usuarioSheet.addCell(ativoLabel);
 
-        number = new Number(8, quantidade, 1);
-        userscopy.addCell(number);
+            Label cargoLabel = new Label(9, quantidadeUsuarios, getJob());
+            usuarioSheet.addCell(cargoLabel);
+            
+            Label CPFLabel = new Label(10, quantidadeUsuarios, getCPF());
+            usuarioSheet.addCell(CPFLabel);
+            
+            Label proxLabel = new Label(11, quantidadeUsuarios, getprox());
+            usuarioSheet.addCell(proxLabel);
 
-        label = new Label(9, quantidade, this.job);
-        userscopy.addCell(label);
+            // Atualizar a célula que guarda a quantidade de usuários cadastrados
+            WritableCell c1 = usuarioSheet.getWritableCell(0, 0);
+            c1 = new Label(0, 0, Integer.toString(quantidadeUsuarios));
+            modifyData(c1, Integer.toString(quantidadeUsuarios));
 
-        label = new Label(10, quantidade, this.CPF);
-        userscopy.addCell(label);
+            copy.write();
+            copy.close();
 
-        WritableCell c1 = userscopy.getWritableCell(11, 0);
-        quantidade++;
-        String novodisponivel = Integer.toString(quantidade);
-        modifyData(c1, novodisponivel);
-
-        copy.write();
-        copy.close();
+            System.out.println("Usuário cadastrado com sucesso!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    private void modifyData(WritableCell cell, String novastring) throws Exception {
+
+    public static void modifyData(WritableCell cell, String novastring) throws Exception {
         if (cell.getType() == CellType.LABEL) {
             Label l = (Label) cell;
             l.setString(novastring);
         } else if (cell.getType() == CellType.NUMBER) {
-            double numero = Double.parseDouble(novastring);
-            Number n = (Number) cell;
-            n.setValue(numero);
+            Label n = (Label) cell;
+            n.setString(novastring);
         } else {
             System.out.println("Other data... ");
         }
     }
-    public void desativarUsuario(String nomeDoArquivo) {
+    public void excluirUsuario(String nomeDoArquivo) {
         try {
             File file = new File(nomeDoArquivo);
     		if (!file.exists()) {
@@ -215,8 +238,7 @@ public class Users {
 
             if (linhaExclusao != -1) {
                 // Encontrou o usuário pelo email e agora vamos remover a linha
-                WritableCell c1 = usuarioSheet.getWritableCell(8, linhaExclusao);
-                modifyData(c1, "0");
+                usuarioSheet.removeRow(linhaExclusao);
                 copy.write();
                 copy.close();
                 System.out.println("Usuário excluído com sucesso!");
@@ -229,12 +251,10 @@ public class Users {
             e.printStackTrace();
         } catch (WriteException e) {
             e.printStackTrace();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
     
-    /*???????????????????????????????
+    
     public void mudarNomeArquivo(String nomeAntigo, String nomeNovo) {
         File arquivoAntigo = new File(nomeAntigo);
         
@@ -249,5 +269,5 @@ public class Users {
         } else {
             System.out.println("O arquivo " + nomeAntigo + " não existe.");
         }
-    }*/
+    }
 }
