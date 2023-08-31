@@ -110,7 +110,7 @@ public class dashboard2 extends javax.swing.JFrame {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(2);
         
-        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),Double.valueOf(sheet.getCell(2,linha).getContents()),Double.valueOf(sheet.getCell(4,linha).getContents()), sheet.getCell(4,linha).getContents());
+        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),sheet.getCell(2,linha).getContents(),sheet.getCell(4,linha).getContents(), sheet.getCell(4,linha).getContents());
 
         return productSelected;
     }
