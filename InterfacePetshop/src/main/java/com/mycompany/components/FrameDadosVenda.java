@@ -249,8 +249,11 @@ public class FrameDadosVenda extends javax.swing.JFrame {
              modifyData(precocell, txtpreco.getText());
              modifyData(nomecostumer, txtnome.getText());
              
+            
              JOptionPane.showMessageDialog(rootPane, "Venda alterada com Sucesso","Confirmação",HEIGHT);
              
+            copy.write();
+            copy.close();
              this.dispose();
              dashboard2 dash = new dashboard2();
              dash.setVisible(true);

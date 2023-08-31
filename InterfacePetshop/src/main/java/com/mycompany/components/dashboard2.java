@@ -195,6 +195,7 @@ public class dashboard2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque Pet Shop");
+        setPreferredSize(new java.awt.Dimension(1130, 620));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -842,7 +843,22 @@ public class dashboard2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel15MouseExited
 
     private void table4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table4MouseClicked
-        // TODO add your handling code here:
+        if(evt.getClickCount() == 2){
+           if (file.exists()) {
+           linha = table4.getSelectedRow()+1;
+          
+           try {
+               Sales venda = LerVenda(linha);
+               
+               FrameDadosVenda framedata = new FrameDadosVenda(venda,linha);
+               framedata.setVisible(true);
+               this.dispose();
+               
+           } catch (IOException | BiffException ex) {
+               Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+       }
     }//GEN-LAST:event_table4MouseClicked
 
     /**
