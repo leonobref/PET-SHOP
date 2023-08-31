@@ -89,7 +89,7 @@ public class Utils {
         }
     }
 
-    public static void excluir(String nomeDoArquivo, int cod, int IDplanilha)
+    public static void excluir(String nomeDoArquivo, String cod, int IDplanilha)
     {
         try {
             File file = new File(nomeDoArquivo);

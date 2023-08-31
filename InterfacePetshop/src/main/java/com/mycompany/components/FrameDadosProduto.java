@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import com.mycompany.model.Products;
 import com.mycompany.model.Utils;
+import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import jxl.write.WritableCell;
@@ -26,28 +27,25 @@ import jxl.write.WritableWorkbook;
 public final class FrameDadosProduto extends javax.swing.JFrame{
 
 
-
+    public static int linha1 = 0;
     public static Products prod = null;
     File file = new File("DadosPetShop.xls");
     String categorias [] = {"Rações ", "Higiene e Limpeza", "Medicamento e saúde", "Acessórios"};
-    public FrameDadosProduto(Products prodtext) {
+    public FrameDadosProduto(Products prodtext, int linha) {
         
         
         initComponents();
+       linha1 = linha;
+       jList1.setListData(categorias);
         prod = prodtext;
         btnsalvar.setVisible(false);
         txtnomeproduto.setText(prod.getName());
-        txtcod.setText(String.valueOf(prod.getCode()));
+        
         txtprecovenda.setText(String.valueOf(prod.getSaleprice()));
         txtcusto.setText(String.valueOf(prod.getCostprice()));
         txtquantidade.setText(String.valueOf(prod.getQuantity()));
 
-        if( prod.getActive() == 1){
-            checkativo.setSelected(true);
-        }
-        else{
-            checkativo.setSelected(false);
-        }
+       
         jList1.setSelectedIndex(Listasele());
         
          
@@ -89,10 +87,8 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        txtcod = new javax.swing.JTextField();
         Jlabel2 = new javax.swing.JLabel();
         txtquantidade = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         checkativo = new javax.swing.JCheckBox();
         txtprecovenda = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -179,17 +175,11 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         jList1.setEnabled(false);
         jScrollPane1.setViewportView(jList1);
 
-        txtcod.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        txtcod.setEnabled(false);
-
         Jlabel2.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         Jlabel2.setText("Nome do Produto");
 
         txtquantidade.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         txtquantidade.setEnabled(false);
-
-        jLabel3.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        jLabel3.setText("Código do Produto");
 
         checkativo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         checkativo.setText("Ativo");
@@ -216,33 +206,32 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtquantidade, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtprecovenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(checkativo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtcusto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtnomeproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtquantidade, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtprecovenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(checkativo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtcusto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel1)
                                 .addComponent(Jlabel2)))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(15, 15, 15)
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtnomeproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnsalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnalterar, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
@@ -265,13 +254,9 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
                         .addContainerGap(26, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Jlabel2))
+                        .addComponent(Jlabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtnomeproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtnomeproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
@@ -308,8 +293,9 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
     private void btnalterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnalterarMouseClicked
       btnsalvar.setVisible(true);
       btnexcluir.setVisible(false);
+      txtprecovenda.setEnabled(true);
       txtnomeproduto.setEnabled(true);
-      txtcod.setEnabled(true);
+  
       txtcusto.setEnabled(true);
       txtquantidade.setEnabled(true);
       jList1.setEnabled(true);
@@ -321,25 +307,24 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
     private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvarMouseClicked
         try {
             
-            Workbook workbook;
-        
-            workbook = Workbook.getWorkbook(file);
+          
+            Workbook workbook = Workbook.getWorkbook(file);
         
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
             WritableSheet produtoSheet = copy.getSheet(2);
+           
             // Alterar Nome
-            int linha = Integer.parseInt(user.getprox());
-            WritableCell nomeproduto = produtoSheet.getWritableCell(0, linha);
-            WritableCell produtocode = produtoSheet.getWritableCell(1, linha);
-            WritableCell categoria = produtoSheet.getWritableCell(2, linha);
-            WritableCell quantidade = produtoSheet.getWritableCell(4, linha);
-            WritableCell custoprice = produtoSheet.getWritableCell(5,linha);
-            WritableCell vendapreco = produtoSheet.getWritableCell(6, linha);
-            WritableCell ativo = produtoSheet.getWritableCell(7, linha);
+           
+            
+            WritableCell nomeproduto = produtoSheet.getWritableCell(0, linha1);
+            WritableCell categoria = produtoSheet.getWritableCell(2, linha1);
+            WritableCell quantidade = produtoSheet.getWritableCell(4, linha1);
+            WritableCell custoprice = produtoSheet.getWritableCell(5,linha1);
+            WritableCell vendapreco = produtoSheet.getWritableCell(6, linha1);
+            WritableCell ativo = produtoSheet.getWritableCell(7, linha1);
          
             
             modifyData(nomeproduto, txtnomeproduto.getText());
-            modifyData(produtocode,txtcod.getText());
             modifyData(categoria,jList1.getSelectedValue());
             modifyData(quantidade,txtquantidade.getText());
             modifyData(custoprice,txtcusto.getText());
@@ -358,7 +343,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
 
             copy.write();
             copy.close();
-            
+            this.dispose();
             dashboard2 dash = new dashboard2();
             dash.setVisible(true);
             
@@ -387,7 +372,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
 
     private void btnexcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexcluirMouseClicked
      try {
-            Utils.excluir("DadosPetShop.xls", prod.getCode(),2);
+             prod.excluirUsuario(linha1);
             //prod.excluirProduto();
             System.out.println("Produto Excluído");
             this.dispose();
@@ -448,7 +433,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                new FrameDadosProduto(prod).setVisible(true);
+                new FrameDadosProduto(prod,linha1).setVisible(true);
             }
         });
     }
@@ -461,7 +446,6 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
     private javax.swing.JCheckBox checkativo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -469,7 +453,6 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtcod;
     private javax.swing.JTextField txtcusto;
     private javax.swing.JTextField txtnomeproduto;
     private javax.swing.JTextField txtprecovenda;

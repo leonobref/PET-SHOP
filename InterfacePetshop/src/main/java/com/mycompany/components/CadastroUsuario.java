@@ -298,7 +298,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         novouser.setNumber(txttelefone.getText());
         novouser.setPassword(txtsenha.getText());
         novouser.setCPF(txtcpf.getText());
-
+        
        if (exceptionCheck.isValidEmail(txtemail.getText()))
        {
            novouser.setEmail(txtemail.getText());

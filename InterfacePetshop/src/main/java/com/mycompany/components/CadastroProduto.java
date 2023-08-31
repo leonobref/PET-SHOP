@@ -47,9 +47,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         txtnomeproduto = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtcod = new javax.swing.JTextField();
         Jlabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtprecovenda = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtcusto = new javax.swing.JTextField();
@@ -63,6 +61,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Dados Produto");
         setBackground(new java.awt.Color(204, 204, 204));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -81,13 +80,8 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel1.setText("Cadastro de Produto");
 
-        txtcod.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-
         Jlabel2.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         Jlabel2.setText("Nome do Produto");
-
-        jLabel3.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        jLabel3.setText("Código do Produto");
 
         txtprecovenda.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         txtprecovenda.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +127,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Adicionar Usuário");
+        jLabel2.setText("Adicionar Produto");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -146,7 +140,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -167,14 +161,8 @@ public class CadastroProduto extends javax.swing.JFrame {
                                 .addComponent(jLabel6)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Jlabel2)
-                            .addComponent(txtnomeproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(Jlabel2)
+                    .addComponent(txtnomeproduto))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,13 +171,9 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Jlabel2))
+                .addComponent(Jlabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnomeproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtnomeproduto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -212,8 +196,8 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,46 +250,44 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         Utils.verifyExistenceDate();
 
-       Products novoproduto = new Products();
+        Products novoproduto = new Products();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String productDate = dateFormat.format(new Date());
-
+        
         novoproduto.setName(txtnomeproduto.getText());
-        novoproduto.setCode(Integer.parseInt(txtcod.getText()));
         novoproduto.setCategory(jList1.getSelectedValue());
-        //novoproduto.setSales(botao.getSales());
         novoproduto.setQuantity((txtquantidade.getText()));
         novoproduto.setCostprice(txtcusto.getText());
         novoproduto.setSaleprice(txtprecovenda.getText());
         novoproduto.setInsertiondate(productDate);
+        
+        
 
+         if(checkativo.isSelected()){
+          novoproduto.setActive("1");
+        }
+        else{
+          novoproduto.setActive("0");
+        }
         try {
-            novoproduto.escrever_produtos("DadosPetShop.xls");
-            Workbook workbook = Workbook.getWorkbook(file);
-            Sheet sheet = workbook.getSheet(2);
+            novoproduto.escrever_produtos();
+            JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado com Sucesso","Confirmação",HEIGHT);
+            System.out.println(novoproduto.getCode());
+            this.dispose();
+            dashboard2 dash = new dashboard2();
+            dash.setVisible(true);
         } catch (IOException | BiffException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-      if(checkativo.isSelected()){
-          novoproduto.setActive(1);
-      }
-      else{
-          novoproduto.setActive(0);
-      }
-
-      JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado com Sucesso","Confirmação",HEIGHT);
       
-      this.dispose();
-        try {
-            dashboard2 dash2 = new dashboard2();
-            dash2.setVisible(true);
-            dash2.selecttable(1);
-        } catch (IOException | BiffException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+        
+
+
+      
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
@@ -352,14 +334,12 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtcod;
     private javax.swing.JTextField txtcusto;
     private javax.swing.JTextField txtnomeproduto;
     private javax.swing.JTextField txtprecovenda;

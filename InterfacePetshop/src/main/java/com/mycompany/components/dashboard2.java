@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.mycompany.model.Users;
+import com.mycompany.model.Utils;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -40,8 +41,9 @@ public class dashboard2 extends javax.swing.JFrame {
     
     
     public dashboard2() throws IOException, BiffException {
-        
+        Utils.escreverDadosEmExcel("DadosPetShop.xls");
         initComponents();
+       
         atualizarTabela();
         atualizarCards();
         
@@ -50,10 +52,13 @@ public class dashboard2 extends javax.swing.JFrame {
     }
     
     public String LerDados(int numPlanilha, int x,int y) throws IOException, BiffException{
+       
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(numPlanilha);
         Cell cell = sheet.getCell(x,y);
         return cell.getContents();
+        
+     
     }
     
     private void atualizarCards() throws IOException, BiffException{
@@ -111,7 +116,7 @@ public class dashboard2 extends javax.swing.JFrame {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(2);
 
-        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(2,linha).getContents(), sheet.getCell(5,linha).getContents(), sheet.getCell(6,linha).getContents(), sheet.getCell(4,linha).getContents());
+        Products productSelected = new Products(sheet.getCell(0, linha).getContents(),sheet.getCell(2, linha).getContents(),sheet.getCell(5, linha).getContents(),sheet.getCell(6, linha).getContents(),sheet.getCell(7,linha).getContents());
 
         return productSelected;
     }
@@ -758,12 +763,12 @@ public class dashboard2 extends javax.swing.JFrame {
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
         if(evt.getClickCount() == 2){
            if (file.exists()) {
-           linha = table1.getSelectedRow()+1;
+           linha = table3.getSelectedRow()+1;
           
            try {
                Products prod = LerProduto(linha);
                
-               FrameDadosProduto framedata = new FrameDadosProduto(prod);
+               FrameDadosProduto framedata = new FrameDadosProduto(prod,linha);
                framedata.setVisible(true);
                this.dispose();
                
