@@ -291,20 +291,19 @@ public class CadastroUsuario extends javax.swing.JFrame {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       novouser.setName(txtnome.getText());
-       novouser.setNamecomplement(txtsobrenome.getText());
+        novouser.setName(txtnome.getText());
+        novouser.setNamecomplement(txtsobrenome.getText());
         novouser.setJob(txtfuncao.getText());
         novouser.setEmail(txtemail.getText());
         novouser.setNumber(txttelefone.getText());
         novouser.setPassword(txtsenha.getText());
         novouser.setCPF(txtcpf.getText());
 
-
        if (exceptionCheck.isValidEmail(txtemail.getText()))
        {
            novouser.setEmail(txtemail.getText());
        } else {
-           System.out.println("a");
+           System.out.println("email invalido");
             // Abrir tela de erro
            return;
        }
@@ -315,6 +314,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
        }
        else {
            // Abrir tela de erro
+           System.out.println("numero de telefone invalido");
            return;
        }
 
@@ -322,6 +322,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
        {
            novouser.setPassword(txtsenha.getText());
        } else {
+           System.out.println("senha invalida");
            // Abrir tela de erro
            return;
        }
@@ -331,6 +332,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
            novouser.setCPF(txtcpf.getText());
        } else {
            // Abrir tela de erro
+           System.out.println("cpf invalido");
            return;
        }
        novouser.setEmployment(txtcodigo.getText());
