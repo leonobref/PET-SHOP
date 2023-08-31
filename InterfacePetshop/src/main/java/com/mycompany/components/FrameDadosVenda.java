@@ -31,9 +31,10 @@ public class FrameDadosVenda extends javax.swing.JFrame {
      * Creates new form FrameDadosVenda
      * @param venda
      */
-    public FrameDadosVenda(Sales venda, int linha) {
+    public FrameDadosVenda(Sales venda, int linha) throws IOException, BiffException {
         initComponents();
         novavenda = venda;
+        preencherListaandSelect();
         linha1 = linha;
         txtnome.setText(venda.getCustomer_name());
         txtquantidade.setText(venda.getQuantity());
@@ -52,16 +53,13 @@ public class FrameDadosVenda extends javax.swing.JFrame {
            Produtos[i] = products.getCell(0,i).getContents() ;
                     }
         jList1.setListData(Produtos); 
-        int sele = 0;
-        for(int j = 0; j <= Produtos.length; j++){
-            if(Produtos[j].equals(novavenda.getProduct())){
-                sele = j;
-            }
+        int selection = 0;
+        for(int j = 0; j != Produtos.length;j++)
+        if(novavenda.getProduct().equals(Produtos[j])){
+            selection = j;
         }
-        jList1.setSelectedIndex(sele);
-       }
-       
-       
+        jList1.setSelectedIndex(selection);
+   }
    }
 
     /**
@@ -317,7 +315,13 @@ public class FrameDadosVenda extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameDadosVenda(novavenda,linha1).setVisible(true);
+                try {
+                    new FrameDadosVenda(novavenda,linha1).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(FrameDadosVenda.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (BiffException ex) {
+                    Logger.getLogger(FrameDadosVenda.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
