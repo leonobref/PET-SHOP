@@ -38,7 +38,7 @@ public class CadastroVendas extends javax.swing.JFrame {
         int tam = products.getRows();
         String[] Produtos = new String[tam];
         for(int i = 1 ; i < Produtos.length; i++){
-           Produtos[i] = products.getCell(0,i).getContents() + " Quantidade diponível: " + products.getCell(4,i).getContents() ;
+           Produtos[i] = products.getCell(0,i).getContents() ;
                     }
         jList1.setListData(Produtos); 
        }
@@ -79,6 +79,7 @@ public class CadastroVendas extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Cadastro Venda");
         setBackground(new java.awt.Color(204, 204, 204));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -143,6 +144,11 @@ public class CadastroVendas extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Cancelar");
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -286,6 +292,20 @@ public class CadastroVendas extends javax.swing.JFrame {
         }
       
     }//GEN-LAST:event_btnconcluirMouseClicked
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+       this.dispose();
+        try {
+            dashboard2 dash = new dashboard2();
+            dash.setVisible(true);
+            dash.selecttable(1);
+        } catch (IOException ex) {
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }//GEN-LAST:event_jLabel16MouseClicked
 
     /**
      * @param args the command line arguments

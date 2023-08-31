@@ -5,9 +5,12 @@ com\mycompany\components\dashboard2$15.class
 com\mycompany\model\PanelRound.class
 com\mycompany\components\CadastroVendas$4.class
 com\mycompany\components\dashboard2$3.class
+com\mycompany\components\FrameDadosVenda$2.class
+com\mycompany\components\FrameDadosVenda$5.class
 com\mycompany\model\UtilsTest.class
 com\mycompany\components\CadastroVendas$1.class
 com\mycompany\components\FrameDadosProduto$2.class
+com\mycompany\components\FrameDadosVenda.class
 com\mycompany\components\CadastroProduto$3.class
 com\mycompany\components\CadastroUsuario$3.class
 com\mycompany\components\dashboard2$12.class
@@ -34,6 +37,7 @@ com\mycompany\components\FrameDadosProduto$7.class
 com\mycompany\components\FrameDadosUsuario.class
 com\mycompany\components\dashboard2$11.class
 com\mycompany\model\StatusType.class
+com\mycompany\components\FrameDadosVenda$1.class
 com\mycompany\model\Utils.class
 com\mycompany\components\Form1$3.class
 com\mycompany\main\Main_InterfacePetShop.class
@@ -52,12 +56,15 @@ com\mycompany\components\FrameDadosProduto.class
 com\mycompany\components\CadastroUsuario$2.class
 com\mycompany\components\Form1$4.class
 com\mycompany\components\Form1$1.class
+com\mycompany\components\FrameDadosVenda$3.class
 com\mycompany\components\FrameDadosUsuario$1.class
 com\mycompany\components\dashboard2.class
+com\mycompany\components\dashboard2$16.class
 com\mycompany\components\dashboard2$1.class
 com\mycompany\model\Card.class
 com\mycompany\components\dashboard2$4.class
 com\mycompany\model\AplicarNimbus.class
+com\mycompany\components\FrameDadosVenda$4.class
 com\mycompany\components\FrameDadosUsuario$7.class
 com\mycompany\model\Sales.class
 com\mycompany\components\CadastroVendas$5.class
@@ -72,6 +79,7 @@ com\mycompany\components\CadastroUsuario$1.class
 com\mycompany\components\dashboard2$14.class
 com\mycompany\components\dashboard2$6.class
 com\mycompany\model\Model_Card.class
+com\mycompany\components\CadastroVendas$6.class
 com\mycompany\model\ScrollBar.class
 com\mycompany\components\CadastroProduto$5.class
 com\mycompany\components\FrameDadosUsuario$6.class

@@ -229,7 +229,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         try {
             dash2 = new dashboard2();
             dash2.setVisible(true);
-            dash2.selecttable(3);
+            dash2.selecttable(2);
         } catch (IOException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
@@ -276,6 +276,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             this.dispose();
             dashboard2 dash = new dashboard2();
             dash.setVisible(true);
+            dash.selecttable(2);
         } catch (IOException | BiffException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

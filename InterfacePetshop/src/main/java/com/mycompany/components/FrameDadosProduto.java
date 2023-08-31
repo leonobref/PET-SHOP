@@ -94,8 +94,8 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Dados do Usuário");
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setTitle("Dados do Produto");
+        setPreferredSize(new java.awt.Dimension(630, 540));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -106,7 +106,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         btnalterar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         btnalterar.setForeground(new java.awt.Color(255, 255, 255));
         btnalterar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnalterar.setText("Alterar Usuário");
+        btnalterar.setText("AlterarProduto");
         btnalterar.setOpaque(true);
         btnalterar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -118,7 +118,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         btnexcluir.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         btnexcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnexcluir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnexcluir.setText("Excluir Usuário");
+        btnexcluir.setText("Excluir Produto");
         btnexcluir.setOpaque(true);
         btnexcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,7 +163,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         jLabel12.setText("Preço de venda");
 
         jLabel1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jLabel1.setText("Dados de Produto");
+        jLabel1.setText("Dados do Produto");
 
         jScrollPane1.setEnabled(false);
 
@@ -284,7 +284,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 650, 539);
+        jPanel1.setBounds(0, 0, 650, 533);
 
         pack();
         setLocationRelativeTo(null);
@@ -346,6 +346,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
             this.dispose();
             dashboard2 dash = new dashboard2();
             dash.setVisible(true);
+            dash.selecttable(2);
             
         } catch (Exception ex) {
             Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
@@ -360,7 +361,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         try {
             dash = new dashboard2();
             dash.setVisible(true);
-            dash.selecttable(3);
+            dash.selecttable(2);
         } catch (IOException ex) {
             Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
@@ -378,6 +379,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
             this.dispose();
             dashboard2 dash = new dashboard2();
             dash.setVisible(true);
+            dash.selecttable(2);
         } catch (IOException ex) {
             Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
