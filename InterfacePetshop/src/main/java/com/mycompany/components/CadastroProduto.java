@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import com.mycompany.model.Products;
 import com.mycompany.model.Utils;
+import static java.lang.String.valueOf;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -271,7 +272,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         novoproduto.setCategory(jList1.getSelectedValue());
         //novoproduto.setSales(botao.getSales());
         novoproduto.setQuantity(Integer.parseInt(txtquantidade.getText()));
-        novoproduto.setCostprice(Integer.parseInt(txtcusto.getText()));
+        novoproduto.setCostprice(valueOf(txtcusto.getText()));
         novoproduto.setSaleprice(Integer.parseInt(txtprecovenda.getText()));
         novoproduto.setInsertiondate(productDate);
 

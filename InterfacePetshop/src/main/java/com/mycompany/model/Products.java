@@ -23,15 +23,13 @@ public class Products {
 
     public Products(){}
 
-    public Products(String name, String category, double costprice, double saleprice, String insertiondate) {
+    public Products(String name, String category, double costprice, int saleprice,String quantity) {
         this.name = name;
         this.category = category;
-        this.sales = 0;
-        this.quantity = 0;
+        
         this.costprice = costprice;
         this.saleprice = saleprice;
-        this.active = 1;
-        this.insertiondate = insertiondate;
+        
     }
 
     public String getName() {
