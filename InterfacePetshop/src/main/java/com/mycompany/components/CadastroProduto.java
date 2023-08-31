@@ -51,13 +51,13 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtcusto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        btnsalvar = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         txtquantidade = new javax.swing.JTextField();
         checkativo = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -101,22 +101,6 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         jLabel5.setText("Quantidade");
 
-        btnsalvar.setBackground(new java.awt.Color(0, 153, 51));
-        btnsalvar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        btnsalvar.setForeground(new java.awt.Color(255, 255, 255));
-        btnsalvar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnsalvar.setText("Adicionar Produto");
-        btnsalvar.setOpaque(true);
-        btnsalvar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    btnsalvarMouseClicked(evt);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Cancelar");
@@ -146,16 +130,40 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Adicionar Usuário");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel12)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(35, 35, 35)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtquantidade, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtprecovenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(checkativo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(30, 30, 30)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(txtcusto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Jlabel2)
@@ -163,30 +171,8 @@ public class CadastroProduto extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(80, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtquantidade, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtprecovenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-                                        .addComponent(checkativo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(30, 30, 30)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(txtcusto, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +209,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -241,55 +227,6 @@ public class CadastroProduto extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) throws Exception {//GEN-FIRST:event_btnsalvarMouseClicked
-
-       Products novoproduto = new Products();
-
-        novoproduto.setName(txtnomeproduto.getText());
-        novoproduto.setCode(txtcod.getText());
-        novoproduto.setSaleprice(txtprecovenda.getText());
-        novoproduto.setCostprice(txtcusto.getText());
-        novoproduto.setQuantity(txtquantidade.getText());
-        novoproduto.setCategory(jList1.getSelectedValue());
-
-       novoproduto.escrever_produtos();
-       
-        try {
-            Workbook workbook = Workbook.getWorkbook(file);
-            Sheet sheet = workbook.getSheet(2);
-        } catch (IOException ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BiffException ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-      if(checkativo.isSelected()){
-          novoproduto.setActive("1");
-      }
-      else{
-          novoproduto.setActive("0");
-      }
-
-      JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado com Sucesso","Confirmação",HEIGHT);
-      
-      this.dispose();
-        try {
-            dashboard2 dash2 = new dashboard2();
-            dash2.setVisible(true);
-            dash2.selecttable(1);
-        } catch (IOException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BiffException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    
-       
-       
-      
-      
-    }//GEN-LAST:event_btnsalvarMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
        
@@ -318,6 +255,48 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void txtprecovendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecovendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtprecovendaActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+         Products novoproduto = new Products();
+
+        novoproduto.setName(txtnomeproduto.getText());
+        novoproduto.setCode(txtcod.getText());
+        novoproduto.setSaleprice(txtprecovenda.getText());
+        novoproduto.setCostprice(txtcusto.getText());
+        novoproduto.setQuantity(txtquantidade.getText());
+        novoproduto.setCategory(jList1.getSelectedValue());
+
+        try {
+            novoproduto.escrever_produtos();
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        try {
+            Workbook workbook = Workbook.getWorkbook(file);
+            Sheet sheet = workbook.getSheet(2);
+        } catch (IOException | BiffException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      if(checkativo.isSelected()){
+          novoproduto.setActive("1");
+      }
+      else{
+          novoproduto.setActive("0");
+      }
+
+      JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado com Sucesso","Confirmação",HEIGHT);
+      
+      this.dispose();
+        try {
+            dashboard2 dash2 = new dashboard2();
+            dash2.setVisible(true);
+            dash2.selecttable(1);
+        } catch (IOException | BiffException ex) {
+            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -358,11 +337,11 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Jlabel2;
-    private javax.swing.JLabel btnsalvar;
     private javax.swing.JCheckBox checkativo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

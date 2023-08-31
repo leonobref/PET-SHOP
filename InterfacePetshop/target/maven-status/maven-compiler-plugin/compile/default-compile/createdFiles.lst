@@ -14,6 +14,7 @@ com\mycompany\components\dashboard2$12.class
 com\mycompany\components\Form1$5.class
 com\mycompany\components\FrameDadosUsuario$5.class
 com\mycompany\components\FrameDadosProduto$5.class
+com\mycompany\components\FrameDadosProduto$8.class
 com\mycompany\components\CadastroUsuario$6.class
 com\mycompany\model\Users.class
 com\mycompany\components\CadastroVendas$2.class
