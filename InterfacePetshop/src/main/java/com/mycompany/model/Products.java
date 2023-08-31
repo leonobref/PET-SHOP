@@ -2,35 +2,36 @@ package com.mycompany.model;
 
 import java.io.File;
 import java.io.IOException;
+
+import jxl.CellType;
+import jxl.write.*;
+import jxl.Cell;
 import jxl.Workbook;
-import jxl.read.biff.BiffException;
-import jxl.write.Label;
-import jxl.write.WritableCell;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
+import jxl.Sheet;
+import jxl.write.Number;
 
 public class Products {
     private String name;
-    private String code;
+    private int code;
     private String category;
-    private String sales;
-    private String quantity;
-    private String costprice;
-    private String saleprice;
-    private String active;
+    private int sales;
+    private int quantity;
+    private double costprice;
+    private double saleprice;
+    private int active;
+    private String insertiondate;
 
     public Products(){}
 
-    public Products(String name, String code, String category, String sales, String quantity, String costprice, String saleprice, String active) {
+    public Products(String name, String category, double costprice, double saleprice, String insertiondate) {
         this.name = name;
-        this.code = code;
         this.category = category;
-        this.sales = sales;
-        this.quantity = quantity;
+        this.sales = 0;
+        this.quantity = 0;
         this.costprice = costprice;
         this.saleprice = saleprice;
-        this.active = active;
+        this.active = 1;
+        this.insertiondate = insertiondate;
     }
 
     public String getName() {
@@ -41,11 +42,11 @@ public class Products {
         this.name = name;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -57,45 +58,52 @@ public class Products {
         this.category = category;
     }
 
-    public String getSales() {
+    public int getSales() {
         return sales;
     }
 
-    public void setSales(String sales) {
+    public void setSales(int sales) {
         this.sales = sales;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public String  getCostprice() {
+    public double getCostprice() {
         return costprice;
     }
 
-    public void setCostprice(String costprice) {
+    public void setCostprice(double costprice) {
         this.costprice = costprice;
-        
     }
 
-    public String getSaleprice() {
+    public double getSaleprice() {
         return saleprice;
     }
 
-    public void setSaleprice(String saleprice) {
+    public void setSaleprice(double saleprice) {
         this.saleprice = saleprice;
     }
 
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
+    }
+
+    public String getInsertiondate() {
+        return insertiondate;
+    }
+
+    public void setInsertiondate(String insertiondate) {
+        this.insertiondate = insertiondate;
     }
 
     @Override
@@ -110,154 +118,66 @@ public class Products {
                 ", saleprice=" + saleprice +
                 ", active=" + active +
                 '}';
-    
-        
     }
-    public void  escreverDadosEmExcel() {
-    	try {
-    		// Manter Um nome pAdrão
-    	File file = new File("Pet Shop Produtos.xls");
-    		if (file.exists()) {
-                System.out.println("O arquivo " + file + " já existe.");
-                return ; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
-            }
-            // Criar um arquivo Excel e uma planilha
-            WritableWorkbook workbook = Workbook.createWorkbook(file);
-            WritableSheet sheet = workbook.createSheet("Produtos", 0);
-            
-            // Escrever dados na planilha
-            Label label = new Label(0, 0, "NAME");
-            sheet.addCell(label);
 
-            label = new Label(1, 0, "CODE");
-            sheet.addCell(label);
-            
-            label = new Label(2, 0, "CATEGORY");
-            sheet.addCell(label);
-            
-            label = new Label(3, 0, "SALES");
-            sheet.addCell(label);
+    public void escrever_produtos(String filename) throws Exception {
+        File file = new File(filename);
+        Workbook workbook = Workbook.getWorkbook(file);
+        Sheet products = workbook.getSheet(2);
 
-            label = new Label(4, 0, "QUANTITY");
-            sheet.addCell(label);
+        Cell c = products.getCell(9,0);
+        String quant = c.getContents();
+        int quantidade = Integer.parseInt(quant);
 
-            label = new Label(5, 0, "COSTPRICE");
-            sheet.addCell(label);
+        WritableWorkbook copy = Workbook.createWorkbook(new File(filename), workbook);
+        WritableSheet productscopy = copy.getSheet(2);
 
-            label = new Label(6, 0, "COSTSALE");
-            sheet.addCell(label);
+        Label label = new Label(0, quantidade, this.name);
+        productscopy.addCell(label);
 
-            label = new Label(7, 0, "ACTIVE");
-            sheet.addCell(label);
+        Number number = new Number(1, quantidade, quantidade);
+        productscopy.addCell(number);
+        this.code = quantidade + 1;
 
-           
-            // Salvar o arquivo Excel
-            workbook.write();
-            workbook.close();
+        label = new Label(2, quantidade, this.category);
+        productscopy.addCell(label);
 
-            System.out.println("Dados escritos no arquivo Excel com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return ;
+        number = new Number(3, quantidade, 0);
+        productscopy.addCell(number);
+
+        number = new Number(4, quantidade, 0);
+        productscopy.addCell(number);
+
+        number = new Number(5,quantidade, this.costprice);
+        productscopy.addCell(number);
+
+        number = new Number(6,quantidade, this.saleprice);
+        productscopy.addCell(number);
+
+        number = new Number(7,quantidade, 1);
+        productscopy.addCell(number);
+
+        label = new Label(8, quantidade, this.insertiondate);
+        productscopy.addCell(label);
+
+        WritableCell c1 = productscopy.getWritableCell(9, 0);
+        quantidade++;
+        String novodisponivel = Integer.toString(quantidade);
+        modifyData(c1, novodisponivel);
+
+        copy.write();
+        copy.close();
     }
-    
-    public void cadastrarProduto() {
-        try {
-            File file = new File("Pet Shop Produtos.xls");
-            Workbook workbook = Workbook.getWorkbook(file);
-            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet produtoSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
-
-            int quantidadeDeProdutos = produtoSheet.getRows(); // Obter o número de linhas (usuários) já cadastrados
-
-            Label nomeLabel = new Label(0, quantidadeDeProdutos, getName());
-            produtoSheet.addCell(nomeLabel);
-
-            Label complementoLabel = new Label(1, quantidadeDeProdutos, getCode());
-            produtoSheet.addCell(complementoLabel);
-            
-            Label EmploymentLabel = new Label(2, quantidadeDeProdutos, getCategory());
-            produtoSheet.addCell(EmploymentLabel);
-
-            Label emailLabel = new Label(3, quantidadeDeProdutos, "0");
-            produtoSheet.addCell(emailLabel);
-
-            Label dataLabel = new Label(4, quantidadeDeProdutos, getQuantity());
-            produtoSheet.addCell(dataLabel);
-
-            Label senhaLabel = new Label(5, quantidadeDeProdutos, getCostprice());
-            produtoSheet.addCell(senhaLabel);
-
-            Label numeroLabel = new Label(6, quantidadeDeProdutos, getSaleprice());
-            produtoSheet.addCell(numeroLabel);
-
-            Label adminLabel = new Label(7, quantidadeDeProdutos, getActive());
-            produtoSheet.addCell(adminLabel);
-
-            Label ativoLabel = new Label(8, quantidadeDeProdutos,"0" );
-            produtoSheet.addCell(ativoLabel);
-
-            
-
-            
-
-            copy.write();
-            copy.close();
-
-            System.out.println("Produto cadastrado com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void modifyData(WritableCell cell, String novastring) throws Exception {
+        if (cell.getType() == CellType.LABEL) {
+            Label l = (Label) cell;
+            l.setString(novastring);
+        } else if (cell.getType() == CellType.NUMBER) {
+            double numero = Double.parseDouble(novastring);
+            Number n = (Number) cell;
+            n.setValue(numero);
+        } else {
+            System.out.println("Other data... ");
         }
     }
-    
-    public static void modifyData(WritableCell cell, String novastring) throws Exception {
-         
-       
-            Label n = (Label) cell;
-            n.setString(novastring);
-       
-            System.out.println(" Usuario Alterado ");
-        }
-    
-        
-        
-    
-    public void excluirUsuario() throws IOException, BiffException, WriteException {
-        
-            File file = new File("Pet Shop Produtos.xls");
-            
-            //Criar uma Planilha editável
-            Workbook file1 = Workbook.getWorkbook(file);
-            WritableWorkbook writeBook =Workbook.createWorkbook(file,file1);
-            WritableSheet usersheet = writeBook.getSheet(0);
-            
-            int linhaExclusao = -1;
-            
-            //Procurar Por nome e Saber a Linha
-            String nome = getName();
-            for(int i = 0;i < usersheet.getRows();i++){
-                if(nome.equals(usersheet.getCell(0,i).getContents())){
-                    linhaExclusao = i;
-                }
-            }
-            
-            //Excluindo
-            if(linhaExclusao != -1){
-               usersheet.removeRow(linhaExclusao);
-            }
-            
-            //Escrevendo e fechando//
-            writeBook.write();
-            writeBook.close();
-            
-    }
-    
-    
-    
 }

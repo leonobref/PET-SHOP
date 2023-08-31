@@ -3,20 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.components;
-import com.mycompany.model.Users;
 import static com.mycompany.model.Users.modifyData;
-import com.mycompany.components.dashboard2;
-import static java.awt.image.ImageObserver.HEIGHT;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import jxl.Sheet;
+
+import com.mycompany.model.Users;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import jxl.write.Label;
 import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -26,12 +22,11 @@ import jxl.write.WriteException;
  *
  * @author geova
  */
-public class FrameDadosUsuario extends javax.swing.JFrame{
-
-    
+public class FrameDadosUsuario extends javax.swing.JFrame
+{
    
     public static Users user = null;
-    File file = new File("Pet Shop Dados.xls");
+    File file = new File("DadosPetShop.xls");
     public FrameDadosUsuario(Users userdatatext) {
         
         
@@ -58,8 +53,6 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
        
         
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -360,12 +353,6 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
        checkadmin.setEnabled(true);
        checkactive.setEnabled(true);
        
-       
-       
-       
-       
-       
-       
     }//GEN-LAST:event_btnalterarMouseClicked
 
     private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvarMouseClicked
@@ -378,7 +365,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
             workbook = Workbook.getWorkbook(file);
         
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet usuarioSheet = copy.getSheet(0);
+            WritableSheet usuarioSheet = copy.getSheet(2);
             // Alterar Nome
             int linha = Integer.parseInt(user.getprox());
             WritableCell nomecell = usuarioSheet.getWritableCell(0, linha);
@@ -430,18 +417,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
         } catch (Exception ex) {
             Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } 
-             
-            
 
-            
-
-            
-            
-            
-            
-       
-        
-        
     }//GEN-LAST:event_btnsalvarMouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -459,7 +435,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
 
     private void btnexcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexcluirMouseClicked
         try {
-            user.excluirUsuario();
+            user.excluirUsuario("DadosPetShop.xls");
             System.out.println("Usuário Excluido");
             this.dispose();
             dashboard2 dash = new dashboard2();
@@ -467,8 +443,6 @@ public class FrameDadosUsuario extends javax.swing.JFrame{
         } catch (IOException ex) {
             Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
-            Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (WriteException ex) {
             Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnexcluirMouseClicked

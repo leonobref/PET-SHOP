@@ -3,20 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.components;
-import com.mycompany.model.Users;
 import static com.mycompany.model.Users.modifyData;
-import com.mycompany.components.dashboard2;
-import static java.awt.image.ImageObserver.HEIGHT;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import jxl.Sheet;
+
+import com.mycompany.model.Users;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import jxl.write.Label;
 import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -28,15 +24,15 @@ import jxl.write.WriteException;
  */
 public class FrameDadosProduto extends javax.swing.JFrame{
 
-    
-   
+
+
     public static Users user = null;
-    File file = new File("Pet Shop Dados.xls");
+    File file = new File("DadosPetShop.xls");
     public FrameDadosProduto(Users userdatatext) {
         
         
         initComponents();
-        
+
         btnsalvar.setVisible(false);
         user = userdatatext;
         txtnome.setText(user.getName());
@@ -49,14 +45,14 @@ public class FrameDadosProduto extends javax.swing.JFrame{
         txtsenha.setText(user.getPassword());
         if("1".equals(user.getAdmin())){
             checkadmin.setSelected(true);
-            
+
         }
         if("1".equals(user.getAdmin())){
             checkactive.setSelected(true);
-            
+
         }
-       
-        
+
+
     }
     
     
@@ -358,26 +354,21 @@ public class FrameDadosProduto extends javax.swing.JFrame{
        txtnome.setEnabled(true);
        checkadmin.setEnabled(true);
        checkactive.setEnabled(true);
-       
-       
-       
-       
-       
-       
-       
+
+
     }//GEN-LAST:event_btnalterarMouseClicked
 
     private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvarMouseClicked
-      
-        
+
+
        try {
             String nome = txtnome.getText();
             Workbook workbook;
-        
+
             workbook = Workbook.getWorkbook(file);
-        
+
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet usuarioSheet = copy.getSheet(0);
+            WritableSheet usuarioSheet = copy.getSheet(2);
             // Alterar Nome
             int linha = Integer.parseInt(user.getprox());
             WritableCell nomecell = usuarioSheet.getWritableCell(0, linha);
@@ -390,7 +381,7 @@ public class FrameDadosProduto extends javax.swing.JFrame{
             WritableCell cpfcell = usuarioSheet.getWritableCell(10, linha);
             WritableCell admincell = usuarioSheet.getWritableCell(7,linha);
             WritableCell activecell = usuarioSheet.getWritableCell(8,linha);
-            
+
             modifyData(nomecell, nome);
             modifyData(sobrenomecell,txtsobrenome.getText());
             modifyData(funcaocell,txtfuncao.getText());
@@ -399,7 +390,7 @@ public class FrameDadosProduto extends javax.swing.JFrame{
             modifyData(telefonecell,txttelefone.getText());
             modifyData(codigocell,txtcodigo.getText());
             modifyData(cpfcell,txtcpf.getText());
-            
+
             if(checkadmin.isSelected()){
                 modifyData(admincell,"1");
             }
@@ -412,7 +403,7 @@ public class FrameDadosProduto extends javax.swing.JFrame{
             else{
                 modifyData(activecell,"0");
             }
-            
+
 
             copy.write();
             copy.close();
@@ -423,19 +414,8 @@ public class FrameDadosProduto extends javax.swing.JFrame{
             Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-             
-            
+        }
 
-            
-
-            
-            
-            
-            
-       
-        
-        
     }//GEN-LAST:event_btnsalvarMouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -453,7 +433,7 @@ public class FrameDadosProduto extends javax.swing.JFrame{
 
     private void btnexcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexcluirMouseClicked
         try {
-            user.excluirUsuario();
+            user.excluirUsuario("DadosPetShop.xls");
             System.out.println("Usuário Excluido");
             this.dispose();
             dashboard2 dash = new dashboard2();
@@ -461,8 +441,6 @@ public class FrameDadosProduto extends javax.swing.JFrame{
         } catch (IOException ex) {
             Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
-            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (WriteException ex) {
             Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnexcluirMouseClicked
