@@ -27,7 +27,9 @@ public class Utils {
 
         return null; // Arquivo não encontrado
     }
-    public void escreverDadosEmExcel(String nomeDoArquivo) {
+
+    public void escreverDadosEmExcel(String nomeDoArquivo) 
+    {
         try {
             File file = new File(nomeDoArquivo);
             if (file.exists()) {
