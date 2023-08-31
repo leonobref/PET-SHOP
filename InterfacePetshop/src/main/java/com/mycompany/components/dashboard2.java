@@ -141,7 +141,7 @@ public class dashboard2 extends javax.swing.JFrame {
         Sheet sheet = workbook.getSheet(4);
         
         Sales vendaSelected = new Sales();
-        vendaSelected.setCustomer_name(sheet.getCell(0, linha).getContents());
+        vendaSelected.setCustomer_name(sheet.getCell(6, linha).getContents());
         vendaSelected.setValue(sheet.getCell(2,linha).getContents());
         vendaSelected.setQuantity(sheet.getCell(3,linha).getContents());
         vendaSelected.setProduct(sheet.getCell(0, linha).getContents());
