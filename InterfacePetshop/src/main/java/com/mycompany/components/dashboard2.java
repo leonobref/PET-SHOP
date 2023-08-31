@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import com.mycompany.model.Products;
 import com.mycompany.model.ScrollBar;
 
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -110,7 +111,7 @@ public class dashboard2 extends javax.swing.JFrame {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(2);
         
-        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),Double.parseDouble(sheet.getCell(2,linha).getContents()),Double.parseDouble(sheet.getCell(4,linha).getContents()), sheet.getCell(4,linha).getContents());
+        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),Double.parseDouble(sheet.getCell(2,linha).getContents()), Integer.parseInt(sheet.getCell(4,linha).getContents()), sheet.getCell(4,linha).getContents());
 
         return productSelected;
     }

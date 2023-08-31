@@ -272,7 +272,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         novoproduto.setCategory(jList1.getSelectedValue());
         //novoproduto.setSales(botao.getSales());
         novoproduto.setQuantity(Integer.parseInt(txtquantidade.getText()));
-        novoproduto.setCostprice(valueOf(txtcusto.getText()));
+        novoproduto.setCostprice(Double.parseDouble(txtcusto.getText()));
         novoproduto.setSaleprice(Integer.parseInt(txtprecovenda.getText()));
         novoproduto.setInsertiondate(productDate);
 
