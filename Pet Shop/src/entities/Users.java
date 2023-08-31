@@ -140,7 +140,9 @@ public class Users {
 
     public void cadastrarUsuario() {
         try {
-            File file = new File("C:\\eclipse-workspace\\PETSHOUPE\\DADOSPETSHOP.xls");
+        	Utils.verifyExistenceDate();
+        	String filename= Utils.findDataFile();
+            File file = new File(filename);
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
             WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
@@ -180,12 +182,11 @@ public class Users {
             Label CPFLabel = new Label(10, quantidadeUsuarios, getCPF());
             usuarioSheet.addCell(CPFLabel);
             
-            Label proxLabel = new Label(11, quantidadeUsuarios, getprox());
+            Label proxLabel = new Label(11, quantidadeUsuarios, String.valueOf(quantidadeUsuarios));
             usuarioSheet.addCell(proxLabel);
 
             // Atualizar a célula que guarda a quantidade de usuários cadastrados
-            WritableCell c1 = usuarioSheet.getWritableCell(0, 0);
-            c1 = new Label(0, 0, Integer.toString(quantidadeUsuarios));
+            WritableCell c1 = usuarioSheet.getWritableCell(12, 0);
             modifyData(c1, Integer.toString(quantidadeUsuarios));
 
             copy.write();
@@ -210,7 +211,7 @@ public class Users {
             System.out.println("Other data... ");
         }
     }
-    public void excluirUsuario(String nomeDoArquivo) {
+    public void excluirUsuario(String nomeDoArquivo) throws Exception {
         try {
             File file = new File(nomeDoArquivo);
     		if (!file.exists()) {
@@ -235,10 +236,12 @@ public class Users {
                     break;
                 }
             }
+           
 
             if (linhaExclusao != -1) {
                 // Encontrou o usuário pelo email e agora vamos remover a linha
                 usuarioSheet.removeRow(linhaExclusao);
+                modifyData(usuarioSheet.getWritableCell(12, 0),String.valueOf(usuarioSheet.getRows()));
                 copy.write();
                 copy.close();
                 System.out.println("Usuário excluído com sucesso!");
