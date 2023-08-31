@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.mycompany.model.Users;
+import com.mycompany.model.Utils;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -39,8 +40,8 @@ public class dashboard2 extends javax.swing.JFrame {
     
     
     public dashboard2() throws IOException, BiffException {
-        initComponents();
         
+        initComponents();
         atualizarTabela();
         atualizarCards();
         
