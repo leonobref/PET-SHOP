@@ -3,15 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.components;
-import com.mycompany.model.Users;
 import java.io.File;
 import javax.swing.JOptionPane;
-import com.mycompany.components.dashboard2;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.SwingUtilities;
+import com.mycompany.model.Users;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -23,15 +21,11 @@ public class CadastroVendas extends javax.swing.JFrame {
 
    
     
-    File file = new File("Pet Shop Dados.xls");
+    File file = new File("DadosPetShop.xls");
 
-    public CadastroVendas() {
-        
+    public CadastroVendas()
+    {
         initComponents();
-        
-       
-       
-        
     }
 
     /**
@@ -285,11 +279,11 @@ public class CadastroVendas extends javax.swing.JFrame {
        
        
        Users novouser = new Users();
-       novouser.escreverDadosEmExcel();
+       novouser.cadastrarUsuario();
         
         try {
             Workbook workbook = Workbook.getWorkbook(file);
-            Sheet sheet = workbook.getSheet(0);
+            Sheet sheet = workbook.getSheet(5);
             novouser.setprox(String.valueOf(sheet.getRows()));
         } catch (IOException ex) {
             Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
@@ -321,7 +315,7 @@ public class CadastroVendas extends javax.swing.JFrame {
        if("".equals(novouser.getName()) ||"".equals(novouser.getJob()) || "".equals(novouser.getNamecomplement()) || "".equals(novouser.getEmail()) || "".equals(novouser.getNumber()) ||
                "".equals(novouser.getPassword ()) || "".equals(novouser.getEmployment())){
            
-                  JOptionPane.showMessageDialog(rootPane, "Erro: Informações faltando","Confirmação",HEIGHT);
+                  JOptionPane.showMessageDialog(rootPane, "Erro: Preencha todos os campos","Confirmação",HEIGHT);
 
        }
        
@@ -341,10 +335,6 @@ public class CadastroVendas extends javax.swing.JFrame {
             Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
        }
-    
-    
-       
-       
       
       
     }//GEN-LAST:event_btnsalvarMouseClicked

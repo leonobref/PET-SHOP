@@ -4,37 +4,24 @@
  */
 package com.mycompany.components;
 
-import com.mycompany.components.Form1;
-import com.mycompany.model.Users;
 import java.io.File;
 import java.io.IOException;
 import com.mycompany.model.Model_Card;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import com.mycompany.model.Model_Card;
-import com.mycompany.model.ScrollBar;
-import java.awt.Color;
-import javax.swing.ImageIcon;
-import java.io.File;
-import java.io.IOException;
-import com.mycompany.components.CadastroVendas;
+
 import com.mycompany.model.Products;
+import com.mycompany.model.ScrollBar;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
+import com.mycompany.model.Users;
 import jxl.Cell;
-import jxl.CellType;
 import jxl.Sheet;
 import jxl.Workbook;
 import javax.swing.table.DefaultTableModel;
 import jxl.read.biff.BiffException;
-import jxl.write.Label;
-import jxl.write.WritableCell;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
 
 /**
  *
@@ -43,8 +30,8 @@ import jxl.write.WriteException;
 public class dashboard2 extends javax.swing.JFrame {
 
     
-    File file = new File("Pet Shop Dados.xls");
-    File file1 = new File("Pet Shop Produtos.xls");
+    File file = new File("DadosPetShop.xls");
+
     Color green = new Color(7,157,152);
     Color corfundo = new Color(23,27,36);
     private int linha;
@@ -57,13 +44,9 @@ public class dashboard2 extends javax.swing.JFrame {
         atualizarTabela();
         atualizarCards();
         
-        
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
         
     }
-    
-    
-    
     
     public String LerDados(int numPlanilha, int x,int y) throws IOException, BiffException{
         Workbook workbook = Workbook.getWorkbook(file);
@@ -82,12 +65,12 @@ public class dashboard2 extends javax.swing.JFrame {
     
     private void atualizarTabela() throws IOException, BiffException{
         ((DefaultTableModel) table1.getModel()).setRowCount(0);
+
+        // Usuários
         if (file.exists()) {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(0);
-        
-       
-        
+
         for(int i = 1; i != sheet.getRows(); i++){
             if( ! "".equals(sheet.getCell(0,i).getContents())){
                
@@ -95,9 +78,10 @@ public class dashboard2 extends javax.swing.JFrame {
             }
         }
         }
-        if (file1.exists()) {
-        Workbook workbookProd = Workbook.getWorkbook(file1);
-        Sheet sheetProd = workbookProd.getSheet(0);
+        // Produtos
+        if (file.exists()) {
+        Workbook workbookProd = Workbook.getWorkbook(file);
+        Sheet sheetProd = workbookProd.getSheet(2);
         for(int i = 1; i != sheetProd.getRows(); i++){
             if( ! "".equals(sheetProd.getCell(0,i).getContents())){
                
@@ -123,11 +107,11 @@ public class dashboard2 extends javax.swing.JFrame {
     }
     
     private Products LerProduto(int linha) throws IOException, BiffException{
-        Workbook workbook = Workbook.getWorkbook(file1);
-        Sheet sheet = workbook.getSheet(0);
+        Workbook workbook = Workbook.getWorkbook(file);
+        Sheet sheet = workbook.getSheet(2);
         
-        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),sheet.getCell(2,linha).getContents(),sheet.getCell(3,linha).getContents(),sheet.getCell(4,linha).getContents(),sheet.getCell(5,linha).getContents(),sheet.getCell(6,linha).getContents(),sheet.getCell(7,linha).getContents());
-        
+        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),Double.valueOf(sheet.getCell(2,linha).getContents()),Double.valueOf(sheet.getCell(4,linha).getContents()), sheet.getCell(4,linha).getContents());
+
         return productSelected;
     }
 
@@ -728,14 +712,8 @@ public class dashboard2 extends javax.swing.JFrame {
            } catch (IOException | BiffException ex) {
                Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
            }
-           
-           
-          
        }
        }
-       
-       
-        
     }//GEN-LAST:event_table1MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked

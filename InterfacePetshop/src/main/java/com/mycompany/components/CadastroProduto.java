@@ -3,16 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.components;
-import com.mycompany.model.Users;
 import java.io.File;
 import javax.swing.JOptionPane;
-import com.mycompany.components.dashboard2;
-import com.mycompany.model.Products;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.SwingUtilities;
+import com.mycompany.model.Products;
+import com.mycompany.model.Utils;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -24,16 +23,12 @@ public class CadastroProduto extends javax.swing.JFrame {
 
    
     
-    File file = new File("Pet Shop Produtos.xls");
+    File file = new File("DadosPetShop.xls");
     String categorias [] = {"Rações ", "Higiene e Limpeza", "Medicamento e saúde", "Acessórios"};
     public CadastroProduto() {
         
         initComponents();
         jList1.setListData(categorias);
-        
-       
-       
-        
     }
 
     /**
@@ -114,7 +109,11 @@ public class CadastroProduto extends javax.swing.JFrame {
         btnsalvar.setOpaque(true);
         btnsalvar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnsalvarMouseClicked(evt);
+                try {
+                    btnsalvarMouseClicked(evt);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -243,34 +242,35 @@ public class CadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvarMouseClicked
-       
+    private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) throws Exception {//GEN-FIRST:event_btnsalvarMouseClicked
+
        Products novoproduto = new Products();
-       novoproduto.escreverDadosEmExcel();
+
+        novoproduto.setName(txtnomeproduto.getText());
+        novoproduto.setCode(Integer.parseInt(txtcod.getText()));
+        novoproduto.setSaleprice(Double.parseDouble(txtprecovenda.getText()));
+        novoproduto.setCostprice(Double.parseDouble(txtcusto.getText()));
+        novoproduto.setQuantity(Integer.parseInt(txtquantidade.getText()));
+        novoproduto.setCategory(jList1.getSelectedValue());
+
+       novoproduto.escrever_produtos("DadosPetShop.xls");
        
         try {
             Workbook workbook = Workbook.getWorkbook(file);
-            Sheet sheet = workbook.getSheet(0);
+            Sheet sheet = workbook.getSheet(2);
         } catch (IOException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-      novoproduto.setName(txtnomeproduto.getText());
-      novoproduto.setCode(txtcod.getText());
-      novoproduto.setSaleprice(txtprecovenda.getText());
-      novoproduto.setCostprice(txtcusto.getText());
-      novoproduto.setQuantity(txtquantidade.getText());
-      novoproduto.setCategory(jList1.getSelectedValue());
+
       if(checkativo.isSelected()){
-          novoproduto.setActive("1");
+          novoproduto.setActive(Integer.parseInt("1"));
       }
       else{
-          novoproduto.setActive("0");
+          novoproduto.setActive(Integer.parseInt("0"));
       }
-      
-      novoproduto.cadastrarProduto();
+
       JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado com Sucesso","Confirmação",HEIGHT);
       
       this.dispose();

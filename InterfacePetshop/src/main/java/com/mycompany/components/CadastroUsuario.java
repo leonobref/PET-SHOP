@@ -3,15 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.components;
-import com.mycompany.model.Users;
 import java.io.File;
 import javax.swing.JOptionPane;
-import com.mycompany.components.dashboard2;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.SwingUtilities;
+import com.mycompany.model.Utils;
+import com.mycompany.model.exceptionCheck;
+import com.mycompany.model.Users;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -23,15 +23,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
    
     
-    File file = new File("Pet Shop Dados.xls");
+    File file = new File("DadosPetShop.xls");
 
-    public CadastroUsuario() {
-        
+    public CadastroUsuario()
+    {
         initComponents();
-        
-       
-       
-        
     }
 
     /**
@@ -282,10 +278,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_checkadminActionPerformed
 
     private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvarMouseClicked
-       
-       
-       Users novouser = new Users();
-       novouser.escreverDadosEmExcel();
+
+        Utils.verifyExistenceDate();
+
+        com.mycompany.model.Users novouser = new Users();
         
         try {
             Workbook workbook = Workbook.getWorkbook(file);
@@ -299,13 +295,49 @@ public class CadastroUsuario extends javax.swing.JFrame {
         
        novouser.setName(txtnome.getText());
        novouser.setNamecomplement(txtsobrenome.getText());
-       novouser.setJob(txtfuncao.getText());
-       novouser.setEmail(txtemail.getText());
-       novouser.setNumber(txttelefone.getText());
-       novouser.setPassword(txtsenha.getText());
-       novouser.setCPF(txtcpf.getText());
+        novouser.setJob(txtfuncao.getText());
+        novouser.setEmail(txtemail.getText());
+        novouser.setNumber(txttelefone.getText());
+        novouser.setPassword(txtsenha.getText());
+        novouser.setCPF(txtcpf.getText());
+
+
+       if (exceptionCheck.isValidEmail(txtemail.getText()))
+       {
+           novouser.setEmail(txtemail.getText());
+       } else {
+           System.out.println("a");
+            // Abrir tela de erro
+           return;
+       }
+
+       if (exceptionCheck.isValidPhoneNumber(txttelefone.getText()))
+       {
+           novouser.setNumber(txttelefone.getText());
+       }
+       else {
+           // Abrir tela de erro
+           System.out.println("b");
+           return;
+       }
+
+       if (exceptionCheck.isValidPassword((txtsenha.getText())))
+       {
+           novouser.setPassword(txtsenha.getText());
+       } else {
+           // Abrir tela de erro
+           return;
+       }
+
+       if (exceptionCheck.isValidCPF(txtcpf.getText()))
+       {
+           novouser.setCPF(txtcpf.getText());
+       } else {
+           // Abrir tela de erro
+           return;
+       }
        novouser.setEmployment(txtcodigo.getText());
-      
+
        if(checkactive.isSelected()){
            novouser.setActive("1");
        }
@@ -318,10 +350,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
        else{
            novouser.setAdmin("0");
        }
+
        if("".equals(novouser.getName()) ||"".equals(novouser.getJob()) || "".equals(novouser.getNamecomplement()) || "".equals(novouser.getEmail()) || "".equals(novouser.getNumber()) ||
                "".equals(novouser.getPassword ()) || "".equals(novouser.getEmployment())){
            
-                  JOptionPane.showMessageDialog(rootPane, "Erro: Informações faltando","Confirmação",HEIGHT);
+                  JOptionPane.showMessageDialog(rootPane, "Erro: Preencha todos os campos","Confirmação",HEIGHT);
 
        }
        
