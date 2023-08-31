@@ -284,7 +284,7 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 650, 533);
+        jPanel1.setBounds(0, 0, 650, 539);
 
         pack();
         setLocationRelativeTo(null);

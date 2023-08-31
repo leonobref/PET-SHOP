@@ -408,7 +408,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame
             this.dispose();
             dashboard2 dash2 = new dashboard2();
             dash2.setVisible(true);
-            dash2.selecttable(1);
+            dash2.selecttable(3);
 
            } catch (IOException ex) {
             Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -426,7 +426,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame
         try {
             dash2 = new dashboard2();
             dash2.setVisible(true);
-            dash2.selecttable(1);
+            dash2.selecttable(3);
         } catch (IOException | BiffException ex) {
             Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
