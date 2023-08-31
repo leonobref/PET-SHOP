@@ -90,7 +90,6 @@ public class FrameDadosUsuario extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Dados do Usuário");
-        setPreferredSize(new java.awt.Dimension(635, 550));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -331,14 +330,6 @@ public class FrameDadosUsuario extends javax.swing.JFrame
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void checkactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkactiveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkactiveActionPerformed
-
-    private void checkadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkadminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkadminActionPerformed
-
     private void btnalterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnalterarMouseClicked
        btnexcluir.setVisible(false);
        txtsobrenome.setEnabled(true);
@@ -446,6 +437,14 @@ public class FrameDadosUsuario extends javax.swing.JFrame
             Logger.getLogger(FrameDadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnexcluirMouseClicked
+
+    private void checkadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkadminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkadminActionPerformed
+
+    private void checkactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkactiveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkactiveActionPerformed
 
     /**
      * @param args the command line arguments
