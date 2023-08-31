@@ -365,7 +365,7 @@ public class FrameDadosUsuario extends javax.swing.JFrame
             workbook = Workbook.getWorkbook(file);
         
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet usuarioSheet = copy.getSheet(2);
+            WritableSheet usuarioSheet = copy.getSheet(0);
             // Alterar Nome
             int linha = Integer.parseInt(user.getprox());
             WritableCell nomecell = usuarioSheet.getWritableCell(0, linha);

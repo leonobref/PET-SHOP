@@ -128,10 +128,8 @@ public class Products {
         
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet products = workbook.getSheet(2);
-
-        Cell c = products.getCell(9,0);
-        String quant = c.getContents();
-        int quantidade = Integer.parseInt(quant);
+        
+        int quantidade = products.getRows();
 
         WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
         WritableSheet productscopy = copy.getSheet(2);
@@ -165,11 +163,7 @@ public class Products {
         label = new Label(8, quantidade, this.insertiondate);
         productscopy.addCell(label);
 
-        WritableCell c1 = productscopy.getWritableCell(9, 0);
-        quantidade++;
-        String novodisponivel = Integer.toString(quantidade);
-        modifyData(c1, novodisponivel);
-
+      
         copy.write();
         copy.close();
     }
@@ -186,7 +180,7 @@ public class Products {
         }
     }
     
-     public void excluirUsuario() {
+     public void excluirProduto() {
         try {
             
     		if (!file.exists()) {
