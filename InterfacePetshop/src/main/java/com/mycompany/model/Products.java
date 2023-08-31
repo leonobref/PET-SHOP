@@ -12,25 +12,25 @@ import jxl.write.Number;
 
 public class Products {
     private String name;
-    private int code;
+    private String code;
     private String category;
-    private int sales;
-    private int quantity;
-    private double costprice;
-    private double saleprice;
-    private int active;
+    private String sales;
+    private String quantity;
+    private String costprice;
+    private String saleprice;
+    private String active;
     private String insertiondate;
 
     public Products(){}
 
-    public Products(String name, String category, double costprice, double saleprice, String insertiondate) {
+    public Products(String name, String category, String costprice, String saleprice, String insertiondate) {
         this.name = name;
         this.category = category;
-        this.sales = 0;
-        this.quantity = 0;
+        this.sales = "0";
+        this.quantity = "0";
         this.costprice = costprice;
         this.saleprice = saleprice;
-        this.active = 1;
+        this.active = "1";
         this.insertiondate = insertiondate;
     }
 
@@ -42,11 +42,11 @@ public class Products {
         this.name = name;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -58,43 +58,43 @@ public class Products {
         this.category = category;
     }
 
-    public int getSales() {
+    public String getSales() {
         return sales;
     }
 
-    public void setSales(int sales) {
+    public void setSales(String sales) {
         this.sales = sales;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
-    public double getCostprice() {
+    public String getCostprice() {
         return costprice;
     }
 
-    public void setCostprice(double costprice) {
+    public void setCostprice(String costprice) {
         this.costprice = costprice;
     }
 
-    public double getSaleprice() {
+    public String getSaleprice() {
         return saleprice;
     }
 
-    public void setSaleprice(double saleprice) {
+    public void setSaleprice(String saleprice) {
         this.saleprice = saleprice;
     }
 
-    public int getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(String active) {
         this.active = active;
     }
 
@@ -137,7 +137,7 @@ public class Products {
 
         Number number = new Number(1, quantidade, quantidade);
         productscopy.addCell(number);
-        this.code = quantidade + 1;
+        this.code = String.valueOf(quantidade + 1);
 
         label = new Label(2, quantidade, this.category);
         productscopy.addCell(label);
@@ -148,10 +148,11 @@ public class Products {
         number = new Number(4, quantidade, 0);
         productscopy.addCell(number);
 
-        number = new Number(5,quantidade, this.costprice);
+        number = new Number(5,quantidade, Double.parseDouble(this.costprice));
         productscopy.addCell(number);
 
-        number = new Number(6,quantidade, this.saleprice);
+        number = new Number(6,quantidade, Double.parseDouble(this.saleprice));
+
         productscopy.addCell(number);
 
         number = new Number(7,quantidade, 1);

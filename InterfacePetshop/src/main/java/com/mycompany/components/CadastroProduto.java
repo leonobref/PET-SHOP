@@ -247,10 +247,10 @@ public class CadastroProduto extends javax.swing.JFrame {
        Products novoproduto = new Products();
 
         novoproduto.setName(txtnomeproduto.getText());
-        novoproduto.setCode(Integer.parseInt(txtcod.getText()));
-        novoproduto.setSaleprice(Double.parseDouble(txtprecovenda.getText()));
-        novoproduto.setCostprice(Double.parseDouble(txtcusto.getText()));
-        novoproduto.setQuantity(Integer.parseInt(txtquantidade.getText()));
+        novoproduto.setCode(txtcod.getText());
+        novoproduto.setSaleprice(txtprecovenda.getText());
+        novoproduto.setCostprice(txtcusto.getText());
+        novoproduto.setQuantity(txtquantidade.getText());
         novoproduto.setCategory(jList1.getSelectedValue());
 
        novoproduto.escrever_produtos("DadosPetShop.xls");
@@ -265,10 +265,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
 
       if(checkativo.isSelected()){
-          novoproduto.setActive(Integer.parseInt("1"));
+          novoproduto.setActive("1");
       }
       else{
-          novoproduto.setActive(Integer.parseInt("0"));
+          novoproduto.setActive("0");
       }
 
       JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado com Sucesso","Confirmação",HEIGHT);

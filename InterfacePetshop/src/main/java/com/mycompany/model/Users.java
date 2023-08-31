@@ -143,7 +143,7 @@ public class Users {
 
             //Utils.verifyExistenceDate();
 
-            File file = new File("C:\\Users\\willi\\OneDrive\\Área de Trabalho\\PET-SHOP\\InterfacePetshop\\DadosPetShop.xls");
+            File file = new File(Utils.findDataFile());
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
             WritableSheet usuarioSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
