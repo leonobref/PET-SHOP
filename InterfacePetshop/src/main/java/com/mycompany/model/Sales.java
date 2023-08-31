@@ -126,10 +126,10 @@ public class Sales
 
     public  void CadastrarVenda(){
          try {
-            File file = new File("Pet Shop Venda.xls");
+            File file = new File("DadosPetShop.xls");
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet VendaSheet = copy.getSheet(0); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
+            WritableSheet VendaSheet = copy.getSheet(4); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
 
             int quantidadeVendas = VendaSheet.getRows(); // Obter o número de linhas (usuários) já cadastrados
 
@@ -169,7 +169,7 @@ public class Sales
             copy.write();
             copy.close();
 
-            System.out.println("Usuário cadastrado com sucesso!");
+            System.out.println("Venda cadastrada com sucesso!");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -188,12 +188,12 @@ public class Sales
     }
 
     public void excluirProduto(String nomeDoArquivo) throws IOException, BiffException, WriteException{
-        File file = new File("Pet Shop Dados.xls");
+        File file = new File("DadosPetShop.xls");
             
             //Criar uma Planilha editável
             Workbook file1 = Workbook.getWorkbook(file);
             WritableWorkbook writeBook =Workbook.createWorkbook(file,file1);
-            WritableSheet usersheet = writeBook.getSheet(0);
+            WritableSheet usersheet = writeBook.getSheet(4);
             
             int linhaExclusao = -1;
             

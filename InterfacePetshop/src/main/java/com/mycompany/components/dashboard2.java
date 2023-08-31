@@ -167,8 +167,6 @@ public class dashboard2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque Pet Shop");
-        setMaximumSize(new java.awt.Dimension(1125, 630));
-        setPreferredSize(new java.awt.Dimension(1118, 620));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -243,6 +241,9 @@ public class dashboard2 extends javax.swing.JFrame {
         jLabel4.setText("Vendas");
         jLabel4.setOpaque(true);
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel4MouseEntered(evt);
             }
@@ -778,6 +779,10 @@ public class dashboard2 extends javax.swing.JFrame {
        }
        }
     }//GEN-LAST:event_table3MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+     selecttable(2);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
