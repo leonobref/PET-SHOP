@@ -250,7 +250,7 @@ public class CadastroVendas extends javax.swing.JFrame {
                }
                
                else{
-                   double precofinal = Integer.parseInt(txtquantidade.getText()) * Integer.parseInt(preco);
+                   double precofinal = Integer.parseInt(txtquantidade.getText()) * Double.parseDouble(preco);
                    txtpreco.setText(String.valueOf(precofinal));
                    btnconcluir.setVisible(true);
                    
