@@ -34,6 +34,7 @@ public class FrameDadosVenda extends javax.swing.JFrame {
     public FrameDadosVenda(Sales venda, int linha) throws IOException, BiffException {
         initComponents();
         novavenda = venda;
+        btnsalvar.setVisible(false);
         preencherListaandSelect();
         linha1 = linha;
         txtnome.setText(venda.getCustomer_name());
@@ -219,13 +220,14 @@ public class FrameDadosVenda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnconcluirMouseClicked(java.awt.event.MouseEvent evt)
-    {//GEN-FIRST:event_btnconcluirMouseClicked
-        btnsalvar.setVisible(true);
-        txtnome.setEnabled(true);
-        jList1.setEnabled(true);
-        txtquantidade.setEnabled(true);
-        txtpreco.setEnabled(true);
+    private void btnconcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconcluirMouseClicked
+    btnsalvar.setVisible(true);
+    txtnome.setEnabled(true);
+    jList1.setEnabled(true);
+    txtquantidade.setEnabled(true);
+    txtpreco.setEnabled(true);
+    txtpreco.setEditable(true);
+    btnsalvar.setVisible(true);
     }//GEN-LAST:event_btnconcluirMouseClicked
 
     private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvarMouseClicked
@@ -254,7 +256,7 @@ public class FrameDadosVenda extends javax.swing.JFrame {
              this.dispose();
              dashboard2 dash = new dashboard2();
              dash.setVisible(true);
-             dash.selecttable(2);
+             dash.selecttable(1);
                
             
             

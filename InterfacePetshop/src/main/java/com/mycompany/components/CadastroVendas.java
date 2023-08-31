@@ -293,7 +293,7 @@ public class CadastroVendas extends javax.swing.JFrame {
             dashboard2 dash;
             dash = new dashboard2(); 
              dash.setVisible(true);
-             dash.selecttable(2);
+             dash.selecttable(1);
         } catch (IOException ex) {
             Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
