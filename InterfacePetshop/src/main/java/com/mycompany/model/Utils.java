@@ -76,6 +76,7 @@ public class Utils {
             }
         }
     }
+
     public static void verifyExistenceDate() {
         String fileName = "DadosPetShop.xls";
         File file = new File(fileName);
@@ -88,7 +89,8 @@ public class Utils {
         }
     }
 
-    public void excluir(String nomeDoArquivo,int cod, int IDplanilha) {
+    public static void excluir(String nomeDoArquivo, int cod, int IDplanilha)
+    {
         try {
             File file = new File(nomeDoArquivo);
             if (!file.exists()) {
@@ -132,5 +134,4 @@ public class Utils {
             e.printStackTrace();
         }
     }
-
 }

@@ -20,8 +20,6 @@ import jxl.read.biff.BiffException;
  * @author geova
  */
 public class CadastroUsuario extends javax.swing.JFrame {
-
-   
     
     File file = new File("DadosPetShop.xls");
 

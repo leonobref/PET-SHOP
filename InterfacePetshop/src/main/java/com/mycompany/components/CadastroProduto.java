@@ -7,6 +7,8 @@ import java.io.File;
 import javax.swing.JOptionPane;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -236,6 +238,9 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
       this.dispose();
       dashboard2 dash2;
+
+      Utils.verifyExistenceDate();
+
         try {
             dash2 = new dashboard2();
             dash2.setVisible(true);
@@ -258,18 +263,20 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
        Products novoproduto = new Products();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String productDate = dateFormat.format(new Date());
 
         novoproduto.setName(txtnomeproduto.getText());
-        novoproduto.setCode(txtcod.getText());
-        novoproduto.setSaleprice(txtprecovenda.getText());
-        novoproduto.setCostprice(txtcusto.getText());
-        novoproduto.setQuantity(txtquantidade.getText());
+        novoproduto.setCode(Integer.parseInt(txtcod.getText()));
         novoproduto.setCategory(jList1.getSelectedValue());
+        //novoproduto.setSales(botao.getSales());
+        novoproduto.setQuantity(Integer.parseInt(txtquantidade.getText()));
+        novoproduto.setCostprice(Integer.parseInt(txtcusto.getText()));
+        novoproduto.setSaleprice(Integer.parseInt(txtprecovenda.getText()));
+        novoproduto.setInsertiondate(productDate);
 
-       
-       
         try {
-            novoproduto.escrever_produtos();
+            novoproduto.escrever_produtos("DadosPetShop.xls");
             Workbook workbook = Workbook.getWorkbook(file);
             Sheet sheet = workbook.getSheet(2);
         } catch (IOException | BiffException ex) {
@@ -279,10 +286,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
 
       if(checkativo.isSelected()){
-          novoproduto.setActive("1");
+          novoproduto.setActive(1);
       }
       else{
-          novoproduto.setActive("0");
+          novoproduto.setActive(0);
       }
 
       JOptionPane.showMessageDialog(rootPane, "Produto Cadastrado com Sucesso","Confirmação",HEIGHT);

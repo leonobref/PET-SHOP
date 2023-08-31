@@ -4,7 +4,6 @@
  */
 package com.mycompany.components;
 import static com.mycompany.components.FrameDadosUsuario.user;
-import com.mycompany.model.Products;
 import static com.mycompany.model.Users.modifyData;
 
 import java.io.File;
@@ -12,13 +11,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mycompany.model.Users;
+import com.mycompany.model.Products;
+import com.mycompany.model.Utils;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
 
 /**
  *
@@ -38,11 +37,12 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
         prod = prodtext;
         btnsalvar.setVisible(false);
         txtnomeproduto.setText(prod.getName());
-        txtcod.setText(prod.getCode());
-        txtprecovenda.setText(prod.getSaleprice());
-        txtcusto.setText(prod.getCostprice());
-        txtquantidade.setText(prod.getQuantity());
-        if( prod.getActive().equals("1")){
+        txtcod.setText(String.valueOf(prod.getCode()));
+        txtprecovenda.setText(String.valueOf(prod.getSaleprice()));
+        txtcusto.setText(String.valueOf(prod.getCostprice()));
+        txtquantidade.setText(String.valueOf(prod.getQuantity()));
+
+        if( prod.getActive() == 1){
             checkativo.setSelected(true);
         }
         else{
@@ -387,8 +387,9 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
 
     private void btnexcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexcluirMouseClicked
      try {
-            prod.excluirProduto();
-            System.out.println("Usuário Excluido");
+            Utils.excluir("DadosPetShop.xls", prod.getCode(),2);
+            //prod.excluirProduto();
+            System.out.println("Produto Excluído");
             this.dispose();
             dashboard2 dash = new dashboard2();
             dash.setVisible(true);

@@ -8,31 +8,29 @@ import jxl.write.*;
 import jxl.Cell;
 import jxl.Workbook;
 import jxl.Sheet;
-import jxl.read.biff.BiffException;
 import jxl.write.Number;
 
 public class Products {
     private String name;
-    private String code;
+    private int code;
     private String category;
-    private String sales;
-    private String quantity;
-    private String costprice;
-    private String saleprice;
-    private String active;
+    private int sales;
+    private int quantity;
+    private double costprice;
+    private double saleprice;
+    private int active;
     private String insertiondate;
-    private File file = new File("DadosPetShop.xls");
 
     public Products(){}
 
-    public Products(String name, String category, String costprice, String saleprice, String insertiondate) {
+    public Products(String name, String category, double costprice, double saleprice, String insertiondate) {
         this.name = name;
         this.category = category;
-        this.sales = "0";
-        this.quantity = "0";
+        this.sales = 0;
+        this.quantity = 0;
         this.costprice = costprice;
         this.saleprice = saleprice;
-        this.active = "1";
+        this.active = 1;
         this.insertiondate = insertiondate;
     }
 
@@ -44,11 +42,11 @@ public class Products {
         this.name = name;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -60,43 +58,43 @@ public class Products {
         this.category = category;
     }
 
-    public String getSales() {
+    public int getSales() {
         return sales;
     }
 
-    public void setSales(String sales) {
+    public void setSales(int sales) {
         this.sales = sales;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public String getCostprice() {
+    public double getCostprice() {
         return costprice;
     }
 
-    public void setCostprice(String costprice) {
+    public void setCostprice(double costprice) {
         this.costprice = costprice;
     }
 
-    public String getSaleprice() {
+    public double getSaleprice() {
         return saleprice;
     }
 
-    public void setSaleprice(String saleprice) {
+    public void setSaleprice(double saleprice) {
         this.saleprice = saleprice;
     }
 
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
@@ -121,17 +119,17 @@ public class Products {
                 ", active=" + active +
                 '}';
     }
-    
-   
 
-    public void escrever_produtos() throws Exception {
-        
+    public void escrever_produtos(String filename) throws Exception {
+        File file = new File(filename);
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet products = workbook.getSheet(2);
-        
-        int quantidade = products.getRows();
 
-        WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
+        Cell c = products.getCell(9,0);
+        String quant = c.getContents();
+        int quantidade = Integer.parseInt(quant);
+
+        WritableWorkbook copy = Workbook.createWorkbook(new File(filename), workbook);
         WritableSheet productscopy = copy.getSheet(2);
 
         Label label = new Label(0, quantidade, this.name);
@@ -139,7 +137,7 @@ public class Products {
 
         Number number = new Number(1, quantidade, quantidade);
         productscopy.addCell(number);
-        this.code = String.valueOf(quantidade + 1);
+        this.code = quantidade + 1;
 
         label = new Label(2, quantidade, this.category);
         productscopy.addCell(label);
@@ -150,11 +148,10 @@ public class Products {
         number = new Number(4, quantidade, 0);
         productscopy.addCell(number);
 
-        number = new Number(5,quantidade, Double.parseDouble(this.costprice));
+        number = new Number(5,quantidade, this.costprice);
         productscopy.addCell(number);
 
-        number = new Number(6,quantidade, Double.parseDouble(this.saleprice));
-
+        number = new Number(6,quantidade, this.saleprice);
         productscopy.addCell(number);
 
         number = new Number(7,quantidade, 1);
@@ -163,7 +160,11 @@ public class Products {
         label = new Label(8, quantidade, this.insertiondate);
         productscopy.addCell(label);
 
-      
+        WritableCell c1 = productscopy.getWritableCell(9, 0);
+        quantidade++;
+        String novodisponivel = Integer.toString(quantidade);
+        modifyData(c1, novodisponivel);
+
         copy.write();
         copy.close();
     }
@@ -177,50 +178,6 @@ public class Products {
             n.setValue(numero);
         } else {
             System.out.println("Other data... ");
-        }
-    }
-    
-     public void excluirProduto() {
-        try {
-            
-    		if (!file.exists()) {
-                System.out.println("O arquivo  não existe.");
-                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
-            }
-            Workbook workbook = Workbook.getWorkbook(file);
-            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet usuarioSheet = copy.getSheet(2); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
-
-            int totalLinhas = usuarioSheet.getRows();
-            int linhaExclusao = -1;
-
-            String codProd = getCode(); // Usando o getter para obter o email do próprio objeto Users
-
-            // Procurar o usuário na planilha pelo email
-            for (int i = 1; i < totalLinhas; i++) {
-                Cell cell = usuarioSheet.getCell(1, i); // Coluna 2 contém os emails
-                String email = cell.getContents();
-                if (email.equals(codProd)) {
-                    linhaExclusao = i;
-                    break;
-                }
-            }
-
-            if (linhaExclusao != -1) {
-                // Encontrou o usuário pelo email e agora vamos remover a linha
-                usuarioSheet.removeRow(linhaExclusao);
-                copy.write();
-                copy.close();
-                System.out.println("Usuário excluído com sucesso!");
-            } else {
-                System.out.println("Usuário não encontrado na planilha.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        } catch (WriteException e) {
-            e.printStackTrace();
         }
     }
 }

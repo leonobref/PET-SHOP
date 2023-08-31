@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.mycompany.model.Users;
-import com.mycompany.model.Utils;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -111,7 +110,7 @@ public class dashboard2 extends javax.swing.JFrame {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(2);
         
-        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),sheet.getCell(2,linha).getContents(),sheet.getCell(4,linha).getContents(), sheet.getCell(4,linha).getContents());
+        Products productSelected = new Products(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),Double.parseDouble(sheet.getCell(2,linha).getContents()),Double.parseDouble(sheet.getCell(4,linha).getContents()), sheet.getCell(4,linha).getContents());
 
         return productSelected;
     }
