@@ -755,7 +755,22 @@ public class dashboard2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel14MouseExited
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
-        // TODO add your handling code here:
+        if(evt.getClickCount() == 2){
+           if (file.exists()) {
+           linha = table1.getSelectedRow()+1;
+          
+           try {
+               Products prod = LerProduto(linha);
+               
+               FrameDadosProduto framedata = new FrameDadosProduto(prod);
+               framedata.setVisible(true);
+               this.dispose();
+               
+           } catch (IOException | BiffException ex) {
+               Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+       }
     }//GEN-LAST:event_table3MouseClicked
 
     /**

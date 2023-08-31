@@ -257,7 +257,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtprecovendaActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-         Products novoproduto = new Products();
+       Products novoproduto = new Products();
 
         novoproduto.setName(txtnomeproduto.getText());
         novoproduto.setCode(txtcod.getText());
@@ -266,16 +266,15 @@ public class CadastroProduto extends javax.swing.JFrame {
         novoproduto.setQuantity(txtquantidade.getText());
         novoproduto.setCategory(jList1.getSelectedValue());
 
-        try {
-            novoproduto.escrever_produtos();
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
        
         try {
+            novoproduto.escrever_produtos();
             Workbook workbook = Workbook.getWorkbook(file);
             Sheet sheet = workbook.getSheet(2);
         } catch (IOException | BiffException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
 
