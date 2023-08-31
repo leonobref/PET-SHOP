@@ -41,8 +41,7 @@ public class FrameDadosVenda extends javax.swing.JFrame {
         txtpreco.setText(venda.getValue());
         
     }
-    
-         
+
    void preencherListaandSelect() throws IOException, BiffException{
        if(file.exists()){
           Workbook workbook = Workbook.getWorkbook(file);
@@ -220,13 +219,13 @@ public class FrameDadosVenda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnconcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconcluirMouseClicked
-    btnsalvar.setVisible(true);
-    txtnome.setEnabled(true);
-    jList1.setEnabled(true);
-    txtquantidade.setEnabled(true);
-    txtpreco.setEnabled(true);
-
+    private void btnconcluirMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_btnconcluirMouseClicked
+        btnsalvar.setVisible(true);
+        txtnome.setEnabled(true);
+        jList1.setEnabled(true);
+        txtquantidade.setEnabled(true);
+        txtpreco.setEnabled(true);
     }//GEN-LAST:event_btnconcluirMouseClicked
 
     private void btnsalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalvarMouseClicked
