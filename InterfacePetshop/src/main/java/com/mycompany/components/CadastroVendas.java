@@ -7,6 +7,7 @@ import com.mycompany.model.Sales;
 import java.io.File;
 import javax.swing.JOptionPane;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,17 +43,22 @@ public class CadastroVendas extends javax.swing.JFrame {
                     }
         jList1.setListData(Produtos); 
        }
-       
-       
    }
       
-   void atualizarestoque(Sales novavenda){
+   void atualizarestoque(Sales novavenda)
+   {
        String produtonome = novavenda.getProduct();
-       
-       
-       
    }
 
+    public static String extractLastName(String fullName)
+    {
+        String[] nameParts = fullName.split(" ");
+        if (nameParts.length > 0) {
+            return nameParts[nameParts.length - 1];
+        } else {
+            return ""; // Retorna uma string vazia se o nome estiver vazio
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -245,18 +251,18 @@ public class CadastroVendas extends javax.swing.JFrame {
                int posprod = jList1.getSelectedIndex();
                String quantidade = products.getCell(4,posprod).getContents();
                String preco = products.getCell(6,posprod).getContents();
+
                if(Integer.parseInt(quantidade) < Integer.parseInt(txtquantidade.getText())){
                    JOptionPane.showMessageDialog(rootPane, "Quantidade Excedente","Confirmação",HEIGHT);
                }
                
                else{
                    double precofinal = Integer.parseInt(txtquantidade.getText()) * Double.parseDouble(preco);
-                   txtpreco.setText(String.valueOf(precofinal));
+                   String formattedPrecofinal = String.format("%.2f", precofinal);
+
+                   txtpreco.setText(String.valueOf(formattedPrecofinal));
                    btnconcluir.setVisible(true);
-                   
                }
-               
-               
                 
                 
             } catch (IOException ex) {
@@ -270,10 +276,13 @@ public class CadastroVendas extends javax.swing.JFrame {
 
     private void btnconcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconcluirMouseClicked
         Sales novavenda = new Sales();
+
         novavenda.setCustomer_name(txtnome.getText());
+        novavenda.setCustomer_last_name(extractLastName(txtnome.getText()));
         novavenda.setProduct(jList1.getSelectedValue());
         novavenda.setQuantity(txtquantidade.getText());
         novavenda.setValue(txtpreco.getText());
+        novavenda.setDate(novavenda.getDate());
         novavenda.CadastrarVenda();
         
         JOptionPane.showMessageDialog(rootPane, "Venda Cadastrada com Sucesso","Confirmação",HEIGHT);

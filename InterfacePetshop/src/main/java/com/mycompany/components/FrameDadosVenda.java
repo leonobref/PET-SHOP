@@ -42,8 +42,7 @@ public class FrameDadosVenda extends javax.swing.JFrame {
         txtpreco.setText(venda.getValue());
         
     }
-    
-         
+
    void preencherListaandSelect() throws IOException, BiffException{
        if(file.exists()){
           Workbook workbook = Workbook.getWorkbook(file);

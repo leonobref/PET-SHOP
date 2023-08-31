@@ -11,6 +11,8 @@ import jxl.read.biff.BiffException;
 import jxl.write.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,7 +54,13 @@ public class Sales
     public String getQuantity() { return quantity; }
     public String getCustomer_last_name() { return customer_last_name; }
     public String getCustomer_name() { return customer_name; }
-    public String getDate() { return date; }
+    public String getDate()
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String saleDate = dateFormat.format(new Date());
+
+        return saleDate;
+    }
     public String getProduct() { return product; }
 
     public void setCustomer_code(String customer_code) { this.customer_code = customer_code; }

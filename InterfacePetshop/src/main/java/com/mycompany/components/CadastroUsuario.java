@@ -371,7 +371,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
             this.dispose();
             dashboard2 dash2 = new dashboard2();
             dash2.setVisible(true);
-            dash2.selecttable(1);
+            dash2.selecttable(3);
         } catch (IOException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
@@ -397,7 +397,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         try {
             dash2 = new dashboard2();
             dash2.setVisible(true);
-            dash2.selecttable(1);
+            dash2.selecttable(3);
         } catch (IOException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
