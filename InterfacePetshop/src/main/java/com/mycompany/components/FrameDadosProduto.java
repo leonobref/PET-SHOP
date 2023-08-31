@@ -370,6 +370,17 @@ public final class FrameDadosProduto extends javax.swing.JFrame{
     }//GEN-LAST:event_btnsalvarMouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+       this.dispose();
+       dashboard2 dash;
+        try {
+            dash = new dashboard2();
+            dash.setVisible(true);
+            dash.selecttable(3);
+        } catch (IOException ex) {
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(FrameDadosProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
       
     }//GEN-LAST:event_jLabel9MouseClicked
