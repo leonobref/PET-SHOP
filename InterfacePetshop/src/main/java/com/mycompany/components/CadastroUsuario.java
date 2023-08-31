@@ -317,7 +317,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
        }
        else {
            // Abrir tela de erro
-           System.out.println("b");
            return;
        }
 
