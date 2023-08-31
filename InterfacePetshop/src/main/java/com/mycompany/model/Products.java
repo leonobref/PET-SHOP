@@ -8,6 +8,7 @@ import jxl.write.*;
 import jxl.Cell;
 import jxl.Workbook;
 import jxl.Sheet;
+import jxl.read.biff.BiffException;
 import jxl.write.Number;
 
 public class Products {
@@ -20,6 +21,7 @@ public class Products {
     private String saleprice;
     private String active;
     private String insertiondate;
+    private File file = new File("DadosPetShop.xls");
 
     public Products(){}
 
@@ -119,9 +121,11 @@ public class Products {
                 ", active=" + active +
                 '}';
     }
+    
+   
 
-    public void escrever_produtos(String filename) throws Exception {
-        File file = new File(filename);
+    public void escrever_produtos() throws Exception {
+        
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet products = workbook.getSheet(2);
 
@@ -129,7 +133,7 @@ public class Products {
         String quant = c.getContents();
         int quantidade = Integer.parseInt(quant);
 
-        WritableWorkbook copy = Workbook.createWorkbook(new File(filename), workbook);
+        WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
         WritableSheet productscopy = copy.getSheet(2);
 
         Label label = new Label(0, quantidade, this.name);
@@ -179,6 +183,50 @@ public class Products {
             n.setValue(numero);
         } else {
             System.out.println("Other data... ");
+        }
+    }
+    
+     public void excluirUsuario() {
+        try {
+            
+    		if (!file.exists()) {
+                System.out.println("O arquivo  não existe.");
+                return; // Aqui você pode decidir o que fazer em caso de arquivo já existente.
+            }
+            Workbook workbook = Workbook.getWorkbook(file);
+            WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
+            WritableSheet usuarioSheet = copy.getSheet(2); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
+
+            int totalLinhas = usuarioSheet.getRows();
+            int linhaExclusao = -1;
+
+            String codProd = getCode(); // Usando o getter para obter o email do próprio objeto Users
+
+            // Procurar o usuário na planilha pelo email
+            for (int i = 1; i < totalLinhas; i++) {
+                Cell cell = usuarioSheet.getCell(1, i); // Coluna 2 contém os emails
+                String email = cell.getContents();
+                if (email.equals(codProd)) {
+                    linhaExclusao = i;
+                    break;
+                }
+            }
+
+            if (linhaExclusao != -1) {
+                // Encontrou o usuário pelo email e agora vamos remover a linha
+                usuarioSheet.removeRow(linhaExclusao);
+                copy.write();
+                copy.close();
+                System.out.println("Usuário excluído com sucesso!");
+            } else {
+                System.out.println("Usuário não encontrado na planilha.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        } catch (WriteException e) {
+            e.printStackTrace();
         }
     }
 }

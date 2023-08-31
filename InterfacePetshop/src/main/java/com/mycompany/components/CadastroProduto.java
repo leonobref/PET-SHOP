@@ -253,7 +253,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         novoproduto.setQuantity(txtquantidade.getText());
         novoproduto.setCategory(jList1.getSelectedValue());
 
-       novoproduto.escrever_produtos("DadosPetShop.xls");
+       novoproduto.escrever_produtos();
        
         try {
             Workbook workbook = Workbook.getWorkbook(file);
