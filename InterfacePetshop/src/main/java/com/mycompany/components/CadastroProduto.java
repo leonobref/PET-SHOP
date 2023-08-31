@@ -263,6 +263,9 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtprecovendaActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+
+        Utils.verifyExistenceDate();
+
        Products novoproduto = new Products();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String productDate = dateFormat.format(new Date());
@@ -271,9 +274,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         novoproduto.setCode(Integer.parseInt(txtcod.getText()));
         novoproduto.setCategory(jList1.getSelectedValue());
         //novoproduto.setSales(botao.getSales());
-        novoproduto.setQuantity(Integer.parseInt(txtquantidade.getText()));
-        novoproduto.setCostprice(Double.parseDouble(txtcusto.getText()));
-        novoproduto.setSaleprice(Integer.parseInt(txtprecovenda.getText()));
+        novoproduto.setQuantity((txtquantidade.getText()));
+        novoproduto.setCostprice(txtcusto.getText());
+        novoproduto.setSaleprice(txtprecovenda.getText());
         novoproduto.setInsertiondate(productDate);
 
         try {

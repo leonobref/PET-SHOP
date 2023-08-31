@@ -26,10 +26,5 @@ public class Main_InterfacePetShop {
         
 
 }
-        
-        
-        
-}
-       
-    
 
+}

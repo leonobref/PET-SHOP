@@ -15,20 +15,20 @@ public class Products {
     private int code;
     private String category;
     private int sales;
-    private int quantity;
-    private double costprice;
-    private double saleprice;
+    private String quantity;
+    private String costprice;
+    private String saleprice;
     private int active;
     private String insertiondate;
 
     public Products(){}
 
-    public Products(String name, String category, double costprice, int saleprice,String quantity) {
+    public Products(String name, String category, String costprice, String saleprice, String quantity) {
         this.name = name;
         this.category = category;
-        
         this.costprice = costprice;
         this.saleprice = saleprice;
+        this.quantity = quantity;
         
     }
 
@@ -64,27 +64,27 @@ public class Products {
         this.sales = sales;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
-    public double getCostprice() {
+    public String getCostprice() {
         return costprice;
     }
 
-    public void setCostprice(double costprice) {
+    public void setCostprice(String costprice) {
         this.costprice = costprice;
     }
 
-    public double getSaleprice() {
+    public String getSaleprice() {
         return saleprice;
     }
 
-    public void setSaleprice(double saleprice) {
+    public void setSaleprice(String saleprice) {
         this.saleprice = saleprice;
     }
 
@@ -146,10 +146,10 @@ public class Products {
         number = new Number(4, quantidade, 0);
         productscopy.addCell(number);
 
-        number = new Number(5,quantidade, this.costprice);
+        number = new Number(5,quantidade, Double.parseDouble(this.costprice));
         productscopy.addCell(number);
 
-        number = new Number(6,quantidade, this.saleprice);
+        number = new Number(6,quantidade, Double.parseDouble(this.saleprice));
         productscopy.addCell(number);
 
         number = new Number(7,quantidade, 1);
