@@ -24,10 +24,30 @@ public class FormRelatório extends javax.swing.JFrame {
     }
 
     
-    public void faturamento() throws IOException, BiffException{
+    public double faturamento() throws IOException, BiffException{
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sales = workbook.getSheet(4);
-        
+        double soma = 0;
+        for(int i = 1; i <= sales.getRows(); i++){
+            soma = soma + Double.parseDouble(sales.getCell(2,i).getContents());
+        }
+       return soma;
+    }
+    
+    public int TotalVendas() throws IOException, BiffException{
+        Workbook workbook = Workbook.getWorkbook(file);
+        Sheet sales = workbook.getSheet(4);
+        return sales.getRows();
+    }
+    
+     public int TotalProdutosVendas() throws IOException, BiffException{
+        Workbook workbook = Workbook.getWorkbook(file);
+        Sheet sales = workbook.getSheet(4);
+        int soma = 0;
+        for(int i = 1; i <= sales.getRows(); i++){
+            soma = soma + Integer.parseInt(sales.getCell(3,i).getContents());
+        }
+        return soma;
     }
     /**
      * This method is called from within the constructor to initialize the form.
