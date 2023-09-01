@@ -7,6 +7,7 @@ com\mycompany\components\CadastroVendas$4.class
 com\mycompany\components\dashboard2$3.class
 com\mycompany\components\FrameDadosVenda$2.class
 com\mycompany\components\FrameDadosVenda$5.class
+com\mycompany\components\dashboard2$18.class
 com\mycompany\model\UtilsTest.class
 com\mycompany\components\CadastroVendas$1.class
 com\mycompany\components\FrameDadosProduto$2.class
@@ -38,6 +39,7 @@ com\mycompany\components\FrameDadosUsuario.class
 com\mycompany\components\dashboard2$11.class
 com\mycompany\model\StatusType.class
 com\mycompany\components\FrameDadosVenda$1.class
+com\mycompany\components\dashboard2$17.class
 com\mycompany\model\Utils.class
 com\mycompany\components\Form1$3.class
 com\mycompany\main\Main_InterfacePetShop.class
