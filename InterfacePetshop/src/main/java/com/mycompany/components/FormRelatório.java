@@ -6,6 +6,8 @@ package com.mycompany.components;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -227,7 +229,13 @@ public class FormRelatório extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormRelatório().setVisible(true);
+                try {
+                    new FormRelatório().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(FormRelatório.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (BiffException ex) {
+                    Logger.getLogger(FormRelatório.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
