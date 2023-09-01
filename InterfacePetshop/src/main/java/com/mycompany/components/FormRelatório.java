@@ -19,8 +19,12 @@ public class FormRelatório extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public FormRelatório() {
+    public FormRelatório() throws IOException, BiffException {
         initComponents();
+        txtfaturamento.setText(String.valueOf(faturamento()));
+        txtvendas.setText(String.valueOf(TotalVendas()));
+        txtProdvend.setText(String.valueOf(TotalProdutosVendas()));
+        txtmedia.setText(String.valueOf(faturamento()/TotalVendas()));
     }
 
     
