@@ -52,21 +52,35 @@ public class dashboard2 extends javax.swing.JFrame {
         
     }
     
-    public String LerDados(int numPlanilha, int x,int y) throws IOException, BiffException{
+    public String faturamentoMensal() throws IOException, BiffException{
        
         Workbook workbook = Workbook.getWorkbook(file);
-        Sheet sheet = workbook.getSheet(numPlanilha);
-        Cell cell = sheet.getCell(x,y);
-        return cell.getContents();
-        
+        Sheet sheet = workbook.getSheet(4);
+        double soma = 0;
+        for(int i = 1; i < sheet.getRows(); i++){
+            soma = soma + Double.parseDouble(sheet.getCell(2,i).getContents());
+        }
+        return String.valueOf(soma);
      
+    }
+    
+    public String QtdUser() throws IOException, BiffException{
+         Workbook workbook = Workbook.getWorkbook(file);
+        Sheet sheet = workbook.getSheet(3);
+        return String.valueOf(sheet.getRows());
+    }
+    
+    public String QtdProd() throws IOException, BiffException{
+         Workbook workbook = Workbook.getWorkbook(file);
+        Sheet sheet = workbook.getSheet(2);
+        return String.valueOf(sheet.getRows());
     }
     
     private void atualizarCards() throws IOException, BiffException{
         if (file.exists()){
-        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(0,0,0)));
-        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(0,0,0)));
-        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ LerDados(0,0,0)));
+        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Faturamento Mensal", "R$"+ faturamentoMensal()));
+        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Total de Usuários", QtdUser()));
+        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/images/fatura.png")), "Total de Produtos",  QtdProd()));
         }
     }
     
@@ -290,6 +304,9 @@ public class dashboard2 extends javax.swing.JFrame {
         jLabel5.setText("Relatório");
         jLabel5.setOpaque(true);
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel5MouseEntered(evt);
             }
@@ -860,6 +877,20 @@ public class dashboard2 extends javax.swing.JFrame {
        }
        }
     }//GEN-LAST:event_table4MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        try {
+            this.dispose();
+            FormRelatorio rel = new FormRelatorio();
+            rel.setVisible(true);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(dashboard2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
