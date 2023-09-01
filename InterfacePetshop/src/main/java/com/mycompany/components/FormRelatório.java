@@ -34,7 +34,7 @@ public class FormRelatório extends javax.swing.JFrame {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sales = workbook.getSheet(4);
         double soma = 0;
-        for(int i = 1; i <= sales.getRows(); i++){
+        for(int i = 1; i <sales.getRows(); i++){
             soma = soma + Double.parseDouble(sales.getCell(2,i).getContents());
         }
        return soma;
@@ -50,7 +50,7 @@ public class FormRelatório extends javax.swing.JFrame {
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sales = workbook.getSheet(4);
         int soma = 0;
-        for(int i = 1; i <= sales.getRows(); i++){
+        for(int i = 1; i < sales.getRows(); i++){
             soma = soma + Integer.parseInt(sales.getCell(3,i).getContents());
         }
         return soma;
