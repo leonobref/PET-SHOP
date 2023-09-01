@@ -8,6 +8,8 @@ package com.mycompany.components;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +17,9 @@ import java.util.logging.Logger;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
@@ -31,11 +36,10 @@ public class Form1 extends javax.swing.JFrame {
     /**
      * Creates new form Form1
      */
-    public Form1() {
+    public Form1()
+    {
         initComponents();
-        
-        
-  
+
     }
     
     /**
@@ -233,6 +237,30 @@ public class Form1 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public static boolean checkLogin(String username, String password) {
+        try (FileInputStream fis = new FileInputStream("DadosPetShop.xls")) {
+            org.apache.poi.ss.usermodel.Workbook workbook = new HSSFWorkbook(fis);
+            org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheetAt(0);
+
+            for (Row row : sheet) {
+                Cell usernameCell = row.getCell(3);
+                Cell passwordCell = row.getCell(5);
+
+                if (usernameCell != null && passwordCell != null &&
+                        usernameCell.getStringCellValue().equals(username) &&
+                        passwordCell.getStringCellValue().equals(password)) {
+                    return true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
+    }
+
     private void txtusuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusuarioKeyPressed
       
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -240,64 +268,32 @@ public class Form1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtusuarioKeyPressed
 
-    private void txtsenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsenhaKeyPressed
-      if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+    private void txtsenhaKeyPressed(java.awt.event.KeyEvent evt)
+    {//GEN-FIRST:event_txtsenhaKeyPressed
+      if(evt.getKeyCode()== KeyEvent.VK_ENTER)
+      {
           
           usuario = txtusuario.getText();
           senha = txtsenha.getText();
-          
-         
            
-               try {
-                   if(file.exists()){
-                  int linhaVerificacao = -1;
-                   Workbook workbook = Workbook.getWorkbook(file);
-                    Sheet usuarioSheet = workbook.getSheet(0);
-                  
-                for (int i = 0; i < usuarioSheet.getRows(); i++) {
-                   if(usuario.equals(usuarioSheet.getCell(0,i).getContents())){
-                       linhaVerificacao = i;
-                       
-                   }
-                }
-               if(linhaVerificacao != -1){
-               if(senha.equals(usuarioSheet.getCell(5, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(8, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(7, linhaVerificacao).getContents())){
+          try
+          {
+                if (checkLogin(usuario,senha))
+                {
                     this.dispose();
-                   dashboard2 dash = new dashboard2();
+                    dashboard2 dash = new dashboard2();
                     dash.setVisible(true);
-                   System.out.println("Usuario Logado Com sucesso");
-               }
-                
-                   }
-                   else{
-                       if("admin".equals(usuario) && "admin".equals(senha)){
-                           this.dispose();
-                           dashboard2 dash = new dashboard2();
-                           dash.setVisible(true);
-                           
-                       }
-                   }
-               } 
-                   else{
-                       System.out.println("Usuário Não Encontrado");                 }
-                
-                
-                
-                
-            } catch (IOException | BiffException ex) {
-                  Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
-              }
-         }
+                    System.out.println("Usuario Logado Com sucesso");
+                } else {
+                    System.out.println("Usuário Não Encontrado");
+                }
+          } catch (IOException | BiffException ex)
+          {
+              Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }
       
-                  
-                  
-                  
-                  
-              
-      
-           
-         
-              
+
             
     }//GEN-LAST:event_txtsenhaKeyPressed
 
@@ -307,45 +303,22 @@ public class Form1 extends javax.swing.JFrame {
           
           usuario = txtusuario.getText();
           senha = txtsenha.getText();
-          
-         
-           
-               try {
-                   if(file.exists()){
-                  int linhaVerificacao = -1;
-                   Workbook workbook = Workbook.getWorkbook(file);
-                    Sheet usuarioSheet = workbook.getSheet(0);
-                  
-                for (int i = 0; i < usuarioSheet.getRows(); i++) {
-                   if(usuario.equals(usuarioSheet.getCell(0,i).getContents())){
-                       linhaVerificacao = i;
-                       
-                   }
-                }
-                
-               if(senha.equals(usuarioSheet.getCell(5, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(8, linhaVerificacao).getContents()) && "1".equals(usuarioSheet.getCell(7, linhaVerificacao).getContents())){
-                    this.dispose();
-                   dashboard2 dash = new dashboard2();
-                    dash.setVisible(true);
-                   System.out.println("Usuario Logado Com sucesso");
-               }
-                
-                   }
-                   else{
-                       if("admin".equals(usuario) && "admin".equals(senha)){
-                           this.dispose();
-                           dashboard2 dash = new dashboard2();
-                           dash.setVisible(true);
-                           
-                       }
-                   }
-                
-                
-                
-                
-            } catch (IOException | BiffException ex) {
-                  Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
-              }
+
+        try
+        {
+            if (checkLogin(usuario,senha))
+            {
+                this.dispose();
+                dashboard2 dash = new dashboard2();
+                dash.setVisible(true);
+                System.out.println("Usuario Logado Com sucesso");
+            } else {
+                System.out.println("Usuário Não Encontrado");
+            }
+        } catch (IOException | BiffException ex)
+        {
+            Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
     }//GEN-LAST:event_btnloginMouseClicked
 

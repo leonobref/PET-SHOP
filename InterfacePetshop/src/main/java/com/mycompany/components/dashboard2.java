@@ -140,7 +140,6 @@ public class dashboard2 extends javax.swing.JFrame {
         Users userSelected = new Users(sheet.getCell(0,linha).getContents(),sheet.getCell(1,linha).getContents(),sheet.getCell(2,linha).getContents(),sheet.getCell(3,linha).getContents(),sheet.getCell(4,linha).getContents(),sheet.getCell(5,linha).getContents(),sheet.getCell(6,linha).getContents(),sheet.getCell(7,linha).getContents(),sheet.getCell(8,linha).getContents(),sheet.getCell(9,linha).getContents(),sheet.getCell(10,linha).getContents(),sheet.getCell(11,linha).getContents());
         
         return userSelected;
-        
     }
     
     private Products LerProduto(int linha) throws IOException, BiffException{
