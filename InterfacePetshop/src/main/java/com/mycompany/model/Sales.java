@@ -27,6 +27,7 @@ public class Sales
     private String customer_name;
     private String customer_last_name;
     private String customer_code;
+    private String lucro;
 
     // Construtores
     public Sales() {}
@@ -62,6 +63,7 @@ public class Sales
         return saleDate;
     }
     public String getProduct() { return product; }
+    public String getLucro(){return lucro;}
 
     public void setCustomer_code(String customer_code) { this.customer_code = customer_code; }
     public void setCustomer_last_name(String customer_last_name) { this.customer_last_name = customer_last_name; }
@@ -72,6 +74,7 @@ public class Sales
     public void setSale(String sale) { this.sale = sale; }
     public void setQuantity(String quantity) { this.quantity = quantity; }
     public void setValue(String value) { this.value = value; }
+     public void setLucro(String value) { this.lucro = value; }
 
     public static void createNewFile()
     {
@@ -137,7 +140,8 @@ public class Sales
             File file = new File("DadosPetShop.xls");
             Workbook workbook = Workbook.getWorkbook(file);
             WritableWorkbook copy = Workbook.createWorkbook(file, workbook);
-            WritableSheet VendaSheet = copy.getSheet(4); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
+            WritableSheet VendaSheet = copy.getSheet(4); 
+            WritableSheet ProdSheet = copy.getSheet(2); // Assumindo que a planilha que queremos usar é a primeira (índice 0)
 
             int quantidadeVendas = VendaSheet.getRows(); // Obter o número de linhas (usuários) já cadastrados
 
@@ -170,6 +174,12 @@ public class Sales
 
             Label cargoLabel = new Label(9, quantidadeVendas,"0");
             VendaSheet.addCell(cargoLabel);
+            
+            Label LucroLabel = new Label(10, quantidadeVendas,getLucro());
+            VendaSheet.addCell(LucroLabel);
+            
+           
+            
             
             
             

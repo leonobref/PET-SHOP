@@ -24,7 +24,7 @@ public class CadastroVendas extends javax.swing.JFrame {
    
     
     File file = new File("DadosPetShop.xls");
-
+    public String lucro = "0";
     public CadastroVendas() throws IOException, BiffException
     {
         initComponents();
@@ -251,6 +251,8 @@ public class CadastroVendas extends javax.swing.JFrame {
                int posprod = jList1.getSelectedIndex();
                String quantidade = products.getCell(4,posprod).getContents();
                String preco = products.getCell(6,posprod).getContents();
+               lucro = String.valueOf(Integer.parseInt(products.getCell(6,posprod).getContents()) - Integer.parseInt(products.getCell(5,posprod).getContents()));
+               
 
                if(Integer.parseInt(quantidade) < Integer.parseInt(txtquantidade.getText())){
                    JOptionPane.showMessageDialog(rootPane, "Quantidade Excedente","Confirmação",HEIGHT);
@@ -283,6 +285,7 @@ public class CadastroVendas extends javax.swing.JFrame {
         novavenda.setQuantity(txtquantidade.getText());
         novavenda.setValue(txtpreco.getText());
         novavenda.setDate(novavenda.getDate());
+        novavenda.setLucro(lucro);
         novavenda.CadastrarVenda();
         
         JOptionPane.showMessageDialog(rootPane, "Venda Cadastrada com Sucesso","Confirmação",HEIGHT);

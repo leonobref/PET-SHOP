@@ -27,6 +27,7 @@ public class FormRelatório extends javax.swing.JFrame {
         txtvendas.setText(String.valueOf(TotalVendas()));
         txtProdvend.setText(String.valueOf(TotalProdutosVendas()));
         txtmedia.setText(String.valueOf(faturamento()/TotalVendas()));
+        txtlucro.setText(String.valueOf(Lucrototal()));
     }
 
     
@@ -55,6 +56,16 @@ public class FormRelatório extends javax.swing.JFrame {
         }
         return soma;
     }
+     
+     public double Lucrototal() throws IOException, BiffException{
+        Workbook workbook = Workbook.getWorkbook(file);
+        Sheet sales = workbook.getSheet(4);
+        double custosoma = 0;
+        for(int i = 1; i < sales.getRows(); i++){
+            custosoma = custosoma + Integer.parseInt(sales.getCell(10,i).getContents())*Integer.parseInt(sales.getCell(3,i).getContents());
+        }
+        return custosoma;
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
